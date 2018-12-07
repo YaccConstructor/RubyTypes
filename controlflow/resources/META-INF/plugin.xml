@@ -1,0 +1,22 @@
+<idea-plugin>
+    <id>org.jetbrains.plugins.ruby.types.static</id>
+    <name>Ruby types</name>
+    <depends>com.intellij.modules.ruby</depends>
+
+    <!--<description><![CDATA[-->
+    <!--Enter short description for your plugin here.<br>-->
+    <!--<em>most HTML tags may be used</em>-->
+    <!--]]></description>-->
+
+    <extensions defaultExtensionNs="org.jetbrains.plugins.ruby">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <action id="RubyTypes"
+                class="org.jetbrains.plugins.ruby.types.controlflow.ControlFlowDumperAction"
+                text="Print control flow graph for active file">
+            <add-to-group group-id="AnalyzeMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

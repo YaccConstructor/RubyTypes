@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.0"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://dl.bintray.com/kotlin/exposed'
+        }
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+
+    dependencies {
+        compile 'org.jetbrains:annotations:15.0'
+        compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.0"
+        compile "org.jetbrains.kotlin:kotlin-reflect:1.2.0"
+
+        testCompile 'junit:junit:4.12'
+    }
+
+    compileKotlin {
+        kotlinOptions {
+            apiVersion = '1.1'
+            languageVersion = '1.1'
+            jvmTarget = '1.8'
+        }
+    }
+}

@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.3.1"
+}
+
+dependencies {
+    compile group: 'org.json', name: 'json', version: '20180813'
+}
+
+sourceSets {
+    main.java.srcDirs = ['src']
+    main.resources.srcDirs = ['resources']
+    test.java.srcDirs = ['src/test/java']
+    test.resources.srcDirs=['src/test/testData']
+}
+
+intellij {
+    version 'IU-182.4323.46'
+    pluginName 'ruby-types'
+    plugins = ["org.jetbrains.plugins.ruby:2018.2.20180810"]
+}
+
+patchPluginXml{
+    sinceBuild '182.3569.1'
+    untilBuild '182.*'
+    version '0.1.1'
+}
