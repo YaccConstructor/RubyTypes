@@ -1,47 +1,35 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
 import com.intellij.codeInsight.controlflow.ControlFlow
-import com.intellij.codeInsight.controlflow.Instruction
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.types.controlflow.data.AdjacencyRecord
 import org.jetbrains.plugins.ruby.types.controlflow.data.ControlFlowData
+import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 
 class RubyControlFlowWrapper(val controlFlow: ControlFlow) {
     private val instructions = controlFlow.instructions
-    private val elementInfoCollector = RubyElementInfoCollector()
+    private val elementInfoCollector = RubyElementsInfoCollector()
 
     fun dump(holder: RPsiElement): ControlFlowData {
-        val instructionsWithIds = getInstructionsWithIds()
+        collectNodesInfo()
         val nodesDescriptions = elementInfoCollector.getNodesDescriptions()
-        val adjacencyList = makeAdjacencyListOnIds(instructionsWithIds)
+        val adjacencyList = makeAdjacencyListOnIds()
         return ControlFlowData(nodesDescriptions, adjacencyList, holder)
     }
 
-    private fun getInstructionsWithIds(): Map<Instruction, Int> {
-        val instructionsWithIds = mutableMapOf<Instruction, Int>()
+    private fun collectNodesInfo(): List<NodeDescription> {
         elementInfoCollector.clearDescriptionsList()
-        
-        instructions.filterNotNull().filter { it.element != null }.forEach { instruction ->
-            val element = instruction.element as RPsiElement
-            instructionsWithIds[instruction] = num
-            elementInfoCollector.visit(element, num)
-            num++
-        }
-        
-        return instructionsWithIds
+        elementInfoCollector.visitGraph(instructions.asList())
+        return elementInfoCollector.getNodesDescriptions()
     }
 
-    private fun makeAdjacencyListOnIds(instructionsWithIds: Map<Instruction, Int>): List<AdjacencyRecord> {
+    private fun makeAdjacencyListOnIds(): List<AdjacencyRecord> {
         val adjacencyList = mutableListOf<AdjacencyRecord>()
 
-        instructionsWithIds.forEach { instruction, id ->
-            val destinationIds: List<Int?> = instruction.allSucc().map { instructionsWithIds[it] }
-            adjacencyList.add(AdjacencyRecord(id, destinationIds))
+        instructions.forEach { instruction ->
+            val destinationIds: List<Int?> = instruction.allSucc().map { it.num() }
+            adjacencyList.add(AdjacencyRecord(instruction.num(), destinationIds))
         }
         return adjacencyList
-    }
-
-    companion object {
-        var num = 1
     }
 }

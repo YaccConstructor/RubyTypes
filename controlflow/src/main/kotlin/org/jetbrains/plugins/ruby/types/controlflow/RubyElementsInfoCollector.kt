@@ -1,8 +1,8 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
+import com.intellij.codeInsight.controlflow.Instruction
 import org.jetbrains.plugins.ruby.erb.psi.ERbFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.*
@@ -25,7 +25,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 
-class RubyElementInfoCollector {
+class RubyElementsInfoCollector {
 
     private val nodesDescription = mutableListOf<NodeDescription>()
 
@@ -35,8 +35,15 @@ class RubyElementInfoCollector {
         nodesDescription.clear()
     }
 
-    fun visit(element: RPsiElement, id: Int) {
-        currentId = id
+    fun visitGraph(instructions: List<Instruction>) {
+        instructions.forEach {
+            currentElementId = it.num()
+            visit(it)
+        }
+    }
+    
+    private fun visit(instruction: Instruction) {
+        val element = instruction.element ?: return
         when (element) {
             is RUnlessModStatement -> visitUnlessModStatement(element)
             is RModule -> visitModule(element)
@@ -132,7 +139,7 @@ class RubyElementInfoCollector {
         }
     }
 
-    fun visitNamedArgument(namedArgument: RNamedArgument) {
+    private fun visitNamedArgument(namedArgument: RNamedArgument) {
         addNodeInfo(
                 "Named argument",
                 namedArgument.text,
@@ -140,11 +147,11 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitUnlessModStatement(rUnlessModStatement: RUnlessModStatement) {
+    private fun visitUnlessModStatement(rUnlessModStatement: RUnlessModStatement) {
         addNodeInfo("Unless mod statement")
     }
 
-    fun visitModule(rModule: RModule) {
+    private fun visitModule(rModule: RModule) {
         addNodeInfo(
                 "Module",
                 null,
@@ -152,27 +159,27 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitRedoStatement(rRedoStatement: RRedoStatement) {
+    private fun visitRedoStatement(rRedoStatement: RRedoStatement) {
         addNodeInfo("Redo statement")
     }
 
-    fun visitWhenCase(rWhenCase: RWhenCase) {
+    private fun visitWhenCase(rWhenCase: RWhenCase) {
         addNodeInfo("When case")
     }
 
-    fun visitColonReference(rColonReference: RColonReference) {
+    private fun visitColonReference(rColonReference: RColonReference) {
         addNodeInfo("Colon reference", rColonReference.text)
     }
 
-    fun visitBeginEndBlockStatement(rBeginEndBlockStatement: RBeginEndBlockStatement) {
+    private fun visitBeginEndBlockStatement(rBeginEndBlockStatement: RBeginEndBlockStatement) {
         addNodeInfo("Begin-end block statement")
     }
 
-    fun visitArgumentList(list: RArgumentList) {
+    private fun visitArgumentList(list: RArgumentList) {
         addNodeInfo("Argument list", list.text)
     }
 
-    fun visitFloatConstant(rFloatConstant: RFloatConstant) {
+    private fun visitFloatConstant(rFloatConstant: RFloatConstant) {
         addNodeInfo(
                 "Float constant",
                 rFloatConstant.text,
@@ -180,15 +187,15 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitWhileModStatement(rWhileModStatement: RWhileModStatement) {
+    private fun visitWhileModStatement(rWhileModStatement: RWhileModStatement) {
         addNodeInfo("While mod statement")
     }
 
-    fun visitFName(rFName: RFName) {
+    private fun visitFName(rFName: RFName) {
         addNodeInfo("Fname", rFName.text)
     }
 
-    fun visitArgument(argument: RArgument) {
+    private fun visitArgument(argument: RArgument) {
         addNodeInfo(
                 "Argument",
                 argument.text,
@@ -196,7 +203,7 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitObjectClass(rsClass: RObjectClass) {
+    private fun visitObjectClass(rsClass: RObjectClass) {
         addNodeInfo(
                 "Object class",
                 rsClass.text,
@@ -204,11 +211,11 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitIfModStatement(rIfModStatement: RIfModStatement) {
+    private fun visitIfModStatement(rIfModStatement: RIfModStatement) {
         addNodeInfo("If mod statement")
     }
 
-    fun visitUnaryExpression(rUnaryExpression: RUnaryExpression) {
+    private fun visitUnaryExpression(rUnaryExpression: RUnaryExpression) {
         addNodeInfo(
                 "Unary expression",
                 rUnaryExpression.text,
@@ -217,7 +224,7 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitAssoc(rAssoc: RAssoc) {
+    private fun visitAssoc(rAssoc: RAssoc) {
         addNodeInfo(
                 "Assoc",
                 rAssoc.text,
@@ -225,27 +232,27 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitPseudoConstant(rPseudoConstant: RPseudoConstant) {
+    private fun visitPseudoConstant(rPseudoConstant: RPseudoConstant) {
         addNodeInfo("Pseudo constant", rPseudoConstant.text)
     }
 
-    fun visitRbFile(rFile: ERbFile) {
+    private fun visitRbFile(rFile: ERbFile) {
         addNodeInfo("File", rFile.text)
     }
 
-    fun visitCompoundStatement(rCompoundStatement: RCompoundStatement) {
+    private fun visitCompoundStatement(rCompoundStatement: RCompoundStatement) {
         addNodeInfo("Compound statement", rCompoundStatement.text)
     }
 
-    fun visitNextStatement(rNextStatement: RNextStatement) {
+    private fun visitNextStatement(rNextStatement: RNextStatement) {
         addNodeInfo("Next statement")
     }
 
-    fun visitFile(rFile: RFile) {
+    private fun visitFile(rFile: RFile) {
         addNodeInfo("File", rFile.text)
     }
 
-    fun visitClass(rClass: RClass) {
+    private fun visitClass(rClass: RClass) {
         addNodeInfo(
                 "Class",
                 rClass.text,
@@ -254,43 +261,43 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitDefinedStatement(rDefinedStatement: RDefinedStatement) {
+    private fun visitDefinedStatement(rDefinedStatement: RDefinedStatement) {
         addNodeInfo("Defined statement")
     }
 
-    fun visitFid(rFid: RFid) {
+    private fun visitFid(rFid: RFid) {
         addNodeInfo("Fid", rFid.text)
     }
 
-    fun visitWords(rSymbols: RWords) {
+    private fun visitWords(rSymbols: RWords) {
         addNodeInfo("Words", rSymbols.text)
     }
 
-    fun visitTopConstReference(rTopConstReference: RTopConstReference) {
+    private fun visitTopConstReference(rTopConstReference: RTopConstReference) {
         addNodeInfo("Top const reference", rTopConstReference.text)
     }
 
-    fun visitClassVariable(rClassVariable: RClassVariable) {
+    private fun visitClassVariable(rClassVariable: RClassVariable) {
         addNodeInfo("Class variable", rClassVariable.text)
     }
 
-    fun visitForStatement(rForStatement: RForStatement) {
+    private fun visitForStatement(rForStatement: RForStatement) {
         addNodeInfo("For statement")
     }
 
-    fun visitYieldStatement(rYieldStatement: RYieldStatement) {
+    private fun visitYieldStatement(rYieldStatement: RYieldStatement) {
         addNodeInfo("Yield statement")
     }
 
-    fun visitHashToArguments(rHashToArguments: RHashToArguments) {
+    private fun visitHashToArguments(rHashToArguments: RHashToArguments) {
         addNodeInfo("Hash to arguments", rHashToArguments.text)
     }
 
-    fun visitAssocKey(rAssocKey: RAssocKey) {
+    private fun visitAssocKey(rAssocKey: RAssocKey) {
         addNodeInfo("Assoc key", rAssocKey.text)
     }
 
-    fun visitGlobalVariable(rGlobalVariable: RGlobalVariable) {
+    private fun visitGlobalVariable(rGlobalVariable: RGlobalVariable) {
         addNodeInfo(
                 "Global variable",
                 rGlobalVariable.text,
@@ -298,23 +305,23 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitReference(rReference: RReference) {
+    private fun visitReference(rReference: RReference) {
         addNodeInfo("Reference", rReference.text)
     }
 
-    fun visitBodyStatement(rBodyStatement: RBodyStatement) {
+    private fun visitBodyStatement(rBodyStatement: RBodyStatement) {
         addNodeInfo("Body statement")
     }
 
-    fun visitBoolNegExpression(rBoolNegExpression: RBoolNegExpression) {
+    private fun visitBoolNegExpression(rBoolNegExpression: RBoolNegExpression) {
         addNodeInfo("Bool neg expression", rBoolNegExpression.text)
     }
 
-    fun visitConstant(rConstant: RConstant) {
+    private fun visitConstant(rConstant: RConstant) {
         addNodeInfo("Constant", rConstant.text)
     }
 
-    fun visitTernaryExpression(ternaryExpression: RTernaryExpression) {
+    private fun visitTernaryExpression(ternaryExpression: RTernaryExpression) {
         addNodeInfo(
                 "Ternary expression",
                 null,
@@ -322,11 +329,11 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitGroupedExpression(groupedExpression: RGroupedExpression) {
+    private fun visitGroupedExpression(groupedExpression: RGroupedExpression) {
         addNodeInfo("Grouped expression")
     }
 
-    fun visitIdentifier(rIdentifier: RIdentifier) {
+    private fun visitIdentifier(rIdentifier: RIdentifier) {
         addNodeInfo(
                 "Identifier",
                 rIdentifier.text,
@@ -348,7 +355,7 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitAliasStatement(rAliasStatement: RAliasStatement) {
+    private fun visitAliasStatement(rAliasStatement: RAliasStatement) {
         addNodeInfo(
                 "Alias statement",
                 null,
@@ -357,19 +364,19 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitExpressionSubstitution(rExpressionSubstitution: RExpressionSubstitution) {
+    private fun visitExpressionSubstitution(rExpressionSubstitution: RExpressionSubstitution) {
         addNodeInfo("Expression substitution")
     }
 
-    fun visitElsifBlock(rElsifBlock: RElsifBlock) {
+    private fun visitElsifBlock(rElsifBlock: RElsifBlock) {
         addNodeInfo("Elsif block")
     }
 
-    fun visitBlockLocalVariables(rBlockLocalVariables: RBlockLocalVariables) {
+    private fun visitBlockLocalVariables(rBlockLocalVariables: RBlockLocalVariables) {
         addNodeInfo("Block local variables")
     }
 
-    fun visitUndefStatement(rUndefStatement: RUndefStatement) {
+    private fun visitUndefStatement(rUndefStatement: RUndefStatement) {
         addNodeInfo(
                 "Undef statement",
                 null,
@@ -377,19 +384,19 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitListOfExpressions(rListOfExpressions: RListOfExpressions) {
+    private fun visitListOfExpressions(rListOfExpressions: RListOfExpressions) {
         addNodeInfo("List of expressions")
     }
 
-    fun visitBreakStatement(breakStatement: RBreakStatement) {
+    private fun visitBreakStatement(breakStatement: RBreakStatement) {
         addNodeInfo("Break statement")
     }
 
-    fun visitRescueBlock(rRescueBlock: RRescueBlock) {
+    private fun visitRescueBlock(rRescueBlock: RRescueBlock) {
         addNodeInfo("Rescue block")
     }
 
-    fun visitSymbol(rSymbol: RSymbol) {
+    private fun visitSymbol(rSymbol: RSymbol) {
         addNodeInfo(
                 "Symbol",
                 rSymbol.text,
@@ -397,23 +404,23 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitArrayIndexing(arrayIndexing: RArrayIndexing) {
+    private fun visitArrayIndexing(arrayIndexing: RArrayIndexing) {
         addNodeInfo("Array indexing")
     }
 
-    fun visitWhileStatement(rWhileStatement: RWhileStatement) {
+    private fun visitWhileStatement(rWhileStatement: RWhileStatement) {
         addNodeInfo("While statement")
     }
 
-    fun visitArgumentToBlock(rArgumentToBlock: RArgumentToBlock) {
+    private fun visitArgumentToBlock(rArgumentToBlock: RArgumentToBlock) {
         addNodeInfo("Argument-to-block")
     }
 
-    fun visitBlockArgumentList(blockParameters: RBlockArgumentList) {
+    private fun visitBlockArgumentList(blockParameters: RBlockArgumentList) {
         addNodeInfo("Block arguments")
     }
 
-    fun visitAssignmentExpression(assignmentExpression: RAssignmentExpression) {
+    private fun visitAssignmentExpression(assignmentExpression: RAssignmentExpression) {
         addNodeInfo(
                 "Assignment expression",
                 null,
@@ -421,31 +428,31 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitHeredocValue(heredocValue: RHeredocValue) {
+    private fun visitHeredocValue(heredocValue: RHeredocValue) {
         addNodeInfo("Heredoc value")
     }
 
-    fun visitSuperClass(rSuperClass: RSuperClass) {
+    private fun visitSuperClass(rSuperClass: RSuperClass) {
         addNodeInfo("Superclass", rSuperClass.text)
     }
 
-    fun visitRetryStatement(rRetryStatement: RRetryStatement) {
+    private fun visitRetryStatement(rRetryStatement: RRetryStatement) {
         addNodeInfo("Retry statement")
     }
 
-    fun visitInstanceVariable(rInstanceVariable: RInstanceVariable) {
+    private fun visitInstanceVariable(rInstanceVariable: RInstanceVariable) {
         addNodeInfo("Instance variable", rInstanceVariable.text)
     }
 
-    fun visitLambdaCall(rLambdaCall: RLambdaCall) {
+    private fun visitLambdaCall(rLambdaCall: RLambdaCall) {
         addNodeInfo("Lambda call", rLambdaCall.text)
     }
 
-    fun visitHeredocId(heredocId: RHeredocId) {
+    private fun visitHeredocId(heredocId: RHeredocId) {
         addNodeInfo("Heredoc id", heredocId.id)
     }
 
-    fun visitMethod(rMethod: RMethod) {
+    private fun visitMethod(rMethod: RMethod) {
         addNodeInfo(
                 "Method",
                 rMethod.text,
@@ -455,71 +462,71 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitElseBlock(rElseBlock: RElseBlock) {
+    private fun visitElseBlock(rElseBlock: RElseBlock) {
         addNodeInfo("Else block")
     }
 
-    fun visitUnlessStatement(rUnlessStatement: RUnlessStatement) {
+    private fun visitUnlessStatement(rUnlessStatement: RUnlessStatement) {
         addNodeInfo("Unless statement")
     }
 
-    fun visitCondition(rCondition: RCondition) {
+    private fun visitCondition(rCondition: RCondition) {
         addNodeInfo("Condition")
     }
 
-    fun visitUntilModStatement(rUntilModStatement: RUntilModStatement) {
+    private fun visitUntilModStatement(rUntilModStatement: RUntilModStatement) {
         addNodeInfo("Until mod statement")
     }
 
-    fun visitCaseStatement(rCaseStatement: RCaseStatement) {
+    private fun visitCaseStatement(rCaseStatement: RCaseStatement) {
         addNodeInfo("Case statement")
     }
 
-    fun visitLBeginStatement(rlBeginStatement: RLBeginStatement) {
+    private fun visitLBeginStatement(rlBeginStatement: RLBeginStatement) {
         addNodeInfo("RLBegin statement")
     }
 
-    fun visitBraceBlockCall(rBraceBlockCall: RBraceBlockCall) {
+    private fun visitBraceBlockCall(rBraceBlockCall: RBraceBlockCall) {
         addNodeInfo("Brace block call", rBraceBlockCall.text)
     }
 
-    fun visitEnsureBlock(rEnsureBlock: REnsureBlock) {
+    private fun visitEnsureBlock(rEnsureBlock: REnsureBlock) {
         addNodeInfo("Ensure block", rEnsureBlock.text)
     }
 
-    fun visitReturnStatement(rReturnStatement: RReturnStatement) {
+    private fun visitReturnStatement(rReturnStatement: RReturnStatement) {
         addNodeInfo("Return statement")
     }
 
-    fun visitRescueModStatement(rRescueModStatement: RRescueModStatement) {
+    private fun visitRescueModStatement(rRescueModStatement: RRescueModStatement) {
         addNodeInfo("Rescue mod statement")
     }
 
-    fun visitBoolBinExpression(rBoolBinExpression: RBoolBinExpression) {
+    private fun visitBoolBinExpression(rBoolBinExpression: RBoolBinExpression) {
         addNodeInfo("Boolean binary expression", rBoolBinExpression.text)
     }
 
-    fun visitSelfAssignmentExpression(selfAssignmentExpression: RSelfAssignmentExpression) {
+    private fun visitSelfAssignmentExpression(selfAssignmentExpression: RSelfAssignmentExpression) {
         addNodeInfo("Self-assignment expression")
     }
 
-    fun visitBlockCall(blockCall: RBlockCall) {
+    private fun visitBlockCall(blockCall: RBlockCall) {
         addNodeInfo("Block call")
     }
 
-    fun visitUntilStatement(rUntilStatement: RUntilStatement) {
+    private fun visitUntilStatement(rUntilStatement: RUntilStatement) {
         addNodeInfo("Until statement")
     }
 
-    fun visitDotReference(rDotReference: RDotReference) {
+    private fun visitDotReference(rDotReference: RDotReference) {
         addNodeInfo("Dot reference", rDotReference.text)
     }
 
-    fun visitIfStatement(ifStatement: RIfStatement) {
+    private fun visitIfStatement(ifStatement: RIfStatement) {
         addNodeInfo("If statement")
     }
 
-    fun visitBinaryExpression(rBinaryExpression: RBinaryExpression) {
+    private fun visitBinaryExpression(rBinaryExpression: RBinaryExpression) {
         addNodeInfo(
                 "Binary expression",
                 rBinaryExpression.text,
@@ -528,47 +535,47 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitAssocList(rAssocList: RAssocList) {
+    private fun visitAssocList(rAssocList: RAssocList) {
         addNodeInfo("Assoc list")
     }
 
-    fun visitBraceCodeBlock(rBraceCodeBlock: RBraceCodeBlock) {
+    private fun visitBraceCodeBlock(rBraceCodeBlock: RBraceCodeBlock) {
         addNodeInfo("Brace code block")
     }
 
-    fun visitConditionalStatement(rConditionalStatement: RConditionalStatement) {
+    private fun visitConditionalStatement(rConditionalStatement: RConditionalStatement) {
         addNodeInfo("Conditional statement")
     }
 
-    fun visitArray(array: RArray) {
+    private fun visitArray(array: RArray) {
         addNodeInfo("Array", array.text)
     }
 
-    fun visitDoCodeBlock(rDoCodeBlock: RDoCodeBlock) {
+    private fun visitDoCodeBlock(rDoCodeBlock: RDoCodeBlock) {
         addNodeInfo("Do code block")
     }
 
-    fun visitCodeBlock(codeBlock: RCodeBlock) {
+    private fun visitCodeBlock(codeBlock: RCodeBlock) {
         addNodeInfo("Code block")
     }
 
-    fun visitDoBlockCall(rDoBlockCall: RDoBlockCall) {
+    private fun visitDoBlockCall(rDoBlockCall: RDoBlockCall) {
         addNodeInfo("Do block call")
     }
 
-    fun visitSingletonMethod(rsMethod: RSingletonMethod) {
+    private fun visitSingletonMethod(rsMethod: RSingletonMethod) {
         addNodeInfo("Singleton method", rsMethod.text)
     }
 
-    fun visitName(name: RName) {
+    private fun visitName(name: RName) {
         addNodeInfo("Name", name.text)
     }
 
-    fun visitArgumentDestructing(rArgumentDestructing: RArgumentDestructing) {
+    private fun visitArgumentDestructing(rArgumentDestructing: RArgumentDestructing) {
         addNodeInfo("Argument destructing", rArgumentDestructing.text)
     }
 
-    fun visitCall(rCall: RCall) {
+    private fun visitCall(rCall: RCall) {
         addNodeInfo(
                 "Call",
                 rCall.text,
@@ -576,11 +583,11 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitIntegerConstant(rIntegerConstant: RIntegerConstant) {
+    private fun visitIntegerConstant(rIntegerConstant: RIntegerConstant) {
         addNodeInfo("Integer constant", rIntegerConstant.text)
     }
 
-    fun visitStringLiteral(rStringLiteral: RStringLiteral) {
+    private fun visitStringLiteral(rStringLiteral: RStringLiteral) {
         addNodeInfo(
                 "String literal",
                 rStringLiteral.text,
@@ -588,7 +595,7 @@ class RubyElementInfoCollector {
         )
     }
 
-    fun visitLambda(rLambda: RLambda) {
+    private fun visitLambda(rLambda: RLambda) {
         addNodeInfo("Lambda", rLambda.text)
     }
 
@@ -597,12 +604,12 @@ class RubyElementInfoCollector {
             text: String? = null,
             vararg additionalProperties: Pair<String, String?>
     ) {
-        val nodeDescription = NodeDescription(nodeType, text, currentId)
+        val nodeDescription = NodeDescription(nodeType, text, currentElementId)
         additionalProperties.forEach { nodeDescription.addProperty(it.first, it.second) }
         nodesDescription.add(nodeDescription)
     }
 
     companion object {
-        var currentId = 0
+        private var currentElementId = 1
     }
 }

@@ -42,7 +42,10 @@ class ControlFlowDumperAction : AnAction() {
         } else if (element is RMethod) {
             getControlFlowInfoOfMethod(element)
         } else {
-            element.children.joinToString("") { getAllControlFlowGraphsInfo(it) }
+            element.children
+                    .map { getAllControlFlowGraphsInfo(it) }
+                    .filter { it.isNotBlank() }
+                    .joinToString(separator = "\n")
         }
 
     private fun getControlFlowInfoOfClass(element: RClass): String {
