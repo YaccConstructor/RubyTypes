@@ -13,8 +13,13 @@
     </extensions>
 
     <actions>
-        <action id="RubyTypes"
-                class="org.jetbrains.plugins.ruby.types.controlflow.ControlFlowDumperAction"
+        <action id="RubyTypesCallsTree"
+                class="org.jetbrains.plugins.ruby.types.controlflow.actions.CallsTreeAction"
+                text="Print calls tree for method">
+            <add-to-group group-id="AnalyzeMenu" anchor="first"/>
+        </action>
+        <action id="RubyTypesControlFlowDump"
+                class="org.jetbrains.plugins.ruby.types.controlflow.actions.ControlFlowDumperAction"
                 text="Print control flow graph for active file">
             <add-to-group group-id="AnalyzeMenu" anchor="first"/>
         </action>

@@ -1,8 +1,12 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
 import com.intellij.codeInsight.controlflow.Instruction
+import com.intellij.psi.PsiElement
 import org.jetbrains.plugins.ruby.erb.psi.ERbFile
+import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil
+import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.*
@@ -23,11 +27,14 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.ruby19.controlStructures.RBlockL
 import org.jetbrains.plugins.ruby.ruby.lang.psi.ruby19.controlStructures.RLambda
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
+import org.jetbrains.plugins.ruby.ruby.lang.search.RubyFindUsagesFactory
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 
 class RubyElementsInfoCollector {
 
     private val nodesDescription = mutableListOf<NodeDescription>()
+
+//    val calledMethods = mutableSetOf<RMethod>()
 
     fun getNodesDescriptions(): List<NodeDescription> = nodesDescription
 
@@ -335,13 +342,13 @@ class RubyElementsInfoCollector {
 
     private fun visitIdentifier(rIdentifier: RIdentifier) {
         addNodeInfo(
-                "Identifier",
+                "Identifier ${rIdentifier.reference?.canonicalText}",
                 rIdentifier.text,
                 Pair("kind",
                         when {
                             rIdentifier.isBlockCallLocalDeclaration -> "block call local declaration"
                             rIdentifier.isBlockParameterDeclaration -> "block parameter declaration"
-                            rIdentifier.isConstructorLike -> "constuctor-like variable"
+                            rIdentifier.isConstructorLike -> "constructor-like variable"
                             rIdentifier.isForLoopVariable -> "for-loop variable"
                             rIdentifier.isLambdaParameterDeclaration -> "lambda parameter"
                             rIdentifier.isLocalVariable -> "local variable"
@@ -351,7 +358,8 @@ class RubyElementsInfoCollector {
                             rIdentifier.isRescueParameterDeclaration -> "rescue parameter declaration"
                             else -> "unknown"
                         }
-                )
+                ),
+                Pair("reference", rIdentifier.reference?.canonicalText)
         )
     }
 
@@ -577,10 +585,12 @@ class RubyElementsInfoCollector {
 
     private fun visitCall(rCall: RCall) {
         addNodeInfo(
-                "Call",
-                rCall.text,
-                Pair("call type", rCall.type.presentableName)
+                nodeType = "Call",
+                text = rCall.text,
+                additionalProperties = Pair("call type", rCall.type.presentableName),
+                callee = rCall.getCalledMethod()
         )
+//        rCall.getCalledMethod()?.let { calledMethods.add(it) }
     }
 
     private fun visitIntegerConstant(rIntegerConstant: RIntegerConstant) {
@@ -602,9 +612,10 @@ class RubyElementsInfoCollector {
     private fun addNodeInfo(
             nodeType: String,
             text: String? = null,
-            vararg additionalProperties: Pair<String, String?>
+            vararg additionalProperties: Pair<String, String?>,
+            callee: RPsiElement? = null
     ) {
-        val nodeDescription = NodeDescription(nodeType, text, currentElementId)
+        val nodeDescription = NodeDescription(nodeType, text, currentElementId, callee)
         additionalProperties.forEach { nodeDescription.addProperty(it.first, it.second) }
         nodesDescription.add(nodeDescription)
     }
@@ -612,4 +623,6 @@ class RubyElementsInfoCollector {
     companion object {
         private var currentElementId = 1
     }
+
+    private fun RCall.getCalledMethod(): RMethod? = firstChild?.reference?.resolve() as? RMethod
 }

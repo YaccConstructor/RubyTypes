@@ -32,6 +32,7 @@ class JsonControlFlowWriter: ControlFlowWriter {
             description.getProperties().forEach { property, value ->
                 nodeDescriptionJson.put(property, value)
             }
+            description.callee?.let { nodeDescriptionJson.put("callee", it.name) }
             nodesDescriptionJson.put(nodeDescriptionJson)
         }
         controlFlowJson.put("nodes description", nodesDescriptionJson)

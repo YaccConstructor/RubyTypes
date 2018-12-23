@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.ruby.types.controlflow
+package org.jetbrains.plugins.ruby.types.controlflow.actions
 
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -9,6 +9,8 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlFlow.impl.RControlFlowBuilder
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
+import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDialog
+import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 
 class ControlFlowDumperAction : AnAction() {
@@ -24,10 +26,11 @@ class ControlFlowDumperAction : AnAction() {
             )
             return
         }
-        val controlFlow = builder.buildControlFlow(file)
-        val controlFlowWrapper = RubyControlFlowWrapper(controlFlow)
 
-        val fileControlFlowInfo = controlFlowWrapper.dump(file).writeToString(JsonControlFlowWriter())
+        val controlFlow = builder.buildControlFlow(file)
+        val controlFlowWrapper = RubyControlFlowWrapper(controlFlow, file)
+
+        val fileControlFlowInfo = controlFlowWrapper.dump().writeToString(JsonControlFlowWriter())
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
         val dialog = ControlFlowDumperDialog(
                 file,
@@ -51,14 +54,16 @@ class ControlFlowDumperAction : AnAction() {
     private fun getControlFlowInfoOfClass(element: RClass): String {
         val builder = RControlFlowBuilder()
         val controlFlow = builder.buildControlFlow(element)
-        val cfg = RubyControlFlowWrapper(controlFlow)
-        return cfg.dump(element).writeToString(JsonControlFlowWriter())
+        val cfg = RubyControlFlowWrapper(controlFlow, element)
+        val childInfo = element.children.joinToString(separator = System.lineSeparator()) { getAllControlFlowGraphsInfo(it) }
+        return cfg.dump().writeToString(JsonControlFlowWriter()) + System.lineSeparator() + childInfo
     }
 
     private fun getControlFlowInfoOfMethod(element: RMethod): String {
         val builder = RControlFlowBuilder()
         val controlFlow = builder.buildControlFlow(element)
-        val cfg = RubyControlFlowWrapper(controlFlow)
-        return cfg.dump(element).writeToString(JsonControlFlowWriter())
+        val cfg = RubyControlFlowWrapper(controlFlow, element)
+        val childInfo = element.children.joinToString(separator = System.lineSeparator()) { getAllControlFlowGraphsInfo(it) }
+        return cfg.dump().writeToString(JsonControlFlowWriter()) + System.lineSeparator() + childInfo
     }
 }
