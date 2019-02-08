@@ -1,0 +1,7946 @@
+{
+    "nodes description": [
+        {
+            "element type": "String literal",
+            "id": 1,
+            "text": "'io/console'",
+            "value": "io/console"
+        },
+        {
+            "element type": "Call",
+            "id": 2,
+            "text": "require 'io/console'"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 3,
+            "text": "true"
+        },
+        {
+            "element type": "Global variable",
+            "id": 4,
+            "text": "$color",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 5,
+            "operation type": "="
+        },
+        {
+            "element type": "Words",
+            "id": 6,
+            "text": "%W{0 1;97 1;93 1;92 1;96 1;91 1;95 1;94 1;30;47 1;43 1;42\n1;46 1;41 1;45 1;44 1;33;43 1;33;42 1;33;41 1;33;44}"
+        },
+        {
+            "element type": "Global variable",
+            "id": 7,
+            "text": "$colors",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 8,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 9,
+            "text": "false"
+        },
+        {
+            "element type": "Global variable",
+            "id": 10,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 11,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 12,
+            "text": "true"
+        },
+        {
+            "element type": "Global variable",
+            "id": 13,
+            "text": "$check_score",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 14,
+            "operation type": "="
+        },
+        {
+            "element type": "Unless statement",
+            "id": 15
+        },
+        {
+            "element type": "Constant",
+            "id": 16,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Reference",
+            "id": 17,
+            "text": "ARGV.empty?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 18,
+            "text": "puts \"Usage: #$0 [gridsize] [score-threshold] [padwidth] [--no-color] [--rumble]\"; exit if %W[-h --help].include?(ARGV[0])\n  args = ARGV.map(&:to_i).reject{|n| n == 0}\n  b = Board.new(*args) unless args.empty?\n  $rumble = true if ARGV.any?{|a| a =~ /rumble/i }\n  $color = false if ARGV.any?{|a| a =~ /no.?color/i}"
+        },
+        {
+            "element type": "Global variable",
+            "id": 19,
+            "text": "$0",
+            "variable type": "NTH_REFERENCE"
+        },
+        {
+            "element type": "String literal",
+            "id": 20,
+            "text": "\"Usage: #$0 [gridsize] [score-threshold] [padwidth] [--no-color] [--rumble]\"",
+            "value": "Usage: #$0 [gridsize] [score-threshold] [padwidth] [--no-color] [--rumble]"
+        },
+        {
+            "element type": "Call",
+            "id": 21,
+            "text": "puts \"Usage: #$0 [gridsize] [score-threshold] [padwidth] [--no-color] [--rumble]\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 22
+        },
+        {
+            "element type": "Words",
+            "id": 23,
+            "text": "%W[-h --help]"
+        },
+        {
+            "element type": "Reference",
+            "id": 24,
+            "text": "%W[-h --help].include?"
+        },
+        {
+            "element type": "Constant",
+            "id": 25,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 26,
+            "text": "0"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 27
+        },
+        {
+            "element type": "Call",
+            "call type": "TrueClass or FalseClass",
+            "id": 28,
+            "text": "%W[-h --help].include?(ARGV[0])"
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 29,
+            "text": "exit"
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 30,
+            "text": "exit"
+        },
+        {
+            "element type": "Constant",
+            "id": 31,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Reference",
+            "id": 32,
+            "text": "ARGV.map"
+        },
+        {
+            "element type": "Call",
+            "id": 33,
+            "text": "ARGV.map(&:to_i)"
+        },
+        {
+            "element type": "Reference",
+            "id": 34,
+            "text": "ARGV.map(&:to_i).reject"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "block parameter declaration",
+            "id": 35,
+            "text": "n"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 36,
+            "text": "n"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 37,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 38,
+            "text": "n == 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 39,
+            "text": "n == 0"
+        },
+        {
+            "element type": "Code block",
+            "id": 40
+        },
+        {
+            "element type": "Block call",
+            "id": 41
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 42,
+            "text": "args"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 43,
+            "operation type": "="
+        },
+        {
+            "element type": "Unless mod statement",
+            "id": 44
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 45,
+            "text": "args"
+        },
+        {
+            "element type": "Reference",
+            "id": 46,
+            "text": "args.empty?"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 47,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 48,
+            "text": "Board"
+        },
+        {
+            "element type": "Reference",
+            "id": 49,
+            "text": "Board.new"
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 50,
+            "text": "args"
+        },
+        {
+            "element type": "Call",
+            "call type": "Board",
+            "callee": "initialize",
+            "id": 51,
+            "text": "Board.new(*args)"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 52,
+            "text": "b"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 53,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 54
+        },
+        {
+            "element type": "Constant",
+            "id": 55,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Reference",
+            "id": 56,
+            "text": "ARGV.any?"
+        },
+        {
+            "element type": "Identifier a",
+            "reference": "a",
+            "kind": "block parameter declaration",
+            "id": 57,
+            "text": "a"
+        },
+        {
+            "element type": "Identifier a",
+            "reference": "a",
+            "kind": "local variable",
+            "id": 58,
+            "text": "a"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 59,
+            "text": "a =~ /rumble/i",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=~"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 60,
+            "text": "a =~ /rumble/i"
+        },
+        {
+            "element type": "Code block",
+            "id": 61
+        },
+        {
+            "element type": "Block call",
+            "id": 62
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 63,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 64,
+            "text": "true"
+        },
+        {
+            "element type": "Global variable",
+            "id": 65,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 66,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 67
+        },
+        {
+            "element type": "Constant",
+            "id": 68,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Reference",
+            "id": 69,
+            "text": "ARGV.any?"
+        },
+        {
+            "element type": "Identifier a",
+            "reference": "a",
+            "kind": "block parameter declaration",
+            "id": 70,
+            "text": "a"
+        },
+        {
+            "element type": "Identifier a",
+            "reference": "a",
+            "kind": "local variable",
+            "id": 71,
+            "text": "a"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 72,
+            "text": "a =~ /no.?color/i",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=~"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 73,
+            "text": "a =~ /no.?color/i"
+        },
+        {
+            "element type": "Code block",
+            "id": 74
+        },
+        {
+            "element type": "Block call",
+            "id": 75
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 76,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 77,
+            "text": "false"
+        },
+        {
+            "element type": "Global variable",
+            "id": 78,
+            "text": "$color",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 79,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 80,
+            "text": "Board"
+        },
+        {
+            "element type": "Reference",
+            "id": 81,
+            "text": "Board.new"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 82,
+            "text": "b"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 83,
+            "operation type": "||="
+        },
+        {
+            "element type": "String literal",
+            "id": 84,
+            "text": "\"\\e[H\\e[2J\"",
+            "value": "\\e[H\\e[2J"
+        },
+        {
+            "element type": "Call",
+            "id": 85,
+            "text": "puts \"\\e[H\\e[2J\""
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 86,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 87,
+            "text": "b.draw"
+        },
+        {
+            "element type": "String literal",
+            "id": 88,
+            "text": "\"Press h for help, q to quit\"",
+            "value": "Press h for help, q to quit"
+        },
+        {
+            "element type": "Call",
+            "id": 89,
+            "text": "puts \"Press h for help, q to quit\""
+        },
+        {
+            "element type": "Identifier loop",
+            "reference": "loop",
+            "kind": "unknown",
+            "id": 90,
+            "text": "loop"
+        },
+        {
+            "element type": "Constant",
+            "id": 91,
+            "text": "STDIN"
+        },
+        {
+            "element type": "Reference",
+            "id": 92,
+            "text": "STDIN.getch"
+        },
+        {
+            "element type": "Identifier input",
+            "reference": "input",
+            "kind": "local variable",
+            "id": 93,
+            "text": "input"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 94,
+            "operation type": "="
+        },
+        {
+            "element type": "If statement",
+            "id": 95
+        },
+        {
+            "element type": "Identifier input",
+            "reference": "input",
+            "kind": "local variable",
+            "id": 96,
+            "text": "input"
+        },
+        {
+            "element type": "String literal",
+            "id": 97,
+            "text": "\"\\e\"",
+            "value": "\\e"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 98,
+            "text": "input == \"\\e\"",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 99,
+            "text": "2.times {input << STDIN.getch}"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 100,
+            "text": "2"
+        },
+        {
+            "element type": "Reference",
+            "id": 101,
+            "text": "2.times"
+        },
+        {
+            "element type": "Identifier input",
+            "reference": "input",
+            "kind": "local variable",
+            "id": 102,
+            "text": "input"
+        },
+        {
+            "element type": "Constant",
+            "id": 103,
+            "text": "STDIN"
+        },
+        {
+            "element type": "Reference",
+            "id": 104,
+            "text": "STDIN.getch"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 105,
+            "text": "input << STDIN.getch",
+            "expression type": "Integer",
+            "operation type": "<<"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 106,
+            "text": "input << STDIN.getch"
+        },
+        {
+            "element type": "Code block",
+            "id": 107
+        },
+        {
+            "element type": "Block call",
+            "id": 108
+        },
+        {
+            "element type": "Case statement",
+            "id": 109
+        },
+        {
+            "element type": "Identifier input",
+            "reference": "input",
+            "kind": "local variable",
+            "id": 110,
+            "text": "input"
+        },
+        {
+            "element type": "When case",
+            "id": 111
+        },
+        {
+            "element type": "String literal",
+            "id": 112,
+            "text": "\"\\e[A\"",
+            "value": "\\e[A"
+        },
+        {
+            "element type": "String literal",
+            "id": 113,
+            "text": "\"w\"",
+            "value": "w"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 114,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 115,
+            "text": "b.move"
+        },
+        {
+            "element type": "Call",
+            "callee": "move",
+            "id": 116,
+            "text": "b.move(:up)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 117,
+            "text": "b.move(:up)"
+        },
+        {
+            "element type": "When case",
+            "id": 118
+        },
+        {
+            "element type": "String literal",
+            "id": 119,
+            "text": "\"\\e[B\"",
+            "value": "\\e[B"
+        },
+        {
+            "element type": "String literal",
+            "id": 120,
+            "text": "\"s\"",
+            "value": "s"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 121,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 122,
+            "text": "b.move"
+        },
+        {
+            "element type": "Call",
+            "callee": "move",
+            "id": 123,
+            "text": "b.move(:down)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 124,
+            "text": "b.move(:down)"
+        },
+        {
+            "element type": "When case",
+            "id": 125
+        },
+        {
+            "element type": "String literal",
+            "id": 126,
+            "text": "\"\\e[C\"",
+            "value": "\\e[C"
+        },
+        {
+            "element type": "String literal",
+            "id": 127,
+            "text": "\"d\"",
+            "value": "d"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 128,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 129,
+            "text": "b.move"
+        },
+        {
+            "element type": "Call",
+            "callee": "move",
+            "id": 130,
+            "text": "b.move(:right)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 131,
+            "text": "b.move(:right)"
+        },
+        {
+            "element type": "When case",
+            "id": 132
+        },
+        {
+            "element type": "String literal",
+            "id": 133,
+            "text": "\"\\e[D\"",
+            "value": "\\e[D"
+        },
+        {
+            "element type": "String literal",
+            "id": 134,
+            "text": "\"a\"",
+            "value": "a"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 135,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 136,
+            "text": "b.move"
+        },
+        {
+            "element type": "Call",
+            "callee": "move",
+            "id": 137,
+            "text": "b.move(:left)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 138,
+            "text": "b.move(:left)"
+        },
+        {
+            "element type": "When case",
+            "id": 139
+        },
+        {
+            "element type": "String literal",
+            "id": 140,
+            "text": "\"q\"",
+            "value": "q"
+        },
+        {
+            "element type": "String literal",
+            "id": 141,
+            "text": "\"\\u0003\"",
+            "value": "\\u0003"
+        },
+        {
+            "element type": "String literal",
+            "id": 142,
+            "text": "\"\\u0004\"",
+            "value": "\\u0004"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 143,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 144,
+            "text": "b.print_score"
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 145,
+            "text": "exit"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 146,
+            "text": "b.print_score; exit"
+        },
+        {
+            "element type": "When case",
+            "id": 147
+        },
+        {
+            "element type": "String literal",
+            "id": 148,
+            "text": "\"h\"",
+            "value": "h"
+        },
+        {
+            "element type": "String literal",
+            "id": 149,
+            "text": "      ┌─                                                                                  ─┐\n      │Use the arrow-keys or WASD on your keyboard to push board in the given direction.   \n      │Tiles with the same number merge into one.                                          \n      │Get a tile with a value of #{ARGV[1] || 2048} to win.                               \n      │In case you cannot move or merge any tiles anymore, you loose.                      \n      │You can start this game with different settings by providing commandline argument:  \n      │For instance:                                                                       \n      │  %> #$0 6 8192 --rumble                                                            \n      └─                                                                                  ─┘\n      PRESS q TO QUIT (or Ctrl-C or Ctrl-D)",
+            "value": "      ┌─                                                                                  ─┐\n      │Use the arrow-keys or WASD on your keyboard to push board in the given direction.   \n      │Tiles with the same number merge into one.                                          \n      │Get a tile with a value of #{ARGV[1] || 2048} to win.                               \n      │In case you cannot move or merge any tiles anymore, you loose.                      \n      │You can start this game with different settings by providing commandline argument:  \n      │For instance:                                                                       \n      │  %> #$0 6 8192 --rumble                                                            \n      └─                                                                                  ─┘\n      PRESS q TO QUIT (or Ctrl-C or Ctrl-D)"
+        },
+        {
+            "element type": "Constant",
+            "id": 150,
+            "text": "ARGV"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 151,
+            "text": "1"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 152
+        },
+        {
+            "element type": "Integer constant",
+            "id": 155,
+            "text": "2048"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 156,
+            "text": "ARGV[1] || 2048"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 157,
+            "text": "ARGV[1] || 2048"
+        },
+        {
+            "element type": "Global variable",
+            "id": 158,
+            "text": "$0",
+            "variable type": "NTH_REFERENCE"
+        },
+        {
+            "element type": "Reference",
+            "id": 159,
+            "text": "<<-EOM.gsub"
+        },
+        {
+            "element type": "String literal",
+            "id": 160,
+            "text": "''",
+            "value": ""
+        },
+        {
+            "element type": "Call",
+            "id": 161,
+            "text": "<<-EOM.gsub(/^\\s*/, '')"
+        },
+        {
+            "element type": "Call",
+            "id": 162,
+            "text": "puts <<-EOM.gsub(/^\\s*/, '')"
+        },
+        {
+            "element type": "Constant",
+            "id": 163,
+            "text": "STDIN"
+        },
+        {
+            "element type": "Reference",
+            "id": 164,
+            "text": "STDIN.getch"
+        },
+        {
+            "element type": "Identifier input",
+            "reference": "input",
+            "kind": "local variable",
+            "id": 165,
+            "text": "input"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 166,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 167,
+            "text": "puts <<-EOM.gsub(/^\\s*/, '')\n      ┌─                                                                                  ─┐\n      │Use the arrow-keys or WASD on your keyboard to push board in the given direction.   \n      │Tiles with the same number merge into one.                                          \n      │Get a tile with a value of #{ARGV[1] || 2048} to win.                               \n      │In case you cannot move or merge any tiles anymore, you loose.                      \n      │You can start this game with different settings by providing commandline argument:  \n      │For instance:                                                                       \n      │  %> #$0 6 8192 --rumble                                                            \n      └─                                                                                  ─┘\n      PRESS q TO QUIT (or Ctrl-C or Ctrl-D)\n    EOM\n    input = STDIN.getch"
+        },
+        {
+            "element type": "String literal",
+            "id": 168,
+            "text": "\"\\e[H\\e[2J\"",
+            "value": "\\e[H\\e[2J"
+        },
+        {
+            "element type": "Call",
+            "id": 169,
+            "text": "puts \"\\e[H\\e[2J\""
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 170,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 171,
+            "text": "b.draw"
+        },
+        {
+            "element type": "If statement",
+            "id": 172
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 173,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 174,
+            "text": "b.no_more_moves?"
+        },
+        {
+            "element type": "Global variable",
+            "id": 177,
+            "text": "$check_score",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 180,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 181,
+            "text": "b.won?"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 182,
+            "text": "$check_score && b.won?"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 183,
+            "text": "b.no_more_moves? or $check_score && b.won?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 184,
+            "text": "b.print_score\n    if b.no_more_moves?\n      puts \"No more moves possible\"\n      puts \"Again? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = true\n      b.reset!\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    else\n      puts \"Continue? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = false\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    end"
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 185,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 186,
+            "text": "b.print_score"
+        },
+        {
+            "element type": "If statement",
+            "id": 187
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 188,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 189,
+            "text": "b.no_more_moves?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 190,
+            "text": "puts \"No more moves possible\"\n      puts \"Again? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = true\n      b.reset!\n      puts \"\\e[H\\e[2J\"\n      b.draw"
+        },
+        {
+            "element type": "String literal",
+            "id": 191,
+            "text": "\"No more moves possible\"",
+            "value": "No more moves possible"
+        },
+        {
+            "element type": "Call",
+            "id": 192,
+            "text": "puts \"No more moves possible\""
+        },
+        {
+            "element type": "String literal",
+            "id": 193,
+            "text": "\"Again? (y/n)\"",
+            "value": "Again? (y/n)"
+        },
+        {
+            "element type": "Call",
+            "id": 194,
+            "text": "puts \"Again? (y/n)\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 195
+        },
+        {
+            "element type": "Constant",
+            "id": 196,
+            "text": "STDIN"
+        },
+        {
+            "element type": "Reference",
+            "id": 197,
+            "text": "STDIN.gets"
+        },
+        {
+            "element type": "Reference",
+            "id": 198,
+            "text": "STDIN.gets.chomp"
+        },
+        {
+            "element type": "Reference",
+            "id": 199,
+            "text": "STDIN.gets.chomp.downcase"
+        },
+        {
+            "element type": "String literal",
+            "id": 200,
+            "text": "\"n\"",
+            "value": "n"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 201,
+            "text": "STDIN.gets.chomp.downcase == \"n\"",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 202,
+            "text": "exit"
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 203,
+            "text": "exit"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 204,
+            "text": "true"
+        },
+        {
+            "element type": "Global variable",
+            "id": 205,
+            "text": "$check_score",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 206,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 207,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 208,
+            "text": "b.reset!"
+        },
+        {
+            "element type": "String literal",
+            "id": 209,
+            "text": "\"\\e[H\\e[2J\"",
+            "value": "\\e[H\\e[2J"
+        },
+        {
+            "element type": "Call",
+            "id": 210,
+            "text": "puts \"\\e[H\\e[2J\""
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 211,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 212,
+            "text": "b.draw"
+        },
+        {
+            "element type": "Else block",
+            "id": 213
+        },
+        {
+            "element type": "String literal",
+            "id": 214,
+            "text": "\"Continue? (y/n)\"",
+            "value": "Continue? (y/n)"
+        },
+        {
+            "element type": "Call",
+            "id": 215,
+            "text": "puts \"Continue? (y/n)\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 216
+        },
+        {
+            "element type": "Constant",
+            "id": 217,
+            "text": "STDIN"
+        },
+        {
+            "element type": "Reference",
+            "id": 218,
+            "text": "STDIN.gets"
+        },
+        {
+            "element type": "Reference",
+            "id": 219,
+            "text": "STDIN.gets.chomp"
+        },
+        {
+            "element type": "Reference",
+            "id": 220,
+            "text": "STDIN.gets.chomp.downcase"
+        },
+        {
+            "element type": "String literal",
+            "id": 221,
+            "text": "\"n\"",
+            "value": "n"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 222,
+            "text": "STDIN.gets.chomp.downcase == \"n\"",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 223,
+            "text": "exit"
+        },
+        {
+            "element type": "Identifier exit",
+            "reference": "exit",
+            "kind": "unknown",
+            "id": 224,
+            "text": "exit"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 225,
+            "text": "false"
+        },
+        {
+            "element type": "Global variable",
+            "id": 226,
+            "text": "$check_score",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 227,
+            "operation type": "="
+        },
+        {
+            "element type": "String literal",
+            "id": 228,
+            "text": "\"\\e[H\\e[2J\"",
+            "value": "\\e[H\\e[2J"
+        },
+        {
+            "element type": "Call",
+            "id": 229,
+            "text": "puts \"\\e[H\\e[2J\""
+        },
+        {
+            "element type": "Identifier b",
+            "reference": "b",
+            "kind": "local variable",
+            "id": 230,
+            "text": "b"
+        },
+        {
+            "element type": "Reference",
+            "id": 231,
+            "text": "b.draw"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 232,
+            "text": "puts \"Continue? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = false\n      puts \"\\e[H\\e[2J\"\n      b.draw"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 233,
+            "text": "input = STDIN.getch\n  if input == \"\\e\"\n    2.times {input << STDIN.getch}\n  end\n\n  case input\n  when \"\\e[A\", \"w\" then b.move(:up)\n  when \"\\e[B\", \"s\" then b.move(:down)\n  when \"\\e[C\", \"d\" then b.move(:right)\n  when \"\\e[D\", \"a\" then b.move(:left)\n\n  when \"q\",\"\\u0003\",\"\\u0004\"  then b.print_score; exit\n\n  when \"h\"\n    puts <<-EOM.gsub(/^\\s*/, '')\n      ┌─                                                                                  ─┐\n      │Use the arrow-keys or WASD on your keyboard to push board in the given direction.   \n      │Tiles with the same number merge into one.                                          \n      │Get a tile with a value of #{ARGV[1] || 2048} to win.                               \n      │In case you cannot move or merge any tiles anymore, you loose.                      \n      │You can start this game with different settings by providing commandline argument:  \n      │For instance:                                                                       \n      │  %> #$0 6 8192 --rumble                                                            \n      └─                                                                                  ─┘\n      PRESS q TO QUIT (or Ctrl-C or Ctrl-D)\n    EOM\n    input = STDIN.getch\n  end\n\n  puts \"\\e[H\\e[2J\"\n  b.draw\n\n  if b.no_more_moves? or $check_score && b.won?\n    b.print_score\n    if b.no_more_moves?\n      puts \"No more moves possible\"\n      puts \"Again? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = true\n      b.reset!\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    else\n      puts \"Continue? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = false\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    end\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 234
+        },
+        {
+            "element type": "Code block",
+            "id": 235
+        },
+        {
+            "element type": "Block call",
+            "id": 236
+        },
+        {
+            "element type": "Compound statement",
+            "id": 237,
+            "text": "require 'io/console'\n\nclass Board\n  def initialize size=4, win_limit=2048, cell_width = 6\n    @size = size; @cw = cell_width; @win_limit = win_limit\n    @board = Array.new(size) {Array.new(size, 0)}\n    @moved = true; @score = 0; @no_more_moves = false\n    spawn\n  end\n\n  def draw\n    print \"\\n\\n\" if @r_vert\n    print '    ' if @r_hori\n    print '┌' + (['─' * @cw] * @size).join('┬')  + '┐'\n    @board.each do |row|\n      print \"\\n\"\n      formated = row.map {|num| num == 0 ? ' ' * @cw : format(num)}\n      print '    ' if @r_hori\n      puts '│' + formated.join('│') + '│'\n      print '    ' if @r_hori\n      print '├' + ([' '  * @cw] * @size).join('┼') + '┤'\n    end\n    print \"\\r\"\n    print '    ' if @r_hori\n    puts '└' + (['─' * @cw] * @size).join('┴')  + '┘'\n  end\n\n  def move direction\n    case direction\n    when :up\n      @board = column_map {|c| logic(c)}\n      @r_vert = false if $rumble\n    when :down\n      @board = column_map {|c| logic(c.reverse).reverse}\n      @r_vert = true if $rumble\n    when :left\n      @board = row_map {|r| logic(r)}\n      @r_hori = false if $rumble\n    when :right\n      @board = row_map {|r| logic(r.reverse).reverse}\n      @r_hori = true if $rumble\n    end\n    spawn\n    @moved = false\n  end\n\n  def print_score\n    puts \"Your Score is #@score.\"\n    puts \"Congratulations, you have won!\" if to_enum.any? {|e| e >= @win_limit}\n  end\n\n  def no_more_moves?; @no_more_moves; end\n  def won?;  to_enum.any? {|e| e >= @win_limit}; end\n  def reset!; initialize @size, @win_limit, @cw; end\n\n  private\n\n  def set x, y, val\n    @board[y][x] = val\n  end\n\n  def spawn\n    free_pos = to_enum.select{|elem,x,y| elem == 0}.map{|_,x,y| [x,y]}\n    unless free_pos.empty?\n      set *free_pos.sample, rand > 0.1 ? 2 : 4 if @moved\n    else\n      snap = @board\n      unless @stop\n        @stop = true\n        %i{up down left right}.each{|s| move(s)}\n        @no_more_moves = true if snap.flatten == @board.flatten\n        @board = snap\n        @stop = false\n      end\n    end\n  end\n\n  def logic list\n    jump = false\n    result =\n        list.reduce([]) do |res, val|\n          if res.last == val && !jump\n            res[-1] += val\n            @score += val\n            jump = true\n          elsif val != 0\n            res.push val\n            jump = false\n          end\n          res\n        end\n    result += [0] * (@size - result.length)\n    @moved ||= list != result\n    result\n  end\n\n  def column_map\n    xboard = @board.transpose\n    xboard.map!{|c| yield c }\n    xboard.transpose\n  end\n\n  def row_map\n    @board.map {|r| yield r }\n  end\n\n  def to_enum\n    @enum ||= Enumerator.new(@size * @size) do |yielder|\n      (@size*@size).times do |i|\n        yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )\n      end\n    end\n    @enum.rewind\n  end\n\n  def format(num)\n    if $color\n      cstart = \"\\e[\" + $colors[Math.log(num, 2)] + \"m\"\n      cend = \"\\e[0m\"\n    else\n      cstart = cend = \"\"\n    end\n    cstart + num.to_s.center(@cw) + cend\n  end\nend\n\n$color = true\n$colors = %W{0 1;97 1;93 1;92 1;96 1;91 1;95 1;94 1;30;47 1;43 1;42\n1;46 1;41 1;45 1;44 1;33;43 1;33;42 1;33;41 1;33;44}\n$rumble = false\n\n$check_score = true\nunless ARGV.empty?\n  puts \"Usage: #$0 [gridsize] [score-threshold] [padwidth] [--no-color] [--rumble]\"; exit if %W[-h --help].include?(ARGV[0])\n  args = ARGV.map(&:to_i).reject{|n| n == 0}\n  b = Board.new(*args) unless args.empty?\n  $rumble = true if ARGV.any?{|a| a =~ /rumble/i }\n  $color = false if ARGV.any?{|a| a =~ /no.?color/i}\nend\n\nb ||= Board.new\nputs \"\\e[H\\e[2J\"\nb.draw\nputs \"Press h for help, q to quit\"\nloop do\n  input = STDIN.getch\n  if input == \"\\e\"\n    2.times {input << STDIN.getch}\n  end\n\n  case input\n  when \"\\e[A\", \"w\" then b.move(:up)\n  when \"\\e[B\", \"s\" then b.move(:down)\n  when \"\\e[C\", \"d\" then b.move(:right)\n  when \"\\e[D\", \"a\" then b.move(:left)\n\n  when \"q\",\"\\u0003\",\"\\u0004\"  then b.print_score; exit\n\n  when \"h\"\n    puts <<-EOM.gsub(/^\\s*/, '')\n      ┌─                                                                                  ─┐\n      │Use the arrow-keys or WASD on your keyboard to push board in the given direction.   \n      │Tiles with the same number merge into one.                                          \n      │Get a tile with a value of #{ARGV[1] || 2048} to win.                               \n      │In case you cannot move or merge any tiles anymore, you loose.                      \n      │You can start this game with different settings by providing commandline argument:  \n      │For instance:                                                                       \n      │  %> #$0 6 8192 --rumble                                                            \n      └─                                                                                  ─┘\n      PRESS q TO QUIT (or Ctrl-C or Ctrl-D)\n    EOM\n    input = STDIN.getch\n  end\n\n  puts \"\\e[H\\e[2J\"\n  b.draw\n\n  if b.no_more_moves? or $check_score && b.won?\n    b.print_score\n    if b.no_more_moves?\n      puts \"No more moves possible\"\n      puts \"Again? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = true\n      b.reset!\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    else\n      puts \"Continue? (y/n)\"\n      exit if STDIN.gets.chomp.downcase == \"n\"\n      $check_score = false\n      puts \"\\e[H\\e[2J\"\n      b.draw\n    end\n  end\nend"
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [
+                18,
+                80
+            ]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [
+                29,
+                31
+            ]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [
+                35,
+                41
+            ]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [
+                41,
+                35
+            ]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [
+                47,
+                54
+            ]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [
+                57,
+                62
+            ]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [59]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [
+                62,
+                57
+            ]
+        },
+        {
+            "from": 62,
+            "to": [
+                63,
+                67
+            ]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [
+                70,
+                75
+            ]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [
+                75,
+                70
+            ]
+        },
+        {
+            "from": 75,
+            "to": [
+                76,
+                80
+            ]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [82]
+        },
+        {
+            "from": 82,
+            "to": [83]
+        },
+        {
+            "from": 83,
+            "to": [84]
+        },
+        {
+            "from": 84,
+            "to": [85]
+        },
+        {
+            "from": 85,
+            "to": [86]
+        },
+        {
+            "from": 86,
+            "to": [87]
+        },
+        {
+            "from": 87,
+            "to": [88]
+        },
+        {
+            "from": 88,
+            "to": [89]
+        },
+        {
+            "from": 89,
+            "to": [90]
+        },
+        {
+            "from": 90,
+            "to": [
+                91,
+                236
+            ]
+        },
+        {
+            "from": 91,
+            "to": [92]
+        },
+        {
+            "from": 92,
+            "to": [93]
+        },
+        {
+            "from": 93,
+            "to": [94]
+        },
+        {
+            "from": 94,
+            "to": [95]
+        },
+        {
+            "from": 95,
+            "to": [96]
+        },
+        {
+            "from": 96,
+            "to": [97]
+        },
+        {
+            "from": 97,
+            "to": [98]
+        },
+        {
+            "from": 98,
+            "to": [
+                99,
+                109
+            ]
+        },
+        {
+            "from": 99,
+            "to": [100]
+        },
+        {
+            "from": 100,
+            "to": [101]
+        },
+        {
+            "from": 101,
+            "to": [
+                102,
+                108
+            ]
+        },
+        {
+            "from": 102,
+            "to": [103]
+        },
+        {
+            "from": 103,
+            "to": [104]
+        },
+        {
+            "from": 104,
+            "to": [105]
+        },
+        {
+            "from": 105,
+            "to": [106]
+        },
+        {
+            "from": 106,
+            "to": [107]
+        },
+        {
+            "from": 107,
+            "to": [
+                108,
+                102
+            ]
+        },
+        {
+            "from": 108,
+            "to": [109]
+        },
+        {
+            "from": 109,
+            "to": [110]
+        },
+        {
+            "from": 110,
+            "to": [
+                111,
+                118,
+                125,
+                132,
+                139,
+                147,
+                168
+            ]
+        },
+        {
+            "from": 111,
+            "to": [112]
+        },
+        {
+            "from": 112,
+            "to": [113]
+        },
+        {
+            "from": 113,
+            "to": [114]
+        },
+        {
+            "from": 114,
+            "to": [115]
+        },
+        {
+            "from": 115,
+            "to": [116]
+        },
+        {
+            "from": 116,
+            "to": [117]
+        },
+        {
+            "from": 117,
+            "to": [168]
+        },
+        {
+            "from": 118,
+            "to": [119]
+        },
+        {
+            "from": 119,
+            "to": [120]
+        },
+        {
+            "from": 120,
+            "to": [121]
+        },
+        {
+            "from": 121,
+            "to": [122]
+        },
+        {
+            "from": 122,
+            "to": [123]
+        },
+        {
+            "from": 123,
+            "to": [124]
+        },
+        {
+            "from": 124,
+            "to": [168]
+        },
+        {
+            "from": 125,
+            "to": [126]
+        },
+        {
+            "from": 126,
+            "to": [127]
+        },
+        {
+            "from": 127,
+            "to": [128]
+        },
+        {
+            "from": 128,
+            "to": [129]
+        },
+        {
+            "from": 129,
+            "to": [130]
+        },
+        {
+            "from": 130,
+            "to": [131]
+        },
+        {
+            "from": 131,
+            "to": [168]
+        },
+        {
+            "from": 132,
+            "to": [133]
+        },
+        {
+            "from": 133,
+            "to": [134]
+        },
+        {
+            "from": 134,
+            "to": [135]
+        },
+        {
+            "from": 135,
+            "to": [136]
+        },
+        {
+            "from": 136,
+            "to": [137]
+        },
+        {
+            "from": 137,
+            "to": [138]
+        },
+        {
+            "from": 138,
+            "to": [168]
+        },
+        {
+            "from": 139,
+            "to": [140]
+        },
+        {
+            "from": 140,
+            "to": [141]
+        },
+        {
+            "from": 141,
+            "to": [142]
+        },
+        {
+            "from": 142,
+            "to": [143]
+        },
+        {
+            "from": 143,
+            "to": [144]
+        },
+        {
+            "from": 144,
+            "to": [145]
+        },
+        {
+            "from": 145,
+            "to": [146]
+        },
+        {
+            "from": 146,
+            "to": [168]
+        },
+        {
+            "from": 147,
+            "to": [148]
+        },
+        {
+            "from": 148,
+            "to": [149]
+        },
+        {
+            "from": 149,
+            "to": [150]
+        },
+        {
+            "from": 150,
+            "to": [151]
+        },
+        {
+            "from": 151,
+            "to": [152]
+        },
+        {
+            "from": 152,
+            "to": [
+                153,
+                154
+            ]
+        },
+        {
+            "from": 153,
+            "to": [157]
+        },
+        {
+            "from": 154,
+            "to": [155]
+        },
+        {
+            "from": 155,
+            "to": [156]
+        },
+        {
+            "from": 156,
+            "to": [157]
+        },
+        {
+            "from": 157,
+            "to": [158]
+        },
+        {
+            "from": 158,
+            "to": [159]
+        },
+        {
+            "from": 159,
+            "to": [160]
+        },
+        {
+            "from": 160,
+            "to": [161]
+        },
+        {
+            "from": 161,
+            "to": [162]
+        },
+        {
+            "from": 162,
+            "to": [163]
+        },
+        {
+            "from": 163,
+            "to": [164]
+        },
+        {
+            "from": 164,
+            "to": [165]
+        },
+        {
+            "from": 165,
+            "to": [166]
+        },
+        {
+            "from": 166,
+            "to": [167]
+        },
+        {
+            "from": 167,
+            "to": [168]
+        },
+        {
+            "from": 168,
+            "to": [169]
+        },
+        {
+            "from": 169,
+            "to": [170]
+        },
+        {
+            "from": 170,
+            "to": [171]
+        },
+        {
+            "from": 171,
+            "to": [172]
+        },
+        {
+            "from": 172,
+            "to": [173]
+        },
+        {
+            "from": 173,
+            "to": [174]
+        },
+        {
+            "from": 174,
+            "to": [
+                175,
+                176
+            ]
+        },
+        {
+            "from": 175,
+            "to": [184]
+        },
+        {
+            "from": 176,
+            "to": [177]
+        },
+        {
+            "from": 177,
+            "to": [
+                178,
+                179
+            ]
+        },
+        {
+            "from": 178,
+            "to": [180]
+        },
+        {
+            "from": 179,
+            "to": [183]
+        },
+        {
+            "from": 180,
+            "to": [181]
+        },
+        {
+            "from": 181,
+            "to": [182]
+        },
+        {
+            "from": 182,
+            "to": [183]
+        },
+        {
+            "from": 183,
+            "to": [
+                184,
+                233
+            ]
+        },
+        {
+            "from": 184,
+            "to": [185]
+        },
+        {
+            "from": 185,
+            "to": [186]
+        },
+        {
+            "from": 186,
+            "to": [187]
+        },
+        {
+            "from": 187,
+            "to": [188]
+        },
+        {
+            "from": 188,
+            "to": [189]
+        },
+        {
+            "from": 189,
+            "to": [
+                190,
+                213
+            ]
+        },
+        {
+            "from": 190,
+            "to": [191]
+        },
+        {
+            "from": 191,
+            "to": [192]
+        },
+        {
+            "from": 192,
+            "to": [193]
+        },
+        {
+            "from": 193,
+            "to": [194]
+        },
+        {
+            "from": 194,
+            "to": [195]
+        },
+        {
+            "from": 195,
+            "to": [196]
+        },
+        {
+            "from": 196,
+            "to": [197]
+        },
+        {
+            "from": 197,
+            "to": [198]
+        },
+        {
+            "from": 198,
+            "to": [199]
+        },
+        {
+            "from": 199,
+            "to": [200]
+        },
+        {
+            "from": 200,
+            "to": [201]
+        },
+        {
+            "from": 201,
+            "to": [
+                202,
+                204
+            ]
+        },
+        {
+            "from": 202,
+            "to": [203]
+        },
+        {
+            "from": 203,
+            "to": [204]
+        },
+        {
+            "from": 204,
+            "to": [205]
+        },
+        {
+            "from": 205,
+            "to": [206]
+        },
+        {
+            "from": 206,
+            "to": [207]
+        },
+        {
+            "from": 207,
+            "to": [208]
+        },
+        {
+            "from": 208,
+            "to": [209]
+        },
+        {
+            "from": 209,
+            "to": [210]
+        },
+        {
+            "from": 210,
+            "to": [211]
+        },
+        {
+            "from": 211,
+            "to": [212]
+        },
+        {
+            "from": 212,
+            "to": [233]
+        },
+        {
+            "from": 213,
+            "to": [214]
+        },
+        {
+            "from": 214,
+            "to": [215]
+        },
+        {
+            "from": 215,
+            "to": [216]
+        },
+        {
+            "from": 216,
+            "to": [217]
+        },
+        {
+            "from": 217,
+            "to": [218]
+        },
+        {
+            "from": 218,
+            "to": [219]
+        },
+        {
+            "from": 219,
+            "to": [220]
+        },
+        {
+            "from": 220,
+            "to": [221]
+        },
+        {
+            "from": 221,
+            "to": [222]
+        },
+        {
+            "from": 222,
+            "to": [
+                223,
+                225
+            ]
+        },
+        {
+            "from": 223,
+            "to": [224]
+        },
+        {
+            "from": 224,
+            "to": [225]
+        },
+        {
+            "from": 225,
+            "to": [226]
+        },
+        {
+            "from": 226,
+            "to": [227]
+        },
+        {
+            "from": 227,
+            "to": [228]
+        },
+        {
+            "from": 228,
+            "to": [229]
+        },
+        {
+            "from": 229,
+            "to": [230]
+        },
+        {
+            "from": 230,
+            "to": [231]
+        },
+        {
+            "from": 231,
+            "to": [232]
+        },
+        {
+            "from": 232,
+            "to": [233]
+        },
+        {
+            "from": 233,
+            "to": [234]
+        },
+        {
+            "from": 234,
+            "to": [235]
+        },
+        {
+            "from": 235,
+            "to": [
+                236,
+                91
+            ]
+        },
+        {
+            "from": 236,
+            "to": [237]
+        },
+        {
+            "from": 237,
+            "to": [238]
+        },
+        {
+            "from": 238,
+            "to": []
+        }
+    ],
+    "holder": "test2.rb"
+}
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Board"
+        },
+        {
+            "element type": "Identifier private",
+            "reference": "private",
+            "kind": "unknown",
+            "id": 2,
+            "text": "private"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 3,
+            "text": "def initialize size=4, win_limit=2048, cell_width = 6\n    @size = size; @cw = cell_width; @win_limit = win_limit\n    @board = Array.new(size) {Array.new(size, 0)}\n    @moved = true; @score = 0; @no_more_moves = false\n    spawn\n  end\n\n  def draw\n    print \"\\n\\n\" if @r_vert\n    print '    ' if @r_hori\n    print '┌' + (['─' * @cw] * @size).join('┬')  + '┐'\n    @board.each do |row|\n      print \"\\n\"\n      formated = row.map {|num| num == 0 ? ' ' * @cw : format(num)}\n      print '    ' if @r_hori\n      puts '│' + formated.join('│') + '│'\n      print '    ' if @r_hori\n      print '├' + ([' '  * @cw] * @size).join('┼') + '┤'\n    end\n    print \"\\r\"\n    print '    ' if @r_hori\n    puts '└' + (['─' * @cw] * @size).join('┴')  + '┘'\n  end\n\n  def move direction\n    case direction\n    when :up\n      @board = column_map {|c| logic(c)}\n      @r_vert = false if $rumble\n    when :down\n      @board = column_map {|c| logic(c.reverse).reverse}\n      @r_vert = true if $rumble\n    when :left\n      @board = row_map {|r| logic(r)}\n      @r_hori = false if $rumble\n    when :right\n      @board = row_map {|r| logic(r.reverse).reverse}\n      @r_hori = true if $rumble\n    end\n    spawn\n    @moved = false\n  end\n\n  def print_score\n    puts \"Your Score is #@score.\"\n    puts \"Congratulations, you have won!\" if to_enum.any? {|e| e >= @win_limit}\n  end\n\n  def no_more_moves?; @no_more_moves; end\n  def won?;  to_enum.any? {|e| e >= @win_limit}; end\n  def reset!; initialize @size, @win_limit, @cw; end\n\n  private\n\n  def set x, y, val\n    @board[y][x] = val\n  end\n\n  def spawn\n    free_pos = to_enum.select{|elem,x,y| elem == 0}.map{|_,x,y| [x,y]}\n    unless free_pos.empty?\n      set *free_pos.sample, rand > 0.1 ? 2 : 4 if @moved\n    else\n      snap = @board\n      unless @stop\n        @stop = true\n        %i{up down left right}.each{|s| move(s)}\n        @no_more_moves = true if snap.flatten == @board.flatten\n        @board = snap\n        @stop = false\n      end\n    end\n  end\n\n  def logic list\n    jump = false\n    result =\n        list.reduce([]) do |res, val|\n          if res.last == val && !jump\n            res[-1] += val\n            @score += val\n            jump = true\n          elsif val != 0\n            res.push val\n            jump = false\n          end\n          res\n        end\n    result += [0] * (@size - result.length)\n    @moved ||= list != result\n    result\n  end\n\n  def column_map\n    xboard = @board.transpose\n    xboard.map!{|c| yield c }\n    xboard.transpose\n  end\n\n  def row_map\n    @board.map {|r| yield r }\n  end\n\n  def to_enum\n    @enum ||= Enumerator.new(@size * @size) do |yielder|\n      (@size*@size).times do |i|\n        yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )\n      end\n    end\n    @enum.rewind\n  end\n\n  def format(num)\n    if $color\n      cstart = \"\\e[\" + $colors[Math.log(num, 2)] + \"m\"\n      cend = \"\\e[0m\"\n    else\n      cstart = cend = \"\"\n    end\n    cstart + num.to_s.center(@cw) + cend\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 4
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": []
+        }
+    ],
+    "holder": "Board"
+}
+
+{
+    "nodes description": [
+        {
+            "element type": "Integer constant",
+            "id": 1,
+            "text": "4"
+        },
+        {
+            "element type": "Identifier size",
+            "reference": "size",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "size"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 3,
+            "text": "2048"
+        },
+        {
+            "element type": "Identifier win_limit",
+            "reference": "win_limit",
+            "kind": "method parameter declaration",
+            "id": 4,
+            "text": "win_limit"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 5,
+            "text": "6"
+        },
+        {
+            "element type": "Identifier cell_width",
+            "reference": "cell_width",
+            "kind": "method parameter declaration",
+            "id": 6,
+            "text": "cell_width"
+        },
+        {
+            "element type": "Identifier size",
+            "reference": "size",
+            "kind": "local variable",
+            "id": 7,
+            "text": "size"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 8,
+            "text": "@size"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 9,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier cell_width",
+            "reference": "cell_width",
+            "kind": "local variable",
+            "id": 10,
+            "text": "cell_width"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 11,
+            "text": "@cw"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 12,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier win_limit",
+            "reference": "win_limit",
+            "kind": "local variable",
+            "id": 13,
+            "text": "win_limit"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 14,
+            "text": "@win_limit"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 15,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 16,
+            "text": "Array"
+        },
+        {
+            "element type": "Reference",
+            "id": 17,
+            "text": "Array.new"
+        },
+        {
+            "element type": "Identifier size",
+            "reference": "size",
+            "kind": "local variable",
+            "id": 18,
+            "text": "size"
+        },
+        {
+            "element type": "Call",
+            "id": 19,
+            "text": "Array.new(size)"
+        },
+        {
+            "element type": "Constant",
+            "id": 20,
+            "text": "Array"
+        },
+        {
+            "element type": "Reference",
+            "id": 21,
+            "text": "Array.new"
+        },
+        {
+            "element type": "Identifier size",
+            "reference": "size",
+            "kind": "local variable",
+            "id": 22,
+            "text": "size"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 23,
+            "text": "0"
+        },
+        {
+            "element type": "Call",
+            "id": 24,
+            "text": "Array.new(size, 0)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 25,
+            "text": "Array.new(size, 0)"
+        },
+        {
+            "element type": "Code block",
+            "id": 26
+        },
+        {
+            "element type": "Block call",
+            "id": 27
+        },
+        {
+            "element type": "Instance variable",
+            "id": 28,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 29,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 30,
+            "text": "true"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 31,
+            "text": "@moved"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 32,
+            "operation type": "="
+        },
+        {
+            "element type": "Integer constant",
+            "id": 33,
+            "text": "0"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 34,
+            "text": "@score"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 35,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 36,
+            "text": "false"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 37,
+            "text": "@no_more_moves"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 38,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier spawn",
+            "reference": "spawn",
+            "kind": "unknown",
+            "id": 39,
+            "text": "spawn"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 40,
+            "text": "@size = size; @cw = cell_width; @win_limit = win_limit\n    @board = Array.new(size) {Array.new(size, 0)}\n    @moved = true; @score = 0; @no_more_moves = false\n    spawn"
+        },
+        {
+            "element type": "Body statement",
+            "id": 41
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [
+                20,
+                27
+            ]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [
+                27,
+                20
+            ]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": []
+        }
+    ],
+    "holder": "initialize"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "If mod statement",
+            "id": 1
+        },
+        {
+            "element type": "Instance variable",
+            "id": 2,
+            "text": "@r_vert"
+        },
+        {
+            "element type": "Call",
+            "id": 3,
+            "text": "print \"\\n\\n\""
+        },
+        {
+            "element type": "String literal",
+            "id": 4,
+            "text": "\"\\n\\n\"",
+            "value": "\\n\\n"
+        },
+        {
+            "element type": "Call",
+            "id": 5,
+            "text": "print \"\\n\\n\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 6
+        },
+        {
+            "element type": "Instance variable",
+            "id": 7,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Call",
+            "id": 8,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 9,
+            "text": "'    '",
+            "value": "    "
+        },
+        {
+            "element type": "Call",
+            "id": 10,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 11,
+            "text": "'┌'",
+            "value": "┌"
+        },
+        {
+            "element type": "String literal",
+            "id": 12,
+            "text": "'─'",
+            "value": "─"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 13,
+            "text": "@cw"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 14,
+            "text": "'─' * @cw",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Array",
+            "id": 15,
+            "text": "['─' * @cw]"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 16,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 17,
+            "text": "['─' * @cw] * @size",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 18,
+            "text": "['─' * @cw] * @size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 19
+        },
+        {
+            "element type": "Reference",
+            "id": 20,
+            "text": "(['─' * @cw] * @size).join"
+        },
+        {
+            "element type": "String literal",
+            "id": 21,
+            "text": "'┬'",
+            "value": "┬"
+        },
+        {
+            "element type": "Call",
+            "id": 22,
+            "text": "(['─' * @cw] * @size).join('┬')"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 23,
+            "text": "'┌' + (['─' * @cw] * @size).join('┬')",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "String literal",
+            "id": 24,
+            "text": "'┐'",
+            "value": "┐"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 25,
+            "text": "'┌' + (['─' * @cw] * @size).join('┬')  + '┐'",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Call",
+            "id": 26,
+            "text": "print '┌' + (['─' * @cw] * @size).join('┬')  + '┐'"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 27,
+            "text": "@board"
+        },
+        {
+            "element type": "Reference",
+            "id": 28,
+            "text": "@board.each"
+        },
+        {
+            "element type": "Identifier row",
+            "reference": "row",
+            "kind": "block parameter declaration",
+            "id": 29,
+            "text": "row"
+        },
+        {
+            "element type": "String literal",
+            "id": 30,
+            "text": "\"\\n\"",
+            "value": "\\n"
+        },
+        {
+            "element type": "Call",
+            "id": 31,
+            "text": "print \"\\n\""
+        },
+        {
+            "element type": "Identifier row",
+            "reference": "row",
+            "kind": "local variable",
+            "id": 32,
+            "text": "row"
+        },
+        {
+            "element type": "Reference",
+            "id": 33,
+            "text": "row.map"
+        },
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "block parameter declaration",
+            "id": 34,
+            "text": "num"
+        },
+        {
+            "element type": "Ternary expression",
+            "id": 35,
+            "expression type": "Integer"
+        },
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "local variable",
+            "id": 36,
+            "text": "num"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 37,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 38,
+            "text": "num == 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Binary expression",
+            "id": 39,
+            "text": "' ' * @cw",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "String literal",
+            "id": 40,
+            "text": "' '",
+            "value": " "
+        },
+        {
+            "element type": "Instance variable",
+            "id": 41,
+            "text": "@cw"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 42,
+            "text": "' ' * @cw",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Call",
+            "callee": "format",
+            "id": 43,
+            "text": "format(num)"
+        },
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "local variable",
+            "id": 44,
+            "text": "num"
+        },
+        {
+            "element type": "Call",
+            "callee": "format",
+            "id": 45,
+            "text": "format(num)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 46,
+            "text": "num == 0 ? ' ' * @cw : format(num)"
+        },
+        {
+            "element type": "Code block",
+            "id": 47
+        },
+        {
+            "element type": "Block call",
+            "id": 48
+        },
+        {
+            "element type": "Identifier formated",
+            "reference": "formated",
+            "kind": "local variable",
+            "id": 49,
+            "text": "formated"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 50,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 51
+        },
+        {
+            "element type": "Instance variable",
+            "id": 52,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Call",
+            "id": 53,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 54,
+            "text": "'    '",
+            "value": "    "
+        },
+        {
+            "element type": "Call",
+            "id": 55,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 56,
+            "text": "'│'",
+            "value": "│"
+        },
+        {
+            "element type": "Identifier formated",
+            "reference": "formated",
+            "kind": "local variable",
+            "id": 57,
+            "text": "formated"
+        },
+        {
+            "element type": "Reference",
+            "id": 58,
+            "text": "formated.join"
+        },
+        {
+            "element type": "String literal",
+            "id": 59,
+            "text": "'│'",
+            "value": "│"
+        },
+        {
+            "element type": "Call",
+            "id": 60,
+            "text": "formated.join('│')"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 61,
+            "text": "'│' + formated.join('│')",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "String literal",
+            "id": 62,
+            "text": "'│'",
+            "value": "│"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 63,
+            "text": "'│' + formated.join('│') + '│'",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Call",
+            "id": 64,
+            "text": "puts '│' + formated.join('│') + '│'"
+        },
+        {
+            "element type": "If mod statement",
+            "id": 65
+        },
+        {
+            "element type": "Instance variable",
+            "id": 66,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Call",
+            "id": 67,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 68,
+            "text": "'    '",
+            "value": "    "
+        },
+        {
+            "element type": "Call",
+            "id": 69,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 70,
+            "text": "'├'",
+            "value": "├"
+        },
+        {
+            "element type": "String literal",
+            "id": 71,
+            "text": "' '",
+            "value": " "
+        },
+        {
+            "element type": "Instance variable",
+            "id": 72,
+            "text": "@cw"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 73,
+            "text": "' '  * @cw",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Array",
+            "id": 74,
+            "text": "[' '  * @cw]"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 75,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 76,
+            "text": "[' '  * @cw] * @size",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 77,
+            "text": "[' '  * @cw] * @size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 78
+        },
+        {
+            "element type": "Reference",
+            "id": 79,
+            "text": "([' '  * @cw] * @size).join"
+        },
+        {
+            "element type": "String literal",
+            "id": 80,
+            "text": "'┼'",
+            "value": "┼"
+        },
+        {
+            "element type": "Call",
+            "id": 81,
+            "text": "([' '  * @cw] * @size).join('┼')"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 82,
+            "text": "'├' + ([' '  * @cw] * @size).join('┼')",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "String literal",
+            "id": 83,
+            "text": "'┤'",
+            "value": "┤"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 84,
+            "text": "'├' + ([' '  * @cw] * @size).join('┼') + '┤'",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Call",
+            "id": 85,
+            "text": "print '├' + ([' '  * @cw] * @size).join('┼') + '┤'"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 86,
+            "text": "print \"\\n\"\n      formated = row.map {|num| num == 0 ? ' ' * @cw : format(num)}\n      print '    ' if @r_hori\n      puts '│' + formated.join('│') + '│'\n      print '    ' if @r_hori\n      print '├' + ([' '  * @cw] * @size).join('┼') + '┤'"
+        },
+        {
+            "element type": "Body statement",
+            "id": 87
+        },
+        {
+            "element type": "Code block",
+            "id": 88
+        },
+        {
+            "element type": "Block call",
+            "id": 89
+        },
+        {
+            "element type": "String literal",
+            "id": 90,
+            "text": "\"\\r\"",
+            "value": "\\r"
+        },
+        {
+            "element type": "Call",
+            "id": 91,
+            "text": "print \"\\r\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 92
+        },
+        {
+            "element type": "Instance variable",
+            "id": 93,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Call",
+            "id": 94,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 95,
+            "text": "'    '",
+            "value": "    "
+        },
+        {
+            "element type": "Call",
+            "id": 96,
+            "text": "print '    '"
+        },
+        {
+            "element type": "String literal",
+            "id": 97,
+            "text": "'└'",
+            "value": "└"
+        },
+        {
+            "element type": "String literal",
+            "id": 98,
+            "text": "'─'",
+            "value": "─"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 99,
+            "text": "@cw"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 100,
+            "text": "'─' * @cw",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Array",
+            "id": 101,
+            "text": "['─' * @cw]"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 102,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 103,
+            "text": "['─' * @cw] * @size",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 104,
+            "text": "['─' * @cw] * @size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 105
+        },
+        {
+            "element type": "Reference",
+            "id": 106,
+            "text": "(['─' * @cw] * @size).join"
+        },
+        {
+            "element type": "String literal",
+            "id": 107,
+            "text": "'┴'",
+            "value": "┴"
+        },
+        {
+            "element type": "Call",
+            "id": 108,
+            "text": "(['─' * @cw] * @size).join('┴')"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 109,
+            "text": "'└' + (['─' * @cw] * @size).join('┴')",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "String literal",
+            "id": 110,
+            "text": "'┘'",
+            "value": "┘"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 111,
+            "text": "'└' + (['─' * @cw] * @size).join('┴')  + '┘'",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Call",
+            "id": 112,
+            "text": "puts '└' + (['─' * @cw] * @size).join('┴')  + '┘'"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 113,
+            "text": "print \"\\n\\n\" if @r_vert\n    print '    ' if @r_hori\n    print '┌' + (['─' * @cw] * @size).join('┬')  + '┐'\n    @board.each do |row|\n      print \"\\n\"\n      formated = row.map {|num| num == 0 ? ' ' * @cw : format(num)}\n      print '    ' if @r_hori\n      puts '│' + formated.join('│') + '│'\n      print '    ' if @r_hori\n      print '├' + ([' '  * @cw] * @size).join('┼') + '┤'\n    end\n    print \"\\r\"\n    print '    ' if @r_hori\n    puts '└' + (['─' * @cw] * @size).join('┴')  + '┘'"
+        },
+        {
+            "element type": "Body statement",
+            "id": 114
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [
+                3,
+                6
+            ]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [
+                8,
+                11
+            ]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [
+                29,
+                89
+            ]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [
+                34,
+                48
+            ]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [
+                39,
+                43
+            ]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [46]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [
+                48,
+                34
+            ]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [
+                53,
+                56
+            ]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [57]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [59]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [
+                67,
+                70
+            ]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [82]
+        },
+        {
+            "from": 82,
+            "to": [83]
+        },
+        {
+            "from": 83,
+            "to": [84]
+        },
+        {
+            "from": 84,
+            "to": [85]
+        },
+        {
+            "from": 85,
+            "to": [86]
+        },
+        {
+            "from": 86,
+            "to": [87]
+        },
+        {
+            "from": 87,
+            "to": [88]
+        },
+        {
+            "from": 88,
+            "to": [
+                89,
+                29
+            ]
+        },
+        {
+            "from": 89,
+            "to": [90]
+        },
+        {
+            "from": 90,
+            "to": [91]
+        },
+        {
+            "from": 91,
+            "to": [92]
+        },
+        {
+            "from": 92,
+            "to": [93]
+        },
+        {
+            "from": 93,
+            "to": [
+                94,
+                97
+            ]
+        },
+        {
+            "from": 94,
+            "to": [95]
+        },
+        {
+            "from": 95,
+            "to": [96]
+        },
+        {
+            "from": 96,
+            "to": [97]
+        },
+        {
+            "from": 97,
+            "to": [98]
+        },
+        {
+            "from": 98,
+            "to": [99]
+        },
+        {
+            "from": 99,
+            "to": [100]
+        },
+        {
+            "from": 100,
+            "to": [101]
+        },
+        {
+            "from": 101,
+            "to": [102]
+        },
+        {
+            "from": 102,
+            "to": [103]
+        },
+        {
+            "from": 103,
+            "to": [104]
+        },
+        {
+            "from": 104,
+            "to": [105]
+        },
+        {
+            "from": 105,
+            "to": [106]
+        },
+        {
+            "from": 106,
+            "to": [107]
+        },
+        {
+            "from": 107,
+            "to": [108]
+        },
+        {
+            "from": 108,
+            "to": [109]
+        },
+        {
+            "from": 109,
+            "to": [110]
+        },
+        {
+            "from": 110,
+            "to": [111]
+        },
+        {
+            "from": 111,
+            "to": [112]
+        },
+        {
+            "from": 112,
+            "to": [113]
+        },
+        {
+            "from": 113,
+            "to": [114]
+        },
+        {
+            "from": 114,
+            "to": [115]
+        },
+        {
+            "from": 115,
+            "to": []
+        }
+    ],
+    "holder": "draw"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier direction",
+            "reference": "direction",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "direction"
+        },
+        {
+            "element type": "Case statement",
+            "id": 2
+        },
+        {
+            "element type": "Identifier direction",
+            "reference": "direction",
+            "kind": "local variable",
+            "id": 3,
+            "text": "direction"
+        },
+        {
+            "element type": "When case",
+            "id": 4
+        },
+        {
+            "element type": "Identifier column_map",
+            "reference": "column_map",
+            "kind": "unknown",
+            "id": 5,
+            "text": "column_map"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "block parameter declaration",
+            "id": 6,
+            "text": "c"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "local variable",
+            "id": 7,
+            "text": "c"
+        },
+        {
+            "element type": "Call",
+            "callee": "logic",
+            "id": 8,
+            "text": "logic(c)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 9,
+            "text": "logic(c)"
+        },
+        {
+            "element type": "Code block",
+            "id": 10
+        },
+        {
+            "element type": "Block call",
+            "id": 11
+        },
+        {
+            "element type": "Instance variable",
+            "id": 12,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 13,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 14
+        },
+        {
+            "element type": "Global variable",
+            "id": 15,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 16,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 17,
+            "text": "false"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 18,
+            "text": "@r_vert"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 19,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 20,
+            "text": "@board = column_map {|c| logic(c)}\n      @r_vert = false if $rumble"
+        },
+        {
+            "element type": "When case",
+            "id": 21
+        },
+        {
+            "element type": "Identifier column_map",
+            "reference": "column_map",
+            "kind": "unknown",
+            "id": 22,
+            "text": "column_map"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "block parameter declaration",
+            "id": 23,
+            "text": "c"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "local variable",
+            "id": 24,
+            "text": "c"
+        },
+        {
+            "element type": "Reference",
+            "id": 25,
+            "text": "c.reverse"
+        },
+        {
+            "element type": "Call",
+            "callee": "logic",
+            "id": 26,
+            "text": "logic(c.reverse)"
+        },
+        {
+            "element type": "Reference",
+            "id": 27,
+            "text": "logic(c.reverse).reverse"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 28,
+            "text": "logic(c.reverse).reverse"
+        },
+        {
+            "element type": "Code block",
+            "id": 29
+        },
+        {
+            "element type": "Block call",
+            "id": 30
+        },
+        {
+            "element type": "Instance variable",
+            "id": 31,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 32,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 33
+        },
+        {
+            "element type": "Global variable",
+            "id": 34,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 35,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 36,
+            "text": "true"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 37,
+            "text": "@r_vert"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 38,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 39,
+            "text": "@board = column_map {|c| logic(c.reverse).reverse}\n      @r_vert = true if $rumble"
+        },
+        {
+            "element type": "When case",
+            "id": 40
+        },
+        {
+            "element type": "Identifier row_map",
+            "reference": "row_map",
+            "kind": "unknown",
+            "id": 41,
+            "text": "row_map"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "block parameter declaration",
+            "id": 42,
+            "text": "r"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "local variable",
+            "id": 43,
+            "text": "r"
+        },
+        {
+            "element type": "Call",
+            "callee": "logic",
+            "id": 44,
+            "text": "logic(r)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 45,
+            "text": "logic(r)"
+        },
+        {
+            "element type": "Code block",
+            "id": 46
+        },
+        {
+            "element type": "Block call",
+            "id": 47
+        },
+        {
+            "element type": "Instance variable",
+            "id": 48,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 49,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 50
+        },
+        {
+            "element type": "Global variable",
+            "id": 51,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 52,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 53,
+            "text": "false"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 54,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 55,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 56,
+            "text": "@board = row_map {|r| logic(r)}\n      @r_hori = false if $rumble"
+        },
+        {
+            "element type": "When case",
+            "id": 57
+        },
+        {
+            "element type": "Identifier row_map",
+            "reference": "row_map",
+            "kind": "unknown",
+            "id": 58,
+            "text": "row_map"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "block parameter declaration",
+            "id": 59,
+            "text": "r"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "local variable",
+            "id": 60,
+            "text": "r"
+        },
+        {
+            "element type": "Reference",
+            "id": 61,
+            "text": "r.reverse"
+        },
+        {
+            "element type": "Call",
+            "callee": "logic",
+            "id": 62,
+            "text": "logic(r.reverse)"
+        },
+        {
+            "element type": "Reference",
+            "id": 63,
+            "text": "logic(r.reverse).reverse"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 64,
+            "text": "logic(r.reverse).reverse"
+        },
+        {
+            "element type": "Code block",
+            "id": 65
+        },
+        {
+            "element type": "Block call",
+            "id": 66
+        },
+        {
+            "element type": "Instance variable",
+            "id": 67,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 68,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 69
+        },
+        {
+            "element type": "Global variable",
+            "id": 70,
+            "text": "$rumble",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 71,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 72,
+            "text": "true"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 73,
+            "text": "@r_hori"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 74,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 75,
+            "text": "@board = row_map {|r| logic(r.reverse).reverse}\n      @r_hori = true if $rumble"
+        },
+        {
+            "element type": "Identifier spawn",
+            "reference": "spawn",
+            "kind": "unknown",
+            "id": 76,
+            "text": "spawn"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 77,
+            "text": "false"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 78,
+            "text": "@moved"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 79,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 80,
+            "text": "case direction\n    when :up\n      @board = column_map {|c| logic(c)}\n      @r_vert = false if $rumble\n    when :down\n      @board = column_map {|c| logic(c.reverse).reverse}\n      @r_vert = true if $rumble\n    when :left\n      @board = row_map {|r| logic(r)}\n      @r_hori = false if $rumble\n    when :right\n      @board = row_map {|r| logic(r.reverse).reverse}\n      @r_hori = true if $rumble\n    end\n    spawn\n    @moved = false"
+        },
+        {
+            "element type": "Body statement",
+            "id": 81
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [
+                4,
+                21,
+                40,
+                57,
+                76
+            ]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [
+                6,
+                11
+            ]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [
+                11,
+                6
+            ]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [
+                16,
+                20
+            ]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [76]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [
+                23,
+                30
+            ]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [
+                30,
+                23
+            ]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [
+                35,
+                39
+            ]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [76]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [
+                42,
+                47
+            ]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [
+                47,
+                42
+            ]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [
+                52,
+                56
+            ]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [76]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [
+                59,
+                66
+            ]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [
+                66,
+                59
+            ]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [
+                71,
+                75
+            ]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [82]
+        },
+        {
+            "from": 82,
+            "to": []
+        }
+    ],
+    "holder": "move"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@score"
+        },
+        {
+            "element type": "String literal",
+            "id": 2,
+            "text": "\"Your Score is #@score.\"",
+            "value": "Your Score is #@score."
+        },
+        {
+            "element type": "Call",
+            "id": 3,
+            "text": "puts \"Your Score is #@score.\""
+        },
+        {
+            "element type": "If mod statement",
+            "id": 4
+        },
+        {
+            "element type": "Identifier to_enum",
+            "reference": "to_enum",
+            "kind": "unknown",
+            "id": 5,
+            "text": "to_enum"
+        },
+        {
+            "element type": "Reference",
+            "id": 6,
+            "text": "to_enum.any?"
+        },
+        {
+            "element type": "Identifier e",
+            "reference": "e",
+            "kind": "block parameter declaration",
+            "id": 7,
+            "text": "e"
+        },
+        {
+            "element type": "Identifier e",
+            "reference": "e",
+            "kind": "local variable",
+            "id": 8,
+            "text": "e"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 9,
+            "text": "@win_limit"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 10,
+            "text": "e >= @win_limit",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "e >= @win_limit"
+        },
+        {
+            "element type": "Code block",
+            "id": 12
+        },
+        {
+            "element type": "Block call",
+            "id": 13
+        },
+        {
+            "element type": "Call",
+            "id": 14,
+            "text": "puts \"Congratulations, you have won!\""
+        },
+        {
+            "element type": "String literal",
+            "id": 15,
+            "text": "\"Congratulations, you have won!\"",
+            "value": "Congratulations, you have won!"
+        },
+        {
+            "element type": "Call",
+            "id": 16,
+            "text": "puts \"Congratulations, you have won!\""
+        },
+        {
+            "element type": "Compound statement",
+            "id": 17,
+            "text": "puts \"Your Score is #@score.\"\n    puts \"Congratulations, you have won!\" if to_enum.any? {|e| e >= @win_limit}"
+        },
+        {
+            "element type": "Body statement",
+            "id": 18
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [
+                7,
+                13
+            ]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [
+                13,
+                7
+            ]
+        },
+        {
+            "from": 13,
+            "to": [
+                14,
+                17
+            ]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": []
+        }
+    ],
+    "holder": "print_score"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@no_more_moves"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 2,
+            "text": "@no_more_moves;"
+        },
+        {
+            "element type": "Body statement",
+            "id": 3
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": []
+        }
+    ],
+    "holder": "no_more_moves?"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier to_enum",
+            "reference": "to_enum",
+            "kind": "unknown",
+            "id": 1,
+            "text": "to_enum"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "to_enum.any?"
+        },
+        {
+            "element type": "Identifier e",
+            "reference": "e",
+            "kind": "block parameter declaration",
+            "id": 3,
+            "text": "e"
+        },
+        {
+            "element type": "Identifier e",
+            "reference": "e",
+            "kind": "local variable",
+            "id": 4,
+            "text": "e"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 5,
+            "text": "@win_limit"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 6,
+            "text": "e >= @win_limit",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 7,
+            "text": "e >= @win_limit"
+        },
+        {
+            "element type": "Code block",
+            "id": 8
+        },
+        {
+            "element type": "Block call",
+            "id": 9
+        },
+        {
+            "element type": "Compound statement",
+            "id": 10,
+            "text": "to_enum.any? {|e| e >= @win_limit};"
+        },
+        {
+            "element type": "Body statement",
+            "id": 11
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [
+                3,
+                9
+            ]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [
+                9,
+                3
+            ]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": []
+        }
+    ],
+    "holder": "won?"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@size"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 2,
+            "text": "@win_limit"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 3,
+            "text": "@cw"
+        },
+        {
+            "element type": "Call",
+            "callee": "initialize",
+            "id": 4,
+            "text": "initialize @size, @win_limit, @cw"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 5,
+            "text": "initialize @size, @win_limit, @cw;"
+        },
+        {
+            "element type": "Body statement",
+            "id": 6
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": []
+        }
+    ],
+    "holder": "reset!"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier y",
+            "reference": "y",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "y"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "method parameter declaration",
+            "id": 3,
+            "text": "val"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 4,
+            "text": "val"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 5,
+            "text": "@board"
+        },
+        {
+            "element type": "Identifier y",
+            "reference": "y",
+            "kind": "local variable",
+            "id": 6,
+            "text": "y"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 7
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "local variable",
+            "id": 8,
+            "text": "x"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 9
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 10,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "@board[y][x] = val"
+        },
+        {
+            "element type": "Body statement",
+            "id": 12
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": []
+        }
+    ],
+    "holder": "set"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier to_enum",
+            "reference": "to_enum",
+            "kind": "unknown",
+            "id": 1,
+            "text": "to_enum"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "to_enum.select"
+        },
+        {
+            "element type": "Identifier elem",
+            "reference": "elem",
+            "kind": "block parameter declaration",
+            "id": 3,
+            "text": "elem"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "block parameter declaration",
+            "id": 4,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier y",
+            "reference": "y",
+            "kind": "block parameter declaration",
+            "id": 5,
+            "text": "y"
+        },
+        {
+            "element type": "Identifier elem",
+            "reference": "elem",
+            "kind": "local variable",
+            "id": 6,
+            "text": "elem"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 7,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 8,
+            "text": "elem == 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 9,
+            "text": "elem == 0"
+        },
+        {
+            "element type": "Code block",
+            "id": 10
+        },
+        {
+            "element type": "Block call",
+            "id": 11
+        },
+        {
+            "element type": "Reference",
+            "id": 12,
+            "text": "to_enum.select{|elem,x,y| elem == 0}.map"
+        },
+        {
+            "element type": "Identifier _",
+            "reference": "_",
+            "kind": "block parameter declaration",
+            "id": 13,
+            "text": "_"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "block parameter declaration",
+            "id": 14,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier y",
+            "reference": "y",
+            "kind": "block parameter declaration",
+            "id": 15,
+            "text": "y"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "local variable",
+            "id": 16,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier y",
+            "reference": "y",
+            "kind": "local variable",
+            "id": 17,
+            "text": "y"
+        },
+        {
+            "element type": "Array",
+            "id": 18,
+            "text": "[x,y]"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 19,
+            "text": "[x,y]"
+        },
+        {
+            "element type": "Code block",
+            "id": 20
+        },
+        {
+            "element type": "Block call",
+            "id": 21
+        },
+        {
+            "element type": "Identifier free_pos",
+            "reference": "free_pos",
+            "kind": "local variable",
+            "id": 22,
+            "text": "free_pos"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 23,
+            "operation type": "="
+        },
+        {
+            "element type": "Unless statement",
+            "id": 24
+        },
+        {
+            "element type": "Identifier free_pos",
+            "reference": "free_pos",
+            "kind": "local variable",
+            "id": 25,
+            "text": "free_pos"
+        },
+        {
+            "element type": "Reference",
+            "id": 26,
+            "text": "free_pos.empty?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 27,
+            "text": "set *free_pos.sample, rand > 0.1 ? 2 : 4 if @moved"
+        },
+        {
+            "element type": "If mod statement",
+            "id": 28
+        },
+        {
+            "element type": "Instance variable",
+            "id": 29,
+            "text": "@moved"
+        },
+        {
+            "element type": "Call",
+            "callee": "set",
+            "id": 30,
+            "text": "set *free_pos.sample, rand > 0.1 ? 2 : 4"
+        },
+        {
+            "element type": "Identifier free_pos",
+            "reference": "free_pos",
+            "kind": "local variable",
+            "id": 31,
+            "text": "free_pos"
+        },
+        {
+            "element type": "Reference",
+            "id": 32,
+            "text": "free_pos.sample"
+        },
+        {
+            "element type": "Ternary expression",
+            "id": 33
+        },
+        {
+            "element type": "Identifier rand",
+            "reference": "rand",
+            "kind": "unknown",
+            "id": 34,
+            "text": "rand"
+        },
+        {
+            "element type": "Float constant",
+            "id": 35,
+            "text": "0.1",
+            "value": "0.1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 36,
+            "text": "rand > 0.1",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 37,
+            "text": "2"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 38,
+            "text": "2"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 39,
+            "text": "4"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 40,
+            "text": "4"
+        },
+        {
+            "element type": "Call",
+            "callee": "set",
+            "id": 41,
+            "text": "set *free_pos.sample, rand > 0.1 ? 2 : 4"
+        },
+        {
+            "element type": "Else block",
+            "id": 42
+        },
+        {
+            "element type": "Instance variable",
+            "id": 43,
+            "text": "@board"
+        },
+        {
+            "element type": "Identifier snap",
+            "reference": "snap",
+            "kind": "local variable",
+            "id": 44,
+            "text": "snap"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 45,
+            "operation type": "="
+        },
+        {
+            "element type": "Unless statement",
+            "id": 46
+        },
+        {
+            "element type": "Instance variable",
+            "id": 47,
+            "text": "@stop"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 48,
+            "text": "@stop = true\n        %i{up down left right}.each{|s| move(s)}\n        @no_more_moves = true if snap.flatten == @board.flatten\n        @board = snap\n        @stop = false"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 49,
+            "text": "true"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 50,
+            "text": "@stop"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 51,
+            "operation type": "="
+        },
+        {
+            "element type": "Words",
+            "id": 52,
+            "text": "%i{up down left right}"
+        },
+        {
+            "element type": "Reference",
+            "id": 53,
+            "text": "%i{up down left right}.each"
+        },
+        {
+            "element type": "Identifier s",
+            "reference": "s",
+            "kind": "block parameter declaration",
+            "id": 54,
+            "text": "s"
+        },
+        {
+            "element type": "Identifier s",
+            "reference": "s",
+            "kind": "local variable",
+            "id": 55,
+            "text": "s"
+        },
+        {
+            "element type": "Call",
+            "callee": "move",
+            "id": 56,
+            "text": "move(s)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 57,
+            "text": "move(s)"
+        },
+        {
+            "element type": "Code block",
+            "id": 58
+        },
+        {
+            "element type": "Block call",
+            "id": 59
+        },
+        {
+            "element type": "If mod statement",
+            "id": 60
+        },
+        {
+            "element type": "Identifier snap",
+            "reference": "snap",
+            "kind": "local variable",
+            "id": 61,
+            "text": "snap"
+        },
+        {
+            "element type": "Reference",
+            "id": 62,
+            "text": "snap.flatten"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 63,
+            "text": "@board"
+        },
+        {
+            "element type": "Reference",
+            "id": 64,
+            "text": "@board.flatten"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 65,
+            "text": "snap.flatten == @board.flatten",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 66,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 67,
+            "text": "true"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 68,
+            "text": "@no_more_moves"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 69,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier snap",
+            "reference": "snap",
+            "kind": "local variable",
+            "id": 70,
+            "text": "snap"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 71,
+            "text": "@board"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 72,
+            "operation type": "="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 73,
+            "text": "false"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 74,
+            "text": "@stop"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 75,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 76,
+            "text": "snap = @board\n      unless @stop\n        @stop = true\n        %i{up down left right}.each{|s| move(s)}\n        @no_more_moves = true if snap.flatten == @board.flatten\n        @board = snap\n        @stop = false\n      end"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 77,
+            "text": "free_pos = to_enum.select{|elem,x,y| elem == 0}.map{|_,x,y| [x,y]}\n    unless free_pos.empty?\n      set *free_pos.sample, rand > 0.1 ? 2 : 4 if @moved\n    else\n      snap = @board\n      unless @stop\n        @stop = true\n        %i{up down left right}.each{|s| move(s)}\n        @no_more_moves = true if snap.flatten == @board.flatten\n        @board = snap\n        @stop = false\n      end\n    end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 78
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [
+                3,
+                11
+            ]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [
+                11,
+                3
+            ]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [
+                13,
+                21
+            ]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [
+                21,
+                13
+            ]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [
+                27,
+                42
+            ]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [
+                30,
+                77
+            ]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [
+                37,
+                39
+            ]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [41]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [
+                48,
+                76
+            ]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [
+                54,
+                59
+            ]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [57]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [
+                59,
+                54
+            ]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [
+                66,
+                70
+            ]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": []
+        }
+    ],
+    "holder": "spawn"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier list",
+            "reference": "list",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "list"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 2,
+            "text": "false"
+        },
+        {
+            "element type": "Identifier jump",
+            "reference": "jump",
+            "kind": "local variable",
+            "id": 3,
+            "text": "jump"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 4,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier list",
+            "reference": "list",
+            "kind": "local variable",
+            "id": 5,
+            "text": "list"
+        },
+        {
+            "element type": "Reference",
+            "id": 6,
+            "text": "list.reduce"
+        },
+        {
+            "element type": "Array",
+            "id": 7,
+            "text": "[]"
+        },
+        {
+            "element type": "Call",
+            "id": 8,
+            "text": "list.reduce([])"
+        },
+        {
+            "element type": "Identifier res",
+            "reference": "res",
+            "kind": "block parameter declaration",
+            "id": 9,
+            "text": "res"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "block parameter declaration",
+            "id": 10,
+            "text": "val"
+        },
+        {
+            "element type": "If statement",
+            "id": 11
+        },
+        {
+            "element type": "Identifier res",
+            "reference": "res",
+            "kind": "local variable",
+            "id": 12,
+            "text": "res"
+        },
+        {
+            "element type": "Reference",
+            "id": 13,
+            "text": "res.last"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 14,
+            "text": "val"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 15,
+            "text": "res.last == val",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Identifier jump",
+            "reference": "jump",
+            "kind": "local variable",
+            "id": 18,
+            "text": "jump"
+        },
+        {
+            "element type": "Unary expression",
+            "id": 19,
+            "text": "!jump",
+            "expression type": "TrueClass",
+            "operation": "!"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 20,
+            "text": "res.last == val && !jump"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 21,
+            "text": "res[-1] += val\n            @score += val\n            jump = true"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 22,
+            "text": "val"
+        },
+        {
+            "element type": "Identifier res",
+            "reference": "res",
+            "kind": "local variable",
+            "id": 23,
+            "text": "res"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 24,
+            "text": "-1"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 25
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 26,
+            "operation type": "+="
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 27,
+            "text": "val"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 28,
+            "text": "@score"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 29,
+            "operation type": "+="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 30,
+            "text": "true"
+        },
+        {
+            "element type": "Identifier jump",
+            "reference": "jump",
+            "kind": "local variable",
+            "id": 31,
+            "text": "jump"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 32,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 33,
+            "text": "val"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 34,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 35,
+            "text": "val != 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "!="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 36,
+            "text": "res[-1] += val\n            @score += val\n            jump = true"
+        },
+        {
+            "element type": "Identifier res",
+            "reference": "res",
+            "kind": "local variable",
+            "id": 37,
+            "text": "res"
+        },
+        {
+            "element type": "Reference",
+            "id": 38,
+            "text": "res.push"
+        },
+        {
+            "element type": "Identifier val",
+            "reference": "val",
+            "kind": "local variable",
+            "id": 39,
+            "text": "val"
+        },
+        {
+            "element type": "Call",
+            "id": 40,
+            "text": "res.push val"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 41,
+            "text": "false"
+        },
+        {
+            "element type": "Identifier jump",
+            "reference": "jump",
+            "kind": "local variable",
+            "id": 42,
+            "text": "jump"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 43,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 44,
+            "text": "res.push val\n            jump = false"
+        },
+        {
+            "element type": "Identifier res",
+            "reference": "res",
+            "kind": "local variable",
+            "id": 45,
+            "text": "res"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 46,
+            "text": "if res.last == val && !jump\n            res[-1] += val\n            @score += val\n            jump = true\n          elsif val != 0\n            res.push val\n            jump = false\n          end\n          res"
+        },
+        {
+            "element type": "Body statement",
+            "id": 47
+        },
+        {
+            "element type": "Code block",
+            "id": 48
+        },
+        {
+            "element type": "Block call",
+            "id": 49
+        },
+        {
+            "element type": "Identifier result",
+            "reference": "result",
+            "kind": "local variable",
+            "id": 50,
+            "text": "result"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 51,
+            "operation type": "="
+        },
+        {
+            "element type": "Integer constant",
+            "id": 52,
+            "text": "0"
+        },
+        {
+            "element type": "Array",
+            "id": 53,
+            "text": "[0]"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 54,
+            "text": "@size"
+        },
+        {
+            "element type": "Identifier result",
+            "reference": "result",
+            "kind": "local variable",
+            "id": 55,
+            "text": "result"
+        },
+        {
+            "element type": "Reference",
+            "id": 56,
+            "text": "result.length"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 57,
+            "text": "@size - result.length",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 58,
+            "text": "@size - result.length"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 59
+        },
+        {
+            "element type": "Binary expression",
+            "id": 60,
+            "text": "[0] * (@size - result.length)",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Identifier result",
+            "reference": "result",
+            "kind": "local variable",
+            "id": 61,
+            "text": "result"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 62,
+            "operation type": "+="
+        },
+        {
+            "element type": "Identifier list",
+            "reference": "list",
+            "kind": "local variable",
+            "id": 63,
+            "text": "list"
+        },
+        {
+            "element type": "Identifier result",
+            "reference": "result",
+            "kind": "local variable",
+            "id": 64,
+            "text": "result"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 65,
+            "text": "list != result",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "!="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 66,
+            "text": "@moved"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 67,
+            "operation type": "||="
+        },
+        {
+            "element type": "Identifier result",
+            "reference": "result",
+            "kind": "local variable",
+            "id": 68,
+            "text": "result"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 69,
+            "text": "jump = false\n    result =\n        list.reduce([]) do |res, val|\n          if res.last == val && !jump\n            res[-1] += val\n            @score += val\n            jump = true\n          elsif val != 0\n            res.push val\n            jump = false\n          end\n          res\n        end\n    result += [0] * (@size - result.length)\n    @moved ||= list != result\n    result"
+        },
+        {
+            "element type": "Body statement",
+            "id": 70
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [
+                9,
+                49
+            ]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [
+                16,
+                17
+            ]
+        },
+        {
+            "from": 16,
+            "to": [18]
+        },
+        {
+            "from": 17,
+            "to": [33]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [
+                21,
+                33
+            ]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [45]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [
+                36,
+                45
+            ]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [
+                49,
+                9
+            ]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [57]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [59]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": []
+        }
+    ],
+    "holder": "logic"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@board"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "@board.transpose"
+        },
+        {
+            "element type": "Identifier xboard",
+            "reference": "xboard",
+            "kind": "local variable",
+            "id": 3,
+            "text": "xboard"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 4,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier xboard",
+            "reference": "xboard",
+            "kind": "local variable",
+            "id": 5,
+            "text": "xboard"
+        },
+        {
+            "element type": "Reference",
+            "id": 6,
+            "text": "xboard.map!"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "block parameter declaration",
+            "id": 7,
+            "text": "c"
+        },
+        {
+            "element type": "Identifier c",
+            "reference": "c",
+            "kind": "local variable",
+            "id": 8,
+            "text": "c"
+        },
+        {
+            "element type": "Yield statement",
+            "id": 9
+        },
+        {
+            "element type": "Compound statement",
+            "id": 10,
+            "text": "yield c"
+        },
+        {
+            "element type": "Code block",
+            "id": 11
+        },
+        {
+            "element type": "Block call",
+            "id": 12
+        },
+        {
+            "element type": "Identifier xboard",
+            "reference": "xboard",
+            "kind": "local variable",
+            "id": 13,
+            "text": "xboard"
+        },
+        {
+            "element type": "Reference",
+            "id": 14,
+            "text": "xboard.transpose"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 15,
+            "text": "xboard = @board.transpose\n    xboard.map!{|c| yield c }\n    xboard.transpose"
+        },
+        {
+            "element type": "Body statement",
+            "id": 16
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [
+                7,
+                12
+            ]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [
+                12,
+                7
+            ]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": []
+        }
+    ],
+    "holder": "column_map"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@board"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "@board.map"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "block parameter declaration",
+            "id": 3,
+            "text": "r"
+        },
+        {
+            "element type": "Identifier r",
+            "reference": "r",
+            "kind": "local variable",
+            "id": 4,
+            "text": "r"
+        },
+        {
+            "element type": "Yield statement",
+            "id": 5
+        },
+        {
+            "element type": "Compound statement",
+            "id": 6,
+            "text": "yield r"
+        },
+        {
+            "element type": "Code block",
+            "id": 7
+        },
+        {
+            "element type": "Block call",
+            "id": 8
+        },
+        {
+            "element type": "Compound statement",
+            "id": 9,
+            "text": "@board.map {|r| yield r }"
+        },
+        {
+            "element type": "Body statement",
+            "id": 10
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [
+                3,
+                8
+            ]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [
+                8,
+                3
+            ]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": []
+        }
+    ],
+    "holder": "row_map"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Enumerator"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "Enumerator.new"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 3,
+            "text": "@size"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 4,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 5,
+            "text": "@size * @size",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Call",
+            "id": 6,
+            "text": "Enumerator.new(@size * @size)"
+        },
+        {
+            "element type": "Identifier yielder",
+            "reference": "yielder",
+            "kind": "block parameter declaration",
+            "id": 7,
+            "text": "yielder"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 8,
+            "text": "@size"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 9,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 10,
+            "text": "@size*@size",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "@size*@size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 12
+        },
+        {
+            "element type": "Reference",
+            "id": 13,
+            "text": "(@size*@size).times"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "block parameter declaration",
+            "id": 14,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier yielder",
+            "reference": "yielder",
+            "kind": "local variable",
+            "id": 15,
+            "text": "yielder"
+        },
+        {
+            "element type": "Reference",
+            "id": 16,
+            "text": "yielder.yield"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 17,
+            "text": "@board"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 18,
+            "text": "i"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 19,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 20,
+            "text": "i / @size",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 21
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 22,
+            "text": "i"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 23,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 24,
+            "text": "i % @size",
+            "expression type": "Integer",
+            "operation type": "%"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 25
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 26
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 27,
+            "text": "i"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 28,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 29,
+            "text": "i % @size",
+            "expression type": "Integer",
+            "operation type": "%"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 30,
+            "text": "i % @size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 31
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 32,
+            "text": "i"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 33,
+            "text": "@size"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 34,
+            "text": "i / @size",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 35,
+            "text": "i / @size"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 36
+        },
+        {
+            "element type": "Call",
+            "id": 37,
+            "text": "yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 38,
+            "text": "yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )"
+        },
+        {
+            "element type": "Body statement",
+            "id": 39
+        },
+        {
+            "element type": "Code block",
+            "id": 40
+        },
+        {
+            "element type": "Block call",
+            "id": 41
+        },
+        {
+            "element type": "Compound statement",
+            "id": 42,
+            "text": "(@size*@size).times do |i|\n        yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )\n      end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 43
+        },
+        {
+            "element type": "Code block",
+            "id": 44
+        },
+        {
+            "element type": "Block call",
+            "id": 45
+        },
+        {
+            "element type": "Instance variable",
+            "id": 46,
+            "text": "@enum"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 47,
+            "operation type": "||="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 48,
+            "text": "@enum"
+        },
+        {
+            "element type": "Reference",
+            "id": 49,
+            "text": "@enum.rewind"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 50,
+            "text": "@enum ||= Enumerator.new(@size * @size) do |yielder|\n      (@size*@size).times do |i|\n        yielder.yield (@board[i / @size][i % @size]), (i % @size), (i / @size )\n      end\n    end\n    @enum.rewind"
+        },
+        {
+            "element type": "Body statement",
+            "id": 51
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [
+                7,
+                45
+            ]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [
+                14,
+                41
+            ]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [
+                41,
+                14
+            ]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [
+                45,
+                7
+            ]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": []
+        }
+    ],
+    "holder": "to_enum"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "num"
+        },
+        {
+            "element type": "If statement",
+            "id": 2
+        },
+        {
+            "element type": "Global variable",
+            "id": 3,
+            "text": "$color",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 4,
+            "text": "cstart = \"\\e[\" + $colors[Math.log(num, 2)] + \"m\"\n      cend = \"\\e[0m\""
+        },
+        {
+            "element type": "String literal",
+            "id": 5,
+            "text": "\"\\e[\"",
+            "value": "\\e["
+        },
+        {
+            "element type": "Global variable",
+            "id": 6,
+            "text": "$colors",
+            "variable type": "GLOBAL_VARIABLE"
+        },
+        {
+            "element type": "Constant",
+            "id": 7,
+            "text": "Math"
+        },
+        {
+            "element type": "Reference",
+            "id": 8,
+            "text": "Math.log"
+        },
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "local variable",
+            "id": 9,
+            "text": "num"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 10,
+            "text": "2"
+        },
+        {
+            "element type": "Call",
+            "id": 11,
+            "text": "Math.log(num, 2)"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 12
+        },
+        {
+            "element type": "Binary expression",
+            "id": 13,
+            "text": "\"\\e[\" + $colors[Math.log(num, 2)]",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "String literal",
+            "id": 14,
+            "text": "\"m\"",
+            "value": "m"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 15,
+            "text": "\"\\e[\" + $colors[Math.log(num, 2)] + \"m\"",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Identifier cstart",
+            "reference": "cstart",
+            "kind": "local variable",
+            "id": 16,
+            "text": "cstart"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 17,
+            "operation type": "="
+        },
+        {
+            "element type": "String literal",
+            "id": 18,
+            "text": "\"\\e[0m\"",
+            "value": "\\e[0m"
+        },
+        {
+            "element type": "Identifier cend",
+            "reference": "cend",
+            "kind": "local variable",
+            "id": 19,
+            "text": "cend"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 20,
+            "operation type": "="
+        },
+        {
+            "element type": "Else block",
+            "id": 21
+        },
+        {
+            "element type": "String literal",
+            "id": 22,
+            "text": "\"\"",
+            "value": ""
+        },
+        {
+            "element type": "Identifier cend",
+            "reference": "cend",
+            "kind": "local variable",
+            "id": 23,
+            "text": "cend"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 24,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier cstart",
+            "reference": "cstart",
+            "kind": "local variable",
+            "id": 25,
+            "text": "cstart"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 26,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 27,
+            "text": "cstart = cend = \"\""
+        },
+        {
+            "element type": "Identifier cstart",
+            "reference": "cstart",
+            "kind": "local variable",
+            "id": 28,
+            "text": "cstart"
+        },
+        {
+            "element type": "Identifier num",
+            "reference": "num",
+            "kind": "local variable",
+            "id": 29,
+            "text": "num"
+        },
+        {
+            "element type": "Reference",
+            "id": 30,
+            "text": "num.to_s"
+        },
+        {
+            "element type": "Reference",
+            "id": 31,
+            "text": "num.to_s.center"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 32,
+            "text": "@cw"
+        },
+        {
+            "element type": "Call",
+            "id": 33,
+            "text": "num.to_s.center(@cw)"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 34,
+            "text": "cstart + num.to_s.center(@cw)",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Identifier cend",
+            "reference": "cend",
+            "kind": "local variable",
+            "id": 35,
+            "text": "cend"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 36,
+            "text": "cstart + num.to_s.center(@cw) + cend",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 37,
+            "text": "if $color\n      cstart = \"\\e[\" + $colors[Math.log(num, 2)] + \"m\"\n      cend = \"\\e[0m\"\n    else\n      cstart = cend = \"\"\n    end\n    cstart + num.to_s.center(@cw) + cend"
+        },
+        {
+            "element type": "Body statement",
+            "id": 38
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [
+                4,
+                21
+            ]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [28]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": []
+        }
+    ],
+    "holder": "format"
+}

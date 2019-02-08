@@ -1,0 +1,2406 @@
+{
+    "nodes description": [
+        {
+            "element type": "String literal",
+            "id": 1,
+            "text": "'base64'",
+            "value": "base64"
+        },
+        {
+            "element type": "Call",
+            "id": 2,
+            "text": "require 'base64'"
+        },
+        {
+            "element type": "String literal",
+            "id": 3,
+            "text": "'net/smtp'",
+            "value": "net/smtp"
+        },
+        {
+            "element type": "Call",
+            "id": 4,
+            "text": "require 'net/smtp'"
+        },
+        {
+            "element type": "String literal",
+            "id": 5,
+            "text": "'tmail'",
+            "value": "tmail"
+        },
+        {
+            "element type": "Call",
+            "id": 6,
+            "text": "require 'tmail'"
+        },
+        {
+            "element type": "String literal",
+            "id": 7,
+            "text": "'mime/types'",
+            "value": "mime/types"
+        },
+        {
+            "element type": "Call",
+            "id": 8,
+            "text": "require 'mime/types'"
+        },
+        {
+            "element type": "Constant",
+            "id": 9,
+            "text": "Email"
+        },
+        {
+            "element type": "Reference",
+            "id": 10,
+            "text": "Email.send"
+        },
+        {
+            "element type": "String literal",
+            "id": 11,
+            "text": "'sender@sender.invalid'",
+            "value": "sender@sender.invalid"
+        },
+        {
+            "element type": "Words",
+            "id": 12,
+            "text": "%w{ recip1@recipient.invalid recip2@example.com }"
+        },
+        {
+            "element type": "String literal",
+            "id": 13,
+            "text": "'the subject'",
+            "value": "the subject"
+        },
+        {
+            "element type": "String literal",
+            "id": 14,
+            "text": "\"the body\\nhas lines\"",
+            "value": "the body\\nhas lines"
+        },
+        {
+            "element type": "Words",
+            "id": 15,
+            "text": "%w{ file1 file2 file3 }"
+        },
+        {
+            "element type": "String literal",
+            "id": 16,
+            "text": "'mail.example.com'",
+            "value": "mail.example.com"
+        },
+        {
+            "element type": "String literal",
+            "id": 17,
+            "text": "'sender.invalid'",
+            "value": "sender.invalid"
+        },
+        {
+            "element type": "String literal",
+            "id": 18,
+            "text": "'user'",
+            "value": "user"
+        },
+        {
+            "element type": "String literal",
+            "id": 19,
+            "text": "'secret'",
+            "value": "secret"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 20
+        },
+        {
+            "element type": "Call",
+            "callee": "send",
+            "id": 21,
+            "text": "Email.send(\n    'sender@sender.invalid',\n    %w{ recip1@recipient.invalid recip2@example.com },\n    'the subject',\n    \"the body\\nhas lines\",\n    {\n        :attachments => %w{ file1 file2 file3 },\n        :server => 'mail.example.com',\n        :helo => 'sender.invalid',\n        :username => 'user',\n        :password => 'secret'\n    }\n)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 22,
+            "text": "require 'base64'\nrequire 'net/smtp'\nrequire 'tmail'\nrequire 'mime/types'\n\nclass Email\n  def initialize(from, to, subject, body, options={})\n    @opts = {:attachments => [], :server => 'localhost'}.update(options)\n    @msg = TMail::Mail.new\n    @msg.from    = from\n    @msg.to      = to\n    @msg.subject = subject\n    @msg.cc      = @opts[:cc]  if @opts[:cc]\n    @msg.bcc     = @opts[:bcc] if @opts[:bcc]\n\n    if @opts[:attachments].empty?\n      # just specify the body\n      @msg.body = body\n    else\n      # attach attachments, including the body\n      @msg.body = \"This is a multi-part message in MIME format.\\n\"\n\n      msg_body = TMail::Mail.new\n      msg_body.body = body\n      msg_body.set_content_type(\"text\",\"plain\", {:charset => \"ISO-8859-1\"})\n      @msg.parts << msg_body\n\n      octet_stream = MIME::Types['application/octet-stream'].first\n\n      @opts[:attachments].select {|file| File.readable?(file)}.each do |file|\n        mime_type = MIME::Types.type_for(file).first || octet_stream\n        @msg.parts << create_attachment(file, mime_type)\n      end\n    end\n  end\n  attr_reader :msg\n\n  def create_attachment(file, mime_type)\n    attach = TMail::Mail.new\n    if mime_type.binary?\n      attach.body = Base64.encode64(File.read(file))\n      attach.transfer_encoding = 'base64'\n    else\n      attach.body = File.read(file)\n    end\n    attach.set_disposition(\"attachment\", {:filename => file})\n    attach.set_content_type(mime_type.media_type, mime_type.sub_type, {:name=>file})\n    attach\n  end\n\n  # instance method to send an Email object\n  def send\n    args = @opts.values_at(:server, :port, :helo, :username, :password, :authtype)\n    Net::SMTP.start(*args) do |smtp|\n      smtp.send_message(@msg.to_s, @msg.from[0], @msg.to)\n    end\n  end\n\n  # class method to construct an Email object and send it\n  def self.send(*args)\n    self.new(*args).send\n  end\nend\n\nEmail.send(\n    'sender@sender.invalid',\n    %w{ recip1@recipient.invalid recip2@example.com },\n    'the subject',\n    \"the body\\nhas lines\",\n    {\n        :attachments => %w{ file1 file2 file3 },\n        :server => 'mail.example.com',\n        :helo => 'sender.invalid',\n        :username => 'user',\n        :password => 'secret'\n    }\n)"
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": []
+        }
+    ],
+    "holder": "test2.rb"
+}
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Email"
+        },
+        {
+            "element type": "Call",
+            "id": 2,
+            "text": "attr_reader :msg"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 3,
+            "text": "self"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 4,
+            "text": "def initialize(from, to, subject, body, options={})\n    @opts = {:attachments => [], :server => 'localhost'}.update(options)\n    @msg = TMail::Mail.new\n    @msg.from    = from\n    @msg.to      = to\n    @msg.subject = subject\n    @msg.cc      = @opts[:cc]  if @opts[:cc]\n    @msg.bcc     = @opts[:bcc] if @opts[:bcc]\n\n    if @opts[:attachments].empty?\n      # just specify the body\n      @msg.body = body\n    else\n      # attach attachments, including the body\n      @msg.body = \"This is a multi-part message in MIME format.\\n\"\n\n      msg_body = TMail::Mail.new\n      msg_body.body = body\n      msg_body.set_content_type(\"text\",\"plain\", {:charset => \"ISO-8859-1\"})\n      @msg.parts << msg_body\n\n      octet_stream = MIME::Types['application/octet-stream'].first\n\n      @opts[:attachments].select {|file| File.readable?(file)}.each do |file|\n        mime_type = MIME::Types.type_for(file).first || octet_stream\n        @msg.parts << create_attachment(file, mime_type)\n      end\n    end\n  end\n  attr_reader :msg\n\n  def create_attachment(file, mime_type)\n    attach = TMail::Mail.new\n    if mime_type.binary?\n      attach.body = Base64.encode64(File.read(file))\n      attach.transfer_encoding = 'base64'\n    else\n      attach.body = File.read(file)\n    end\n    attach.set_disposition(\"attachment\", {:filename => file})\n    attach.set_content_type(mime_type.media_type, mime_type.sub_type, {:name=>file})\n    attach\n  end\n\n  # instance method to send an Email object\n  def send\n    args = @opts.values_at(:server, :port, :helo, :username, :password, :authtype)\n    Net::SMTP.start(*args) do |smtp|\n      smtp.send_message(@msg.to_s, @msg.from[0], @msg.to)\n    end\n  end\n\n  # class method to construct an Email object and send it\n  def self.send(*args)\n    self.new(*args).send\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 5
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": []
+        }
+    ],
+    "holder": "Email"
+}
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier from",
+            "reference": "from",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "from"
+        },
+        {
+            "element type": "Identifier to",
+            "reference": "to",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "to"
+        },
+        {
+            "element type": "Identifier subject",
+            "reference": "subject",
+            "kind": "method parameter declaration",
+            "id": 3,
+            "text": "subject"
+        },
+        {
+            "element type": "Identifier body",
+            "reference": "body",
+            "kind": "method parameter declaration",
+            "id": 4,
+            "text": "body"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 5
+        },
+        {
+            "element type": "Identifier options",
+            "reference": "options",
+            "kind": "method parameter declaration",
+            "id": 6,
+            "text": "options"
+        },
+        {
+            "element type": "Array",
+            "id": 7,
+            "text": "[]"
+        },
+        {
+            "element type": "String literal",
+            "id": 8,
+            "text": "'localhost'",
+            "value": "localhost"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 9
+        },
+        {
+            "element type": "Reference",
+            "id": 10,
+            "text": "{:attachments => [], :server => 'localhost'}.update"
+        },
+        {
+            "element type": "Identifier options",
+            "reference": "options",
+            "kind": "local variable",
+            "id": 11,
+            "text": "options"
+        },
+        {
+            "element type": "Call",
+            "id": 12,
+            "text": "{:attachments => [], :server => 'localhost'}.update(options)"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 13,
+            "text": "@opts"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 14,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 15,
+            "text": "TMail"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 16,
+            "text": "TMail::Mail"
+        },
+        {
+            "element type": "Reference",
+            "id": 17,
+            "text": "TMail::Mail.new"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 18,
+            "text": "@msg"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 19,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier from",
+            "reference": "from",
+            "kind": "local variable",
+            "id": 20,
+            "text": "from"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 21,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 22,
+            "text": "@msg.from"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 23,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier to",
+            "reference": "to",
+            "kind": "local variable",
+            "id": 24,
+            "text": "to"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 25,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 26,
+            "text": "@msg.to"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 27,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier subject",
+            "reference": "subject",
+            "kind": "local variable",
+            "id": 28,
+            "text": "subject"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 29,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 30,
+            "text": "@msg.subject"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 31,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 32
+        },
+        {
+            "element type": "Instance variable",
+            "id": 33,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 34
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 35,
+            "operation type": "="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 36,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 37
+        },
+        {
+            "element type": "Instance variable",
+            "id": 38,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 39,
+            "text": "@msg.cc"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 40,
+            "operation type": "="
+        },
+        {
+            "element type": "If mod statement",
+            "id": 41
+        },
+        {
+            "element type": "Instance variable",
+            "id": 42,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 43
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 44,
+            "operation type": "="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 45,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 46
+        },
+        {
+            "element type": "Instance variable",
+            "id": 47,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 48,
+            "text": "@msg.bcc"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 49,
+            "operation type": "="
+        },
+        {
+            "element type": "If statement",
+            "id": 50
+        },
+        {
+            "element type": "Instance variable",
+            "id": 51,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 52
+        },
+        {
+            "element type": "Reference",
+            "id": 53,
+            "text": "@opts[:attachments].empty?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 54,
+            "text": "@msg.body = body"
+        },
+        {
+            "element type": "Identifier body",
+            "reference": "body",
+            "kind": "local variable",
+            "id": 55,
+            "text": "body"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 56,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 57,
+            "text": "@msg.body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 58,
+            "operation type": "="
+        },
+        {
+            "element type": "Else block",
+            "id": 59
+        },
+        {
+            "element type": "String literal",
+            "id": 60,
+            "text": "\"This is a multi-part message in MIME format.\\n\"",
+            "value": "This is a multi-part message in MIME format.\\n"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 61,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 62,
+            "text": "@msg.body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 63,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 64,
+            "text": "TMail"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 65,
+            "text": "TMail::Mail"
+        },
+        {
+            "element type": "Reference",
+            "id": 66,
+            "text": "TMail::Mail.new"
+        },
+        {
+            "element type": "Identifier msg_body",
+            "reference": "msg_body",
+            "kind": "local variable",
+            "id": 67,
+            "text": "msg_body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 68,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier body",
+            "reference": "body",
+            "kind": "local variable",
+            "id": 69,
+            "text": "body"
+        },
+        {
+            "element type": "Identifier msg_body",
+            "reference": "msg_body",
+            "kind": "local variable",
+            "id": 70,
+            "text": "msg_body"
+        },
+        {
+            "element type": "Reference",
+            "id": 71,
+            "text": "msg_body.body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 72,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier msg_body",
+            "reference": "msg_body",
+            "kind": "local variable",
+            "id": 73,
+            "text": "msg_body"
+        },
+        {
+            "element type": "Reference",
+            "id": 74,
+            "text": "msg_body.set_content_type"
+        },
+        {
+            "element type": "String literal",
+            "id": 75,
+            "text": "\"text\"",
+            "value": "text"
+        },
+        {
+            "element type": "String literal",
+            "id": 76,
+            "text": "\"plain\"",
+            "value": "plain"
+        },
+        {
+            "element type": "String literal",
+            "id": 77,
+            "text": "\"ISO-8859-1\"",
+            "value": "ISO-8859-1"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 78
+        },
+        {
+            "element type": "Call",
+            "id": 79,
+            "text": "msg_body.set_content_type(\"text\",\"plain\", {:charset => \"ISO-8859-1\"})"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 80,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 81,
+            "text": "@msg.parts"
+        },
+        {
+            "element type": "Identifier msg_body",
+            "reference": "msg_body",
+            "kind": "local variable",
+            "id": 82,
+            "text": "msg_body"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 83,
+            "text": "@msg.parts << msg_body",
+            "expression type": "Integer",
+            "operation type": "<<"
+        },
+        {
+            "element type": "Constant",
+            "id": 84,
+            "text": "MIME"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 85,
+            "text": "MIME::Types"
+        },
+        {
+            "element type": "String literal",
+            "id": 86,
+            "text": "'application/octet-stream'",
+            "value": "application/octet-stream"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 87
+        },
+        {
+            "element type": "Reference",
+            "id": 88,
+            "text": "MIME::Types['application/octet-stream'].first"
+        },
+        {
+            "element type": "Identifier octet_stream",
+            "reference": "octet_stream",
+            "kind": "local variable",
+            "id": 89,
+            "text": "octet_stream"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 90,
+            "operation type": "="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 91,
+            "text": "@opts"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 92
+        },
+        {
+            "element type": "Reference",
+            "id": 93,
+            "text": "@opts[:attachments].select"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "block parameter declaration",
+            "id": 94,
+            "text": "file"
+        },
+        {
+            "element type": "Constant",
+            "id": 95,
+            "text": "File"
+        },
+        {
+            "element type": "Reference",
+            "id": 96,
+            "text": "File.readable?"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 97,
+            "text": "file"
+        },
+        {
+            "element type": "Call",
+            "call type": "TrueClass or FalseClass",
+            "id": 98,
+            "text": "File.readable?(file)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 99,
+            "text": "File.readable?(file)"
+        },
+        {
+            "element type": "Code block",
+            "id": 100
+        },
+        {
+            "element type": "Block call",
+            "id": 101
+        },
+        {
+            "element type": "Reference",
+            "id": 102,
+            "text": "@opts[:attachments].select {|file| File.readable?(file)}.each"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "block parameter declaration",
+            "id": 103,
+            "text": "file"
+        },
+        {
+            "element type": "Constant",
+            "id": 104,
+            "text": "MIME"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 105,
+            "text": "MIME::Types"
+        },
+        {
+            "element type": "Reference",
+            "id": 106,
+            "text": "MIME::Types.type_for"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 107,
+            "text": "file"
+        },
+        {
+            "element type": "Call",
+            "id": 108,
+            "text": "MIME::Types.type_for(file)"
+        },
+        {
+            "element type": "Reference",
+            "id": 109,
+            "text": "MIME::Types.type_for(file).first"
+        },
+        {
+            "element type": "Identifier octet_stream",
+            "reference": "octet_stream",
+            "kind": "local variable",
+            "id": 112,
+            "text": "octet_stream"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 113,
+            "text": "MIME::Types.type_for(file).first || octet_stream"
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "local variable",
+            "id": 114,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 115,
+            "operation type": "="
+        },
+        {
+            "element type": "Instance variable",
+            "id": 116,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 117,
+            "text": "@msg.parts"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 118,
+            "text": "file"
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "local variable",
+            "id": 119,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Call",
+            "callee": "create_attachment",
+            "id": 120,
+            "text": "create_attachment(file, mime_type)"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 121,
+            "text": "@msg.parts << create_attachment(file, mime_type)",
+            "expression type": "Integer",
+            "operation type": "<<"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 122,
+            "text": "mime_type = MIME::Types.type_for(file).first || octet_stream\n        @msg.parts << create_attachment(file, mime_type)"
+        },
+        {
+            "element type": "Body statement",
+            "id": 123
+        },
+        {
+            "element type": "Code block",
+            "id": 124
+        },
+        {
+            "element type": "Block call",
+            "id": 125
+        },
+        {
+            "element type": "Compound statement",
+            "id": 126,
+            "text": "@msg.body = \"This is a multi-part message in MIME format.\\n\"\n\n      msg_body = TMail::Mail.new\n      msg_body.body = body\n      msg_body.set_content_type(\"text\",\"plain\", {:charset => \"ISO-8859-1\"})\n      @msg.parts << msg_body\n\n      octet_stream = MIME::Types['application/octet-stream'].first\n\n      @opts[:attachments].select {|file| File.readable?(file)}.each do |file|\n        mime_type = MIME::Types.type_for(file).first || octet_stream\n        @msg.parts << create_attachment(file, mime_type)\n      end"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 127,
+            "text": "@opts = {:attachments => [], :server => 'localhost'}.update(options)\n    @msg = TMail::Mail.new\n    @msg.from    = from\n    @msg.to      = to\n    @msg.subject = subject\n    @msg.cc      = @opts[:cc]  if @opts[:cc]\n    @msg.bcc     = @opts[:bcc] if @opts[:bcc]\n\n    if @opts[:attachments].empty?\n      # just specify the body\n      @msg.body = body\n    else\n      # attach attachments, including the body\n      @msg.body = \"This is a multi-part message in MIME format.\\n\"\n\n      msg_body = TMail::Mail.new\n      msg_body.body = body\n      msg_body.set_content_type(\"text\",\"plain\", {:charset => \"ISO-8859-1\"})\n      @msg.parts << msg_body\n\n      octet_stream = MIME::Types['application/octet-stream'].first\n\n      @opts[:attachments].select {|file| File.readable?(file)}.each do |file|\n        mime_type = MIME::Types.type_for(file).first || octet_stream\n        @msg.parts << create_attachment(file, mime_type)\n      end\n    end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 128
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [
+                35,
+                41
+            ]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [
+                44,
+                50
+            ]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [
+                54,
+                59
+            ]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [57]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [127]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [82]
+        },
+        {
+            "from": 82,
+            "to": [83]
+        },
+        {
+            "from": 83,
+            "to": [84]
+        },
+        {
+            "from": 84,
+            "to": [85]
+        },
+        {
+            "from": 85,
+            "to": [86]
+        },
+        {
+            "from": 86,
+            "to": [87]
+        },
+        {
+            "from": 87,
+            "to": [88]
+        },
+        {
+            "from": 88,
+            "to": [89]
+        },
+        {
+            "from": 89,
+            "to": [90]
+        },
+        {
+            "from": 90,
+            "to": [91]
+        },
+        {
+            "from": 91,
+            "to": [92]
+        },
+        {
+            "from": 92,
+            "to": [93]
+        },
+        {
+            "from": 93,
+            "to": [
+                94,
+                101
+            ]
+        },
+        {
+            "from": 94,
+            "to": [95]
+        },
+        {
+            "from": 95,
+            "to": [96]
+        },
+        {
+            "from": 96,
+            "to": [97]
+        },
+        {
+            "from": 97,
+            "to": [98]
+        },
+        {
+            "from": 98,
+            "to": [99]
+        },
+        {
+            "from": 99,
+            "to": [100]
+        },
+        {
+            "from": 100,
+            "to": [
+                101,
+                94
+            ]
+        },
+        {
+            "from": 101,
+            "to": [102]
+        },
+        {
+            "from": 102,
+            "to": [
+                103,
+                125
+            ]
+        },
+        {
+            "from": 103,
+            "to": [104]
+        },
+        {
+            "from": 104,
+            "to": [105]
+        },
+        {
+            "from": 105,
+            "to": [106]
+        },
+        {
+            "from": 106,
+            "to": [107]
+        },
+        {
+            "from": 107,
+            "to": [108]
+        },
+        {
+            "from": 108,
+            "to": [109]
+        },
+        {
+            "from": 109,
+            "to": [
+                110,
+                111
+            ]
+        },
+        {
+            "from": 110,
+            "to": [114]
+        },
+        {
+            "from": 111,
+            "to": [112]
+        },
+        {
+            "from": 112,
+            "to": [113]
+        },
+        {
+            "from": 113,
+            "to": [114]
+        },
+        {
+            "from": 114,
+            "to": [115]
+        },
+        {
+            "from": 115,
+            "to": [116]
+        },
+        {
+            "from": 116,
+            "to": [117]
+        },
+        {
+            "from": 117,
+            "to": [118]
+        },
+        {
+            "from": 118,
+            "to": [119]
+        },
+        {
+            "from": 119,
+            "to": [120]
+        },
+        {
+            "from": 120,
+            "to": [121]
+        },
+        {
+            "from": 121,
+            "to": [122]
+        },
+        {
+            "from": 122,
+            "to": [123]
+        },
+        {
+            "from": 123,
+            "to": [124]
+        },
+        {
+            "from": 124,
+            "to": [
+                125,
+                103
+            ]
+        },
+        {
+            "from": 125,
+            "to": [126]
+        },
+        {
+            "from": 126,
+            "to": [127]
+        },
+        {
+            "from": 127,
+            "to": [128]
+        },
+        {
+            "from": 128,
+            "to": [129]
+        },
+        {
+            "from": 129,
+            "to": []
+        }
+    ],
+    "holder": "initialize"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "file"
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Constant",
+            "id": 3,
+            "text": "TMail"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 4,
+            "text": "TMail::Mail"
+        },
+        {
+            "element type": "Reference",
+            "id": 5,
+            "text": "TMail::Mail.new"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 6,
+            "text": "attach"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 7,
+            "operation type": "="
+        },
+        {
+            "element type": "If statement",
+            "id": 8
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "local variable",
+            "id": 9,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Reference",
+            "id": 10,
+            "text": "mime_type.binary?"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "attach.body = Base64.encode64(File.read(file))\n      attach.transfer_encoding = 'base64'"
+        },
+        {
+            "element type": "Constant",
+            "id": 12,
+            "text": "Base64"
+        },
+        {
+            "element type": "Reference",
+            "id": 13,
+            "text": "Base64.encode64"
+        },
+        {
+            "element type": "Constant",
+            "id": 14,
+            "text": "File"
+        },
+        {
+            "element type": "Reference",
+            "id": 15,
+            "text": "File.read"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 16,
+            "text": "file"
+        },
+        {
+            "element type": "Call",
+            "id": 17,
+            "text": "File.read(file)"
+        },
+        {
+            "element type": "Call",
+            "id": 18,
+            "text": "Base64.encode64(File.read(file))"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 19,
+            "text": "attach"
+        },
+        {
+            "element type": "Reference",
+            "id": 20,
+            "text": "attach.body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 21,
+            "operation type": "="
+        },
+        {
+            "element type": "String literal",
+            "id": 22,
+            "text": "'base64'",
+            "value": "base64"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 23,
+            "text": "attach"
+        },
+        {
+            "element type": "Reference",
+            "id": 24,
+            "text": "attach.transfer_encoding"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 25,
+            "operation type": "="
+        },
+        {
+            "element type": "Else block",
+            "id": 26
+        },
+        {
+            "element type": "Constant",
+            "id": 27,
+            "text": "File"
+        },
+        {
+            "element type": "Reference",
+            "id": 28,
+            "text": "File.read"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 29,
+            "text": "file"
+        },
+        {
+            "element type": "Call",
+            "id": 30,
+            "text": "File.read(file)"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 31,
+            "text": "attach"
+        },
+        {
+            "element type": "Reference",
+            "id": 32,
+            "text": "attach.body"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 33,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 34,
+            "text": "attach.body = File.read(file)"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 35,
+            "text": "attach"
+        },
+        {
+            "element type": "Reference",
+            "id": 36,
+            "text": "attach.set_disposition"
+        },
+        {
+            "element type": "String literal",
+            "id": 37,
+            "text": "\"attachment\"",
+            "value": "attachment"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 38,
+            "text": "file"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 39
+        },
+        {
+            "element type": "Call",
+            "id": 40,
+            "text": "attach.set_disposition(\"attachment\", {:filename => file})"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 41,
+            "text": "attach"
+        },
+        {
+            "element type": "Reference",
+            "id": 42,
+            "text": "attach.set_content_type"
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "local variable",
+            "id": 43,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Reference",
+            "id": 44,
+            "text": "mime_type.media_type"
+        },
+        {
+            "element type": "Identifier mime_type",
+            "reference": "mime_type",
+            "kind": "local variable",
+            "id": 45,
+            "text": "mime_type"
+        },
+        {
+            "element type": "Reference",
+            "id": 46,
+            "text": "mime_type.sub_type"
+        },
+        {
+            "element type": "Identifier file",
+            "reference": "file",
+            "kind": "local variable",
+            "id": 47,
+            "text": "file"
+        },
+        {
+            "element type": "Assoc list",
+            "id": 48
+        },
+        {
+            "element type": "Call",
+            "id": 49,
+            "text": "attach.set_content_type(mime_type.media_type, mime_type.sub_type, {:name=>file})"
+        },
+        {
+            "element type": "Identifier attach",
+            "reference": "attach",
+            "kind": "local variable",
+            "id": 50,
+            "text": "attach"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 51,
+            "text": "attach = TMail::Mail.new\n    if mime_type.binary?\n      attach.body = Base64.encode64(File.read(file))\n      attach.transfer_encoding = 'base64'\n    else\n      attach.body = File.read(file)\n    end\n    attach.set_disposition(\"attachment\", {:filename => file})\n    attach.set_content_type(mime_type.media_type, mime_type.sub_type, {:name=>file})\n    attach"
+        },
+        {
+            "element type": "Body statement",
+            "id": 52
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [
+                11,
+                26
+            ]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [35]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": []
+        }
+    ],
+    "holder": "create_attachment"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Instance variable",
+            "id": 1,
+            "text": "@opts"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "@opts.values_at"
+        },
+        {
+            "element type": "Call",
+            "id": 3,
+            "text": "@opts.values_at(:server, :port, :helo, :username, :password, :authtype)"
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 4,
+            "text": "args"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 5,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 6,
+            "text": "Net"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 7,
+            "text": "Net::SMTP"
+        },
+        {
+            "element type": "Reference",
+            "id": 8,
+            "text": "Net::SMTP.start"
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 9,
+            "text": "args"
+        },
+        {
+            "element type": "Call",
+            "id": 10,
+            "text": "Net::SMTP.start(*args)"
+        },
+        {
+            "element type": "Identifier smtp",
+            "reference": "smtp",
+            "kind": "block parameter declaration",
+            "id": 11,
+            "text": "smtp"
+        },
+        {
+            "element type": "Identifier smtp",
+            "reference": "smtp",
+            "kind": "local variable",
+            "id": 12,
+            "text": "smtp"
+        },
+        {
+            "element type": "Reference",
+            "id": 13,
+            "text": "smtp.send_message"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 14,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 15,
+            "text": "@msg.to_s"
+        },
+        {
+            "element type": "Instance variable",
+            "id": 16,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 17,
+            "text": "@msg.from"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 18,
+            "text": "0"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 19
+        },
+        {
+            "element type": "Instance variable",
+            "id": 20,
+            "text": "@msg"
+        },
+        {
+            "element type": "Reference",
+            "id": 21,
+            "text": "@msg.to"
+        },
+        {
+            "element type": "Call",
+            "id": 22,
+            "text": "smtp.send_message(@msg.to_s, @msg.from[0], @msg.to)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 23,
+            "text": "smtp.send_message(@msg.to_s, @msg.from[0], @msg.to)"
+        },
+        {
+            "element type": "Body statement",
+            "id": 24
+        },
+        {
+            "element type": "Code block",
+            "id": 25
+        },
+        {
+            "element type": "Block call",
+            "id": 26
+        },
+        {
+            "element type": "Compound statement",
+            "id": 27,
+            "text": "args = @opts.values_at(:server, :port, :helo, :username, :password, :authtype)\n    Net::SMTP.start(*args) do |smtp|\n      smtp.send_message(@msg.to_s, @msg.from[0], @msg.to)\n    end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 28
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [
+                11,
+                26
+            ]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [
+                26,
+                11
+            ]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": []
+        }
+    ],
+    "holder": "send"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Pseudo constant",
+            "id": 1,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "args"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 3,
+            "text": "self"
+        },
+        {
+            "element type": "Reference",
+            "id": 4,
+            "text": "self.new"
+        },
+        {
+            "element type": "Identifier args",
+            "reference": "args",
+            "kind": "local variable",
+            "id": 5,
+            "text": "args"
+        },
+        {
+            "element type": "Call",
+            "call type": "Email",
+            "callee": "initialize",
+            "id": 6,
+            "text": "self.new(*args)"
+        },
+        {
+            "element type": "Reference",
+            "id": 7,
+            "text": "self.new(*args).send"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 8,
+            "text": "self.new(*args).send"
+        },
+        {
+            "element type": "Body statement",
+            "id": 9
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": []
+        }
+    ],
+    "holder": "send"
+}

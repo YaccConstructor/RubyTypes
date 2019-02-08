@@ -1,0 +1,2238 @@
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Pixmap"
+        },
+        {
+            "element type": "Reference",
+            "id": 2,
+            "text": "Pixmap.new"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 3,
+            "text": "400"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 4,
+            "text": "400"
+        },
+        {
+            "element type": "Call",
+            "call type": "Pixmap",
+            "id": 5,
+            "text": "Pixmap.new(400, 400)"
+        },
+        {
+            "element type": "Identifier bitmap",
+            "reference": "bitmap",
+            "kind": "local variable",
+            "id": 6,
+            "text": "bitmap"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 7,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 8,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 9,
+            "text": "40"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 10,
+            "text": "100"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 11
+        },
+        {
+            "element type": "Constant",
+            "id": 12,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 13,
+            "text": "100"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 14,
+            "text": "350"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 15
+        },
+        {
+            "element type": "Constant",
+            "id": 16,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 17,
+            "text": "150"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 18,
+            "text": "50"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 19
+        },
+        {
+            "element type": "Constant",
+            "id": 20,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 21,
+            "text": "150"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 22,
+            "text": "150"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 23
+        },
+        {
+            "element type": "Constant",
+            "id": 24,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 25,
+            "text": "350"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 26,
+            "text": "250"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 27
+        },
+        {
+            "element type": "Constant",
+            "id": 28,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 29,
+            "text": "250"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 30,
+            "text": "250"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 31
+        },
+        {
+            "element type": "Array",
+            "id": 32,
+            "text": "[\n    Pixel[40,100], Pixel[100,350], Pixel[150,50],\n    Pixel[150,150], Pixel[350,250], Pixel[250,250]\n]"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 33,
+            "text": "points"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 34,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 35,
+            "text": "points"
+        },
+        {
+            "element type": "Reference",
+            "id": 36,
+            "text": "points.each"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "block parameter declaration",
+            "id": 37,
+            "text": "p"
+        },
+        {
+            "element type": "Identifier bitmap",
+            "reference": "bitmap",
+            "kind": "local variable",
+            "id": 38,
+            "text": "bitmap"
+        },
+        {
+            "element type": "Reference",
+            "id": 39,
+            "text": "bitmap.draw_circle"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 40,
+            "text": "p"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 41,
+            "text": "3"
+        },
+        {
+            "element type": "Constant",
+            "id": 42,
+            "text": "RGBColour"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 43,
+            "text": "RGBColour::RED"
+        },
+        {
+            "element type": "Call",
+            "id": 44,
+            "text": "bitmap.draw_circle(p, 3, RGBColour::RED)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 45,
+            "text": "bitmap.draw_circle(p, 3, RGBColour::RED)"
+        },
+        {
+            "element type": "Code block",
+            "id": 46
+        },
+        {
+            "element type": "Block call",
+            "id": 47
+        },
+        {
+            "element type": "Identifier bitmap",
+            "reference": "bitmap",
+            "kind": "local variable",
+            "id": 48,
+            "text": "bitmap"
+        },
+        {
+            "element type": "Reference",
+            "id": 49,
+            "text": "bitmap.draw_bezier_curve"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 50,
+            "text": "points"
+        },
+        {
+            "element type": "Constant",
+            "id": 51,
+            "text": "RGBColour"
+        },
+        {
+            "element type": "Colon reference",
+            "id": 52,
+            "text": "RGBColour::BLUE"
+        },
+        {
+            "element type": "Call",
+            "callee": "draw_bezier_curve",
+            "id": 53,
+            "text": "bitmap.draw_bezier_curve(points, RGBColour::BLUE)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 54,
+            "text": "class Pixmap\n  def draw_bezier_curve(points, colour)\n    # ensure the points are increasing along the x-axis\n    points = points.sort_by {|p| [p.x, p.y]}\n    xmin = points[0].x\n    xmax = points[-1].x\n    increment = 2\n    prev = points[0]\n    ((xmin + increment) .. xmax).step(increment) do |x|\n      t = 1.0 * (x - xmin) / (xmax - xmin)\n      p = Pixel[x, bezier(t, points).round]\n      draw_line(prev, p, colour)\n      prev = p\n    end\n  end\nend\n\n# the generalized n-degree Bezier summation\ndef bezier(t, points)\n  n = points.length - 1\n  points.each_with_index.inject(0.0) do |sum, (point, i)|\n    sum += n.choose(i) * (1-t)**(n - i) * t**i * point.y\n  end\nend\n\nclass Fixnum\n  def choose(k)\n    self.factorial / (k.factorial * (self - k).factorial)\n  end\n  def factorial\n    (2 .. self).reduce(1, :*)\n  end\nend\n\nbitmap = Pixmap.new(400, 400)\npoints = [\n    Pixel[40,100], Pixel[100,350], Pixel[150,50],\n    Pixel[150,150], Pixel[350,250], Pixel[250,250]\n]\npoints.each {|p| bitmap.draw_circle(p, 3, RGBColour::RED)}\nbitmap.draw_bezier_curve(points, RGBColour::BLUE)"
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [
+                37,
+                47
+            ]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [
+                47,
+                37
+            ]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": []
+        }
+    ],
+    "holder": "test2.rb"
+}
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Pixmap"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 2,
+            "text": "def draw_bezier_curve(points, colour)\n    # ensure the points are increasing along the x-axis\n    points = points.sort_by {|p| [p.x, p.y]}\n    xmin = points[0].x\n    xmax = points[-1].x\n    increment = 2\n    prev = points[0]\n    ((xmin + increment) .. xmax).step(increment) do |x|\n      t = 1.0 * (x - xmin) / (xmax - xmin)\n      p = Pixel[x, bezier(t, points).round]\n      draw_line(prev, p, colour)\n      prev = p\n    end\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 3
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": []
+        }
+    ],
+    "holder": "Pixmap"
+}
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "points"
+        },
+        {
+            "element type": "Identifier colour",
+            "reference": "colour",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "colour"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 3,
+            "text": "points"
+        },
+        {
+            "element type": "Reference",
+            "id": 4,
+            "text": "points.sort_by"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "block parameter declaration",
+            "id": 5,
+            "text": "p"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 6,
+            "text": "p"
+        },
+        {
+            "element type": "Reference",
+            "id": 7,
+            "text": "p.x"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 8,
+            "text": "p"
+        },
+        {
+            "element type": "Reference",
+            "id": 9,
+            "text": "p.y"
+        },
+        {
+            "element type": "Array",
+            "id": 10,
+            "text": "[p.x, p.y]"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "[p.x, p.y]"
+        },
+        {
+            "element type": "Code block",
+            "id": 12
+        },
+        {
+            "element type": "Block call",
+            "id": 13
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 14,
+            "text": "points"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 15,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 16,
+            "text": "points"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 17,
+            "text": "0"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 18
+        },
+        {
+            "element type": "Reference",
+            "id": 19,
+            "text": "points[0].x"
+        },
+        {
+            "element type": "Identifier xmin",
+            "reference": "xmin",
+            "kind": "local variable",
+            "id": 20,
+            "text": "xmin"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 21,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 22,
+            "text": "points"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 23,
+            "text": "-1"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 24
+        },
+        {
+            "element type": "Reference",
+            "id": 25,
+            "text": "points[-1].x"
+        },
+        {
+            "element type": "Identifier xmax",
+            "reference": "xmax",
+            "kind": "local variable",
+            "id": 26,
+            "text": "xmax"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 27,
+            "operation type": "="
+        },
+        {
+            "element type": "Integer constant",
+            "id": 28,
+            "text": "2"
+        },
+        {
+            "element type": "Identifier increment",
+            "reference": "increment",
+            "kind": "local variable",
+            "id": 29,
+            "text": "increment"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 30,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 31,
+            "text": "points"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 32,
+            "text": "0"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 33
+        },
+        {
+            "element type": "Identifier prev",
+            "reference": "prev",
+            "kind": "local variable",
+            "id": 34,
+            "text": "prev"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 35,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier xmin",
+            "reference": "xmin",
+            "kind": "local variable",
+            "id": 36,
+            "text": "xmin"
+        },
+        {
+            "element type": "Identifier increment",
+            "reference": "increment",
+            "kind": "local variable",
+            "id": 37,
+            "text": "increment"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 38,
+            "text": "xmin + increment",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 39,
+            "text": "xmin + increment"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 40
+        },
+        {
+            "element type": "Identifier xmax",
+            "reference": "xmax",
+            "kind": "local variable",
+            "id": 41,
+            "text": "xmax"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 42,
+            "text": "(xmin + increment) .. xmax",
+            "operation type": ".."
+        },
+        {
+            "element type": "Compound statement",
+            "id": 43,
+            "text": "(xmin + increment) .. xmax"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 44
+        },
+        {
+            "element type": "Reference",
+            "id": 45,
+            "text": "((xmin + increment) .. xmax).step"
+        },
+        {
+            "element type": "Identifier increment",
+            "reference": "increment",
+            "kind": "local variable",
+            "id": 46,
+            "text": "increment"
+        },
+        {
+            "element type": "Call",
+            "id": 47,
+            "text": "((xmin + increment) .. xmax).step(increment)"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "block parameter declaration",
+            "id": 48,
+            "text": "x"
+        },
+        {
+            "element type": "Float constant",
+            "id": 49,
+            "text": "1.0",
+            "value": "1.0"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "local variable",
+            "id": 50,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier xmin",
+            "reference": "xmin",
+            "kind": "local variable",
+            "id": 51,
+            "text": "xmin"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 52,
+            "text": "x - xmin",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 53,
+            "text": "x - xmin"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 54
+        },
+        {
+            "element type": "Binary expression",
+            "id": 55,
+            "text": "1.0 * (x - xmin)",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Identifier xmax",
+            "reference": "xmax",
+            "kind": "local variable",
+            "id": 56,
+            "text": "xmax"
+        },
+        {
+            "element type": "Identifier xmin",
+            "reference": "xmin",
+            "kind": "local variable",
+            "id": 57,
+            "text": "xmin"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 58,
+            "text": "xmax - xmin",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 59,
+            "text": "xmax - xmin"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 60
+        },
+        {
+            "element type": "Binary expression",
+            "id": 61,
+            "text": "1.0 * (x - xmin) / (xmax - xmin)",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Identifier t",
+            "reference": "t",
+            "kind": "local variable",
+            "id": 62,
+            "text": "t"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 63,
+            "operation type": "="
+        },
+        {
+            "element type": "Constant",
+            "id": 64,
+            "text": "Pixel"
+        },
+        {
+            "element type": "Identifier x",
+            "reference": "x",
+            "kind": "local variable",
+            "id": 65,
+            "text": "x"
+        },
+        {
+            "element type": "Identifier t",
+            "reference": "t",
+            "kind": "local variable",
+            "id": 66,
+            "text": "t"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 67,
+            "text": "points"
+        },
+        {
+            "element type": "Call",
+            "callee": "bezier",
+            "id": 68,
+            "text": "bezier(t, points)"
+        },
+        {
+            "element type": "Reference",
+            "id": 69,
+            "text": "bezier(t, points).round"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 70
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 71,
+            "text": "p"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 72,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier prev",
+            "reference": "prev",
+            "kind": "local variable",
+            "id": 73,
+            "text": "prev"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 74,
+            "text": "p"
+        },
+        {
+            "element type": "Identifier colour",
+            "reference": "colour",
+            "kind": "local variable",
+            "id": 75,
+            "text": "colour"
+        },
+        {
+            "element type": "Call",
+            "id": 76,
+            "text": "draw_line(prev, p, colour)"
+        },
+        {
+            "element type": "Identifier p",
+            "reference": "p",
+            "kind": "local variable",
+            "id": 77,
+            "text": "p"
+        },
+        {
+            "element type": "Identifier prev",
+            "reference": "prev",
+            "kind": "local variable",
+            "id": 78,
+            "text": "prev"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 79,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 80,
+            "text": "t = 1.0 * (x - xmin) / (xmax - xmin)\n      p = Pixel[x, bezier(t, points).round]\n      draw_line(prev, p, colour)\n      prev = p"
+        },
+        {
+            "element type": "Body statement",
+            "id": 81
+        },
+        {
+            "element type": "Code block",
+            "id": 82
+        },
+        {
+            "element type": "Block call",
+            "id": 83
+        },
+        {
+            "element type": "Compound statement",
+            "id": 84,
+            "text": "points = points.sort_by {|p| [p.x, p.y]}\n    xmin = points[0].x\n    xmax = points[-1].x\n    increment = 2\n    prev = points[0]\n    ((xmin + increment) .. xmax).step(increment) do |x|\n      t = 1.0 * (x - xmin) / (xmax - xmin)\n      p = Pixel[x, bezier(t, points).round]\n      draw_line(prev, p, colour)\n      prev = p\n    end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 85
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [
+                5,
+                13
+            ]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [
+                13,
+                5
+            ]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [
+                48,
+                83
+            ]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [57]
+        },
+        {
+            "from": 57,
+            "to": [58]
+        },
+        {
+            "from": 58,
+            "to": [59]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [67]
+        },
+        {
+            "from": 67,
+            "to": [68]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [77]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [82]
+        },
+        {
+            "from": 82,
+            "to": [
+                83,
+                48
+            ]
+        },
+        {
+            "from": 83,
+            "to": [84]
+        },
+        {
+            "from": 84,
+            "to": [85]
+        },
+        {
+            "from": 85,
+            "to": [86]
+        },
+        {
+            "from": 86,
+            "to": []
+        }
+    ],
+    "holder": "draw_bezier_curve"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier t",
+            "reference": "t",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "t"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "points"
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 3,
+            "text": "points"
+        },
+        {
+            "element type": "Reference",
+            "id": 4,
+            "text": "points.length"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 5,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 6,
+            "text": "points.length - 1",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 7,
+            "text": "n"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 8,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier points",
+            "reference": "points",
+            "kind": "local variable",
+            "id": 9,
+            "text": "points"
+        },
+        {
+            "element type": "Reference",
+            "id": 10,
+            "text": "points.each_with_index"
+        },
+        {
+            "element type": "Reference",
+            "id": 11,
+            "text": "points.each_with_index.inject"
+        },
+        {
+            "element type": "Float constant",
+            "id": 12,
+            "text": "0.0",
+            "value": "0.0"
+        },
+        {
+            "element type": "Call",
+            "id": 13,
+            "text": "points.each_with_index.inject(0.0)"
+        },
+        {
+            "element type": "Identifier sum",
+            "reference": "sum",
+            "kind": "block parameter declaration",
+            "id": 14,
+            "text": "sum"
+        },
+        {
+            "element type": "Identifier point",
+            "reference": "point",
+            "kind": "block parameter declaration",
+            "id": 15,
+            "text": "point"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "block parameter declaration",
+            "id": 16,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 17,
+            "text": "n"
+        },
+        {
+            "element type": "Reference",
+            "id": 18,
+            "text": "n.choose"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 19,
+            "text": "i"
+        },
+        {
+            "element type": "Call",
+            "callee": "choose",
+            "id": 20,
+            "text": "n.choose(i)"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 21,
+            "text": "1"
+        },
+        {
+            "element type": "Identifier t",
+            "reference": "t",
+            "kind": "local variable",
+            "id": 22,
+            "text": "t"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 23,
+            "text": "1-t",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 24,
+            "text": "1-t"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 25
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 26,
+            "text": "n"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 27,
+            "text": "i"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 28,
+            "text": "n - i",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 29,
+            "text": "n - i"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 30
+        },
+        {
+            "element type": "Binary expression",
+            "id": 31,
+            "text": "(1-t)**(n - i)",
+            "expression type": "Integer",
+            "operation type": "**"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 32,
+            "text": "n.choose(i) * (1-t)**(n - i)",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Identifier t",
+            "reference": "t",
+            "kind": "local variable",
+            "id": 33,
+            "text": "t"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 34,
+            "text": "i"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 35,
+            "text": "t**i",
+            "expression type": "Integer",
+            "operation type": "**"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 36,
+            "text": "n.choose(i) * (1-t)**(n - i) * t**i",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Identifier point",
+            "reference": "point",
+            "kind": "local variable",
+            "id": 37,
+            "text": "point"
+        },
+        {
+            "element type": "Reference",
+            "id": 38,
+            "text": "point.y"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 39,
+            "text": "n.choose(i) * (1-t)**(n - i) * t**i * point.y",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Identifier sum",
+            "reference": "sum",
+            "kind": "local variable",
+            "id": 40,
+            "text": "sum"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 41,
+            "operation type": "+="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 42,
+            "text": "sum += n.choose(i) * (1-t)**(n - i) * t**i * point.y"
+        },
+        {
+            "element type": "Body statement",
+            "id": 43
+        },
+        {
+            "element type": "Code block",
+            "id": 44
+        },
+        {
+            "element type": "Block call",
+            "id": 45
+        },
+        {
+            "element type": "Compound statement",
+            "id": 46,
+            "text": "n = points.length - 1\n  points.each_with_index.inject(0.0) do |sum, (point, i)|\n    sum += n.choose(i) * (1-t)**(n - i) * t**i * point.y\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 47
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [
+                14,
+                45
+            ]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [39]
+        },
+        {
+            "from": 39,
+            "to": [40]
+        },
+        {
+            "from": 40,
+            "to": [41]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [
+                45,
+                14
+            ]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": []
+        }
+    ],
+    "holder": "bezier"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Fixnum"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 2,
+            "text": "def choose(k)\n    self.factorial / (k.factorial * (self - k).factorial)\n  end\n  def factorial\n    (2 .. self).reduce(1, :*)\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 3
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": []
+        }
+    ],
+    "holder": "Fixnum"
+}
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier k",
+            "reference": "k",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "k"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 2,
+            "text": "self"
+        },
+        {
+            "element type": "Reference",
+            "id": 3,
+            "text": "self.factorial"
+        },
+        {
+            "element type": "Identifier k",
+            "reference": "k",
+            "kind": "local variable",
+            "id": 4,
+            "text": "k"
+        },
+        {
+            "element type": "Reference",
+            "id": 5,
+            "text": "k.factorial"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 6,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier k",
+            "reference": "k",
+            "kind": "local variable",
+            "id": 7,
+            "text": "k"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 8,
+            "text": "self - k",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 9,
+            "text": "self - k"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 10
+        },
+        {
+            "element type": "Reference",
+            "id": 11,
+            "text": "(self - k).factorial"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 12,
+            "text": "k.factorial * (self - k).factorial",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 13,
+            "text": "k.factorial * (self - k).factorial"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 14
+        },
+        {
+            "element type": "Binary expression",
+            "id": 15,
+            "text": "self.factorial / (k.factorial * (self - k).factorial)",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 16,
+            "text": "self.factorial / (k.factorial * (self - k).factorial)"
+        },
+        {
+            "element type": "Body statement",
+            "id": 17
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": []
+        }
+    ],
+    "holder": "choose"
+}
+
+
+
+{
+    "nodes description": [
+        {
+            "element type": "Integer constant",
+            "id": 1,
+            "text": "2"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 2,
+            "text": "self"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 3,
+            "text": "2 .. self",
+            "operation type": ".."
+        },
+        {
+            "element type": "Compound statement",
+            "id": 4,
+            "text": "2 .. self"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 5
+        },
+        {
+            "element type": "Reference",
+            "id": 6,
+            "text": "(2 .. self).reduce"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 7,
+            "text": "1"
+        },
+        {
+            "element type": "Call",
+            "id": 8,
+            "text": "(2 .. self).reduce(1, :*)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 9,
+            "text": "(2 .. self).reduce(1, :*)"
+        },
+        {
+            "element type": "Body statement",
+            "id": 10
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": []
+        }
+    ],
+    "holder": "factorial"
+}

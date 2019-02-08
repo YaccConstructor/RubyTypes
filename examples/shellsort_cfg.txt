@@ -1,0 +1,1179 @@
+{
+    "nodes description": [
+        {
+            "element type": "Integer constant",
+            "id": 1,
+            "text": "22"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 2,
+            "text": "7"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 3,
+            "text": "2"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 4,
+            "text": "-5"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 5,
+            "text": "8"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 6,
+            "text": "4"
+        },
+        {
+            "element type": "Array",
+            "id": 7,
+            "text": "[22, 7, 2, -5, 8, 4]"
+        },
+        {
+            "element type": "Identifier data",
+            "reference": "data",
+            "kind": "local variable",
+            "id": 8,
+            "text": "data"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 9,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier data",
+            "reference": "data",
+            "kind": "local variable",
+            "id": 10,
+            "text": "data"
+        },
+        {
+            "element type": "Reference",
+            "id": 11,
+            "text": "data.shellsort!"
+        },
+        {
+            "element type": "Identifier data",
+            "reference": "data",
+            "kind": "local variable",
+            "id": 12,
+            "text": "data"
+        },
+        {
+            "element type": "Call",
+            "id": 13,
+            "text": "p data"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 14,
+            "text": "class Array\n  def shellsort!\n    inc = length / 2\n    while inc != 0\n      inc.step(length-1) do |i|\n        el = self[i]\n        while i >= inc and self[i - inc] > el\n          self[i] = self[i - inc]\n          i -= inc\n        end\n        self[i] = el\n      end\n      inc = (inc == 2 ? 1 : (inc * 5.0 / 11).to_i)\n    end\n    self\n  end\nend\n\ndata = [22, 7, 2, -5, 8, 4]\ndata.shellsort!\np data"
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": []
+        }
+    ],
+    "holder": "test2.rb"
+}
+{
+    "nodes description": [
+        {
+            "element type": "Constant",
+            "id": 1,
+            "text": "Array"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 2,
+            "text": "def shellsort!\n    inc = length / 2\n    while inc != 0\n      inc.step(length-1) do |i|\n        el = self[i]\n        while i >= inc and self[i - inc] > el\n          self[i] = self[i - inc]\n          i -= inc\n        end\n        self[i] = el\n      end\n      inc = (inc == 2 ? 1 : (inc * 5.0 / 11).to_i)\n    end\n    self\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 3
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": []
+        }
+    ],
+    "holder": "Array"
+}
+
+{
+    "nodes description": [
+        {
+            "element type": "Identifier length",
+            "reference": "length",
+            "kind": "unknown",
+            "id": 1,
+            "text": "length"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 2,
+            "text": "2"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 3,
+            "text": "length / 2",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 4,
+            "text": "inc"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 5,
+            "operation type": "="
+        },
+        {
+            "element type": "While statement",
+            "id": 6
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 7,
+            "text": "inc"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 8,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 9,
+            "text": "inc != 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "!="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 12,
+            "text": "inc.step(length-1) do |i|\n        el = self[i]\n        while i >= inc and self[i - inc] > el\n          self[i] = self[i - inc]\n          i -= inc\n        end\n        self[i] = el\n      end\n      inc = (inc == 2 ? 1 : (inc * 5.0 / 11).to_i)"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 13,
+            "text": "inc"
+        },
+        {
+            "element type": "Reference",
+            "id": 14,
+            "text": "inc.step"
+        },
+        {
+            "element type": "Identifier length",
+            "reference": "length",
+            "kind": "unknown",
+            "id": 15,
+            "text": "length"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 16,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 17,
+            "text": "length-1",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Call",
+            "id": 18,
+            "text": "inc.step(length-1)"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "block parameter declaration",
+            "id": 19,
+            "text": "i"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 20,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 21,
+            "text": "i"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 22
+        },
+        {
+            "element type": "Identifier el",
+            "reference": "el",
+            "kind": "local variable",
+            "id": 23,
+            "text": "el"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 24,
+            "operation type": "="
+        },
+        {
+            "element type": "While statement",
+            "id": 25
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 26,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 27,
+            "text": "inc"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 28,
+            "text": "i >= inc",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 31,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 32,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 33,
+            "text": "inc"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 34,
+            "text": "i - inc",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 35
+        },
+        {
+            "element type": "Identifier el",
+            "reference": "el",
+            "kind": "local variable",
+            "id": 36,
+            "text": "el"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 37,
+            "text": "self[i - inc] > el",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 38,
+            "text": "i >= inc and self[i - inc] > el"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 41,
+            "text": "self[i] = self[i - inc]\n          i -= inc"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 42,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 43,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 44,
+            "text": "inc"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 45,
+            "text": "i - inc",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 46
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 47,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 48,
+            "text": "i"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 49
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 50,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 51,
+            "text": "inc"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 52,
+            "text": "i"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 53,
+            "operation type": "-="
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 54,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 55,
+            "text": "inc"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 56,
+            "text": "i >= inc",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 59,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 60,
+            "text": "i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 61,
+            "text": "inc"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 62,
+            "text": "i - inc",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 63
+        },
+        {
+            "element type": "Identifier el",
+            "reference": "el",
+            "kind": "local variable",
+            "id": 64,
+            "text": "el"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 65,
+            "text": "self[i - inc] > el",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": ">"
+        },
+        {
+            "element type": "Boolean binary expression",
+            "id": 66,
+            "text": "i >= inc and self[i - inc] > el"
+        },
+        {
+            "element type": "Identifier el",
+            "reference": "el",
+            "kind": "local variable",
+            "id": 69,
+            "text": "el"
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 70,
+            "text": "self"
+        },
+        {
+            "element type": "Identifier i",
+            "reference": "i",
+            "kind": "local variable",
+            "id": 71,
+            "text": "i"
+        },
+        {
+            "element type": "Array indexing",
+            "id": 72
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 73,
+            "operation type": "="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 74,
+            "text": "el = self[i]\n        while i >= inc and self[i - inc] > el\n          self[i] = self[i - inc]\n          i -= inc\n        end\n        self[i] = el"
+        },
+        {
+            "element type": "Body statement",
+            "id": 75
+        },
+        {
+            "element type": "Code block",
+            "id": 76
+        },
+        {
+            "element type": "Block call",
+            "id": 77
+        },
+        {
+            "element type": "Ternary expression",
+            "id": 78
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 79,
+            "text": "inc"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 80,
+            "text": "2"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 81,
+            "text": "inc == 2",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Integer constant",
+            "id": 82,
+            "text": "1"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 83,
+            "text": "1"
+        },
+        {
+            "element type": "Reference",
+            "id": 84,
+            "text": "(inc * 5.0 / 11).to_i"
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 85,
+            "text": "inc"
+        },
+        {
+            "element type": "Float constant",
+            "id": 86,
+            "text": "5.0",
+            "value": "5.0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 87,
+            "text": "inc * 5.0",
+            "expression type": "Integer",
+            "operation type": "*"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 88,
+            "text": "11"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 89,
+            "text": "inc * 5.0 / 11",
+            "expression type": "Integer",
+            "operation type": "/"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 90,
+            "text": "inc * 5.0 / 11"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 91
+        },
+        {
+            "element type": "Reference",
+            "id": 92,
+            "text": "(inc * 5.0 / 11).to_i"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 93,
+            "text": "inc == 2 ? 1 : (inc * 5.0 / 11).to_i"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 94
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 95,
+            "text": "inc"
+        },
+        {
+            "element type": "Assignment expression",
+            "id": 96,
+            "operation type": "="
+        },
+        {
+            "element type": "Identifier inc",
+            "reference": "inc",
+            "kind": "local variable",
+            "id": 97,
+            "text": "inc"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 98,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 99,
+            "text": "inc != 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "!="
+        },
+        {
+            "element type": "Pseudo constant",
+            "id": 102,
+            "text": "self"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 103,
+            "text": "inc = length / 2\n    while inc != 0\n      inc.step(length-1) do |i|\n        el = self[i]\n        while i >= inc and self[i - inc] > el\n          self[i] = self[i - inc]\n          i -= inc\n        end\n        self[i] = el\n      end\n      inc = (inc == 2 ? 1 : (inc * 5.0 / 11).to_i)\n    end\n    self"
+        },
+        {
+            "element type": "Body statement",
+            "id": 104
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [7]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [
+                10,
+                11
+            ]
+        },
+        {
+            "from": 10,
+            "to": [12]
+        },
+        {
+            "from": 11,
+            "to": [102]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [14]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [
+                19,
+                77
+            ]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [
+                29,
+                30
+            ]
+        },
+        {
+            "from": 29,
+            "to": [31]
+        },
+        {
+            "from": 30,
+            "to": [40]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": [35]
+        },
+        {
+            "from": 35,
+            "to": [36]
+        },
+        {
+            "from": 36,
+            "to": [37]
+        },
+        {
+            "from": 37,
+            "to": [38]
+        },
+        {
+            "from": 38,
+            "to": [
+                39,
+                40
+            ]
+        },
+        {
+            "from": 39,
+            "to": [41]
+        },
+        {
+            "from": 40,
+            "to": [69]
+        },
+        {
+            "from": 41,
+            "to": [42]
+        },
+        {
+            "from": 42,
+            "to": [43]
+        },
+        {
+            "from": 43,
+            "to": [44]
+        },
+        {
+            "from": 44,
+            "to": [45]
+        },
+        {
+            "from": 45,
+            "to": [46]
+        },
+        {
+            "from": 46,
+            "to": [47]
+        },
+        {
+            "from": 47,
+            "to": [48]
+        },
+        {
+            "from": 48,
+            "to": [49]
+        },
+        {
+            "from": 49,
+            "to": [50]
+        },
+        {
+            "from": 50,
+            "to": [51]
+        },
+        {
+            "from": 51,
+            "to": [52]
+        },
+        {
+            "from": 52,
+            "to": [53]
+        },
+        {
+            "from": 53,
+            "to": [54]
+        },
+        {
+            "from": 54,
+            "to": [55]
+        },
+        {
+            "from": 55,
+            "to": [56]
+        },
+        {
+            "from": 56,
+            "to": [
+                57,
+                58
+            ]
+        },
+        {
+            "from": 57,
+            "to": [59]
+        },
+        {
+            "from": 58,
+            "to": [68]
+        },
+        {
+            "from": 59,
+            "to": [60]
+        },
+        {
+            "from": 60,
+            "to": [61]
+        },
+        {
+            "from": 61,
+            "to": [62]
+        },
+        {
+            "from": 62,
+            "to": [63]
+        },
+        {
+            "from": 63,
+            "to": [64]
+        },
+        {
+            "from": 64,
+            "to": [65]
+        },
+        {
+            "from": 65,
+            "to": [66]
+        },
+        {
+            "from": 66,
+            "to": [
+                67,
+                68
+            ]
+        },
+        {
+            "from": 67,
+            "to": [25]
+        },
+        {
+            "from": 68,
+            "to": [69]
+        },
+        {
+            "from": 69,
+            "to": [70]
+        },
+        {
+            "from": 70,
+            "to": [71]
+        },
+        {
+            "from": 71,
+            "to": [72]
+        },
+        {
+            "from": 72,
+            "to": [73]
+        },
+        {
+            "from": 73,
+            "to": [74]
+        },
+        {
+            "from": 74,
+            "to": [75]
+        },
+        {
+            "from": 75,
+            "to": [76]
+        },
+        {
+            "from": 76,
+            "to": [
+                77,
+                19
+            ]
+        },
+        {
+            "from": 77,
+            "to": [78]
+        },
+        {
+            "from": 78,
+            "to": [79]
+        },
+        {
+            "from": 79,
+            "to": [80]
+        },
+        {
+            "from": 80,
+            "to": [81]
+        },
+        {
+            "from": 81,
+            "to": [
+                82,
+                84
+            ]
+        },
+        {
+            "from": 82,
+            "to": [83]
+        },
+        {
+            "from": 83,
+            "to": [93]
+        },
+        {
+            "from": 84,
+            "to": [85]
+        },
+        {
+            "from": 85,
+            "to": [86]
+        },
+        {
+            "from": 86,
+            "to": [87]
+        },
+        {
+            "from": 87,
+            "to": [88]
+        },
+        {
+            "from": 88,
+            "to": [89]
+        },
+        {
+            "from": 89,
+            "to": [90]
+        },
+        {
+            "from": 90,
+            "to": [91]
+        },
+        {
+            "from": 91,
+            "to": [92]
+        },
+        {
+            "from": 92,
+            "to": [93]
+        },
+        {
+            "from": 93,
+            "to": [94]
+        },
+        {
+            "from": 94,
+            "to": [95]
+        },
+        {
+            "from": 95,
+            "to": [96]
+        },
+        {
+            "from": 96,
+            "to": [97]
+        },
+        {
+            "from": 97,
+            "to": [98]
+        },
+        {
+            "from": 98,
+            "to": [99]
+        },
+        {
+            "from": 99,
+            "to": [
+                100,
+                101
+            ]
+        },
+        {
+            "from": 100,
+            "to": [6]
+        },
+        {
+            "from": 101,
+            "to": [102]
+        },
+        {
+            "from": 102,
+            "to": [103]
+        },
+        {
+            "from": 103,
+            "to": [104]
+        },
+        {
+            "from": 104,
+            "to": [105]
+        },
+        {
+            "from": 105,
+            "to": []
+        }
+    ],
+    "holder": "shellsort!"
+}

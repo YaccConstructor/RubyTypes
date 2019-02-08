@@ -1,0 +1,641 @@
+{
+    "nodes description": [
+        {
+            "element type": "Integer constant",
+            "id": 1,
+            "text": "0"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 2,
+            "text": "3"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 3,
+            "text": "0..3",
+            "operation type": ".."
+        },
+        {
+            "element type": "Compound statement",
+            "id": 4,
+            "text": "0..3"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 5
+        },
+        {
+            "element type": "Reference",
+            "id": 6,
+            "text": "(0..3).each"
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "block parameter declaration",
+            "id": 7,
+            "text": "m"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 8,
+            "text": "0"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 9,
+            "text": "6"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 10,
+            "text": "0..6",
+            "operation type": ".."
+        },
+        {
+            "element type": "Compound statement",
+            "id": 11,
+            "text": "0..6"
+        },
+        {
+            "element type": "Grouped expression",
+            "id": 12
+        },
+        {
+            "element type": "Reference",
+            "id": 13,
+            "text": "(0..6).map"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "block parameter declaration",
+            "id": 14,
+            "text": "n"
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "local variable",
+            "id": 15,
+            "text": "m"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 16,
+            "text": "n"
+        },
+        {
+            "element type": "Call",
+            "callee": "ack",
+            "id": 17,
+            "text": "ack(m, n)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 18,
+            "text": "ack(m, n)"
+        },
+        {
+            "element type": "Code block",
+            "id": 19
+        },
+        {
+            "element type": "Block call",
+            "id": 20
+        },
+        {
+            "element type": "Reference",
+            "id": 21,
+            "text": "(0..6).map { |n| ack(m, n) }.join"
+        },
+        {
+            "element type": "String literal",
+            "id": 22,
+            "text": "' '",
+            "value": " "
+        },
+        {
+            "element type": "Call",
+            "id": 23,
+            "text": "(0..6).map { |n| ack(m, n) }.join(' ')"
+        },
+        {
+            "element type": "Call",
+            "id": 24,
+            "text": "puts (0..6).map { |n| ack(m, n) }.join(' ')"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 25,
+            "text": "puts (0..6).map { |n| ack(m, n) }.join(' ')"
+        },
+        {
+            "element type": "Body statement",
+            "id": 26
+        },
+        {
+            "element type": "Code block",
+            "id": 27
+        },
+        {
+            "element type": "Block call",
+            "id": 28
+        },
+        {
+            "element type": "Compound statement",
+            "id": 29,
+            "text": "def ack(m, n)\n  if m == 0\n    n + 1\n  elsif n == 0\n    ack(m-1, 1)\n  else\n    ack(m-1, ack(m, n-1))\n  end\nend\n\n(0..3).each do |m|\n  puts (0..6).map { |n| ack(m, n) }.join(' ')\nend"
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [
+                7,
+                28
+            ]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [11]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [
+                14,
+                20
+            ]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [
+                20,
+                14
+            ]
+        },
+        {
+            "from": 20,
+            "to": [21]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [
+                28,
+                7
+            ]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": []
+        }
+    ],
+    "holder": "test2.rb"
+}
+{
+    "nodes description": [
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "method parameter declaration",
+            "id": 1,
+            "text": "m"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "method parameter declaration",
+            "id": 2,
+            "text": "n"
+        },
+        {
+            "element type": "If statement",
+            "id": 3
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "local variable",
+            "id": 4,
+            "text": "m"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 5,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 6,
+            "text": "m == 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 7,
+            "text": "n + 1"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 8,
+            "text": "n"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 9,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 10,
+            "text": "n + 1",
+            "expression type": "Integer",
+            "operation type": "+"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 11,
+            "text": "n"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 12,
+            "text": "0"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 13,
+            "text": "n == 0",
+            "expression type": "TrueClass or FalseClass",
+            "operation type": "=="
+        },
+        {
+            "element type": "Compound statement",
+            "id": 14,
+            "text": "n + 1"
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "local variable",
+            "id": 15,
+            "text": "m"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 16,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 17,
+            "text": "m-1",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 18,
+            "text": "1"
+        },
+        {
+            "element type": "Call",
+            "callee": "ack",
+            "id": 19,
+            "text": "ack(m-1, 1)"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 20,
+            "text": "ack(m-1, 1)"
+        },
+        {
+            "element type": "Else block",
+            "id": 21
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "local variable",
+            "id": 22,
+            "text": "m"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 23,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 24,
+            "text": "m-1",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Identifier m",
+            "reference": "m",
+            "kind": "local variable",
+            "id": 25,
+            "text": "m"
+        },
+        {
+            "element type": "Identifier n",
+            "reference": "n",
+            "kind": "local variable",
+            "id": 26,
+            "text": "n"
+        },
+        {
+            "element type": "Integer constant",
+            "id": 27,
+            "text": "1"
+        },
+        {
+            "element type": "Binary expression",
+            "id": 28,
+            "text": "n-1",
+            "expression type": "Integer",
+            "operation type": "-"
+        },
+        {
+            "element type": "Call",
+            "callee": "ack",
+            "id": 29,
+            "text": "ack(m, n-1)"
+        },
+        {
+            "element type": "Call",
+            "callee": "ack",
+            "id": 30,
+            "text": "ack(m-1, ack(m, n-1))"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 31,
+            "text": "ack(m-1, ack(m, n-1))"
+        },
+        {
+            "element type": "Compound statement",
+            "id": 32,
+            "text": "if m == 0\n    n + 1\n  elsif n == 0\n    ack(m-1, 1)\n  else\n    ack(m-1, ack(m, n-1))\n  end"
+        },
+        {
+            "element type": "Body statement",
+            "id": 33
+        }
+    ],
+    "adjacency": [
+        {
+            "from": 0,
+            "to": [1]
+        },
+        {
+            "from": 1,
+            "to": [2]
+        },
+        {
+            "from": 2,
+            "to": [3]
+        },
+        {
+            "from": 3,
+            "to": [4]
+        },
+        {
+            "from": 4,
+            "to": [5]
+        },
+        {
+            "from": 5,
+            "to": [6]
+        },
+        {
+            "from": 6,
+            "to": [
+                7,
+                11
+            ]
+        },
+        {
+            "from": 7,
+            "to": [8]
+        },
+        {
+            "from": 8,
+            "to": [9]
+        },
+        {
+            "from": 9,
+            "to": [10]
+        },
+        {
+            "from": 10,
+            "to": [32]
+        },
+        {
+            "from": 11,
+            "to": [12]
+        },
+        {
+            "from": 12,
+            "to": [13]
+        },
+        {
+            "from": 13,
+            "to": [
+                14,
+                21
+            ]
+        },
+        {
+            "from": 14,
+            "to": [15]
+        },
+        {
+            "from": 15,
+            "to": [16]
+        },
+        {
+            "from": 16,
+            "to": [17]
+        },
+        {
+            "from": 17,
+            "to": [18]
+        },
+        {
+            "from": 18,
+            "to": [19]
+        },
+        {
+            "from": 19,
+            "to": [20]
+        },
+        {
+            "from": 20,
+            "to": [32]
+        },
+        {
+            "from": 21,
+            "to": [22]
+        },
+        {
+            "from": 22,
+            "to": [23]
+        },
+        {
+            "from": 23,
+            "to": [24]
+        },
+        {
+            "from": 24,
+            "to": [25]
+        },
+        {
+            "from": 25,
+            "to": [26]
+        },
+        {
+            "from": 26,
+            "to": [27]
+        },
+        {
+            "from": 27,
+            "to": [28]
+        },
+        {
+            "from": 28,
+            "to": [29]
+        },
+        {
+            "from": 29,
+            "to": [30]
+        },
+        {
+            "from": 30,
+            "to": [31]
+        },
+        {
+            "from": 31,
+            "to": [32]
+        },
+        {
+            "from": 32,
+            "to": [33]
+        },
+        {
+            "from": 33,
+            "to": [34]
+        },
+        {
+            "from": 34,
+            "to": []
+        }
+    ],
+    "holder": "ack"
+}
