@@ -8,7 +8,8 @@ class NodeDescription(
         val nodeType: String,
         val text: String? = null,
         val id: Int,
-        val callee: RPsiElement? = null
+        val callee: RPsiElement? = null,
+        val offset: Int
 ) {
     private val additionalProperties = mutableMapOf<String, String?>()
 

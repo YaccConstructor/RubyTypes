@@ -29,6 +29,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
 import org.jetbrains.plugins.ruby.ruby.lang.search.RubyFindUsagesFactory
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
+import org.jetbrains.plugins.ruby.types.controlflow.typeinfo.rightOffset
 
 class RubyElementsInfoCollector {
 
@@ -359,7 +360,8 @@ class RubyElementsInfoCollector {
                             else -> "unknown"
                         }
                 ),
-                Pair("reference", rIdentifier.reference?.canonicalText)
+                Pair("reference", rIdentifier.reference?.canonicalText),
+                offset = rIdentifier.rightOffset
         )
     }
 
@@ -466,7 +468,8 @@ class RubyElementsInfoCollector {
                 rMethod.text,
                 Pair("presentable name", rMethod.getPresentableName(true)),
                 Pair("is constructor", rMethod.isConstructor.toString()),
-                Pair("deprecated", rMethod.isDeprecated.toString())
+                Pair("deprecated", rMethod.isDeprecated.toString()),
+                offset = rMethod.rightOffset
         )
     }
 
@@ -613,9 +616,10 @@ class RubyElementsInfoCollector {
             nodeType: String,
             text: String? = null,
             vararg additionalProperties: Pair<String, String?>,
-            callee: RPsiElement? = null
+            callee: RPsiElement? = null,
+            offset: Int = 0
     ) {
-        val nodeDescription = NodeDescription(nodeType, text, currentElementId, callee)
+        val nodeDescription = NodeDescription(nodeType, text, currentElementId, callee, offset)
         additionalProperties.forEach { nodeDescription.addProperty(it.first, it.second) }
         nodesDescription.add(nodeDescription)
     }

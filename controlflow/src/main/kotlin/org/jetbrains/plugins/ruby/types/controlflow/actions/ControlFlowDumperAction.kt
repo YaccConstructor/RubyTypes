@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.ruby.types.controlflow.actions
 
+import com.intellij.codeInsight.daemon.impl.HintRenderer
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -12,11 +13,16 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDialog
 import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
+import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 
 class ControlFlowDumperAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val file = e.getData(PlatformDataKeys.PSI_FILE)
+        val editor = e.getData(PlatformDataKeys.EDITOR)!!
+        
+        file!!.accept(RubyTypesInlayVisitor(editor.inlayModel))
+
         val builder = RControlFlowBuilder()
         if (file !is RFile) {
             Messages.showErrorDialog(
