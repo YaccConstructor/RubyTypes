@@ -1,10 +1,8 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
 import com.intellij.codeInsight.controlflow.Instruction
-import com.intellij.psi.PsiElement
+import com.intellij.psi.impl.source.tree.PsiCommentImpl
 import org.jetbrains.plugins.ruby.erb.psi.ERbFile
-import org.jetbrains.plugins.ruby.ruby.codeInsight.resolve.ResolveUtil
-import org.jetbrains.plugins.ruby.ruby.lang.findUsages.RubyFindUsagesProvider
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.assoc.RAssoc
@@ -30,12 +28,15 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
 import org.jetbrains.plugins.ruby.ruby.lang.search.RubyFindUsagesFactory
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 import org.jetbrains.plugins.ruby.types.controlflow.typeinfo.rightOffset
+import org.jetbrains.plugins.ruby.types.parser.AnnotationCompiler
+import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeAnnotation
+import java.lang.StringBuilder
 
 class RubyElementsInfoCollector {
 
     private val nodesDescription = mutableListOf<NodeDescription>()
 
-//    val calledMethods = mutableSetOf<RMethod>()
+    private var lastTypeAnnotation: RubyTypeAnnotation? = null
 
     fun getNodesDescriptions(): List<NodeDescription> = nodesDescription
 
@@ -144,6 +145,8 @@ class RubyElementsInfoCollector {
             is RRescueBlock -> visitRescueBlock(element)
             is RExpressionSubstitution -> visitExpressionSubstitution(element)
             is RGroupedExpression -> visitGroupedExpression(element)
+
+            is PsiCommentImpl -> visitPsiComment(element)
         }
     }
 
@@ -610,6 +613,10 @@ class RubyElementsInfoCollector {
 
     private fun visitLambda(rLambda: RLambda) {
         addNodeInfo("Lambda", rLambda.text)
+    }
+
+    private fun visitPsiComment(comment: PsiCommentImpl) {
+        val annotationTypeElement = AnnotationCompiler.compile(comment.chars.toString(), comment.startOffset)
     }
 
     private fun addNodeInfo(
