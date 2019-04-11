@@ -8,8 +8,13 @@
     <!--<em>most HTML tags may be used</em>-->
     <!--]]></description>-->
 
-    <extensions defaultExtensionNs="org.jetbrains.plugins.ruby">
-        <!-- Add your extensions here -->
+    <!--<extensions defaultExtensionNs="org.jetbrains.plugins.ruby">-->
+        <!--&lt;!&ndash; Add your extensions here &ndash;&gt;-->
+        <!--<completion.contributor language="Ruby" implementationClass="org.jetbrains.plugins.ruby.types.controlflow.typeinfo.RubyCompletionContributor"/>-->
+    <!--</extensions>-->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <completion.contributor language="" implementationClass="org.jetbrains.plugins.ruby.types.controlflow.typeinfo.RubyCompletionContributor"/>
     </extensions>
 
     <actions>
@@ -24,4 +29,5 @@
             <add-to-group group-id="AnalyzeMenu" anchor="first"/>
         </action>
     </actions>
+
 </idea-plugin>

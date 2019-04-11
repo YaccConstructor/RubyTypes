@@ -1,0 +1,24 @@
+n
+IDENTIFIER
+Integer
+10
+arr
+IDENTIFIER
+Array[Integer]
+20
+i
+IDENTIFIER
+Integer
+30
+s
+IDENTIFIER
+String
+40
+fib_rec
+METHOD
+(Integer) -> Integer
+50
+fib_ite
+METHOD
+(Integer) -> Integer
+60
