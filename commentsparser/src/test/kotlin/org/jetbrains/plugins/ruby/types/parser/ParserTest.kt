@@ -2,7 +2,9 @@ package org.jetbrains.plugins.ruby.types.parser
 
 import org.jetbrains.plugins.ruby.types.parser.ast.*
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class ParserTest {
 
@@ -252,5 +254,12 @@ class ParserTest {
                 )
         )
         assertEquals(expectedAst, compiledResult)
+    }
+
+    @Test
+    fun `test comments not annotations`() {
+        assertThrows<AnyParsingException> { AnnotationCompiler.compile("# Some regular comment") }
+        assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t onlyid") }
+        assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t K: a -> b -> a") }
     }
 }
