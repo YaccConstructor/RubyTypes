@@ -34,7 +34,6 @@ class RubyTypesInlayVisitor(val inlayModel: InlayModel): RubyRecursiveElementVis
 
     override fun visitRAssignmentExpression(assignmentExpression: RAssignmentExpression) {
         val rIdentifier = assignmentExpression.`object` as? RIdentifier
-        println("${rIdentifier?.reference?.variants?.joinToString(", ")}")
         if (rIdentifier != null) {
             visitIdentifier(rIdentifier)
         }

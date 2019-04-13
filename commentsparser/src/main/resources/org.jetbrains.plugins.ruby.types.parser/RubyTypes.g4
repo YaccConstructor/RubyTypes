@@ -1,6 +1,7 @@
 grammar RubyTypes;
 
-annotation      : BEGIN typeDeclaration (SEMICOLON typeDeclaration)* EOF ;
+annotation      : BEGIN typeDeclaration EOF ;
+additional      : BEGIN type EOF ;
 typeDeclaration : identifier COLON type ;
 type            : LPAREN type RPAREN    # nestedType
                 | identifier            # identifierType
@@ -30,6 +31,7 @@ DCOLON     : '::'   ;
 BEGIN      : '##t ' ;
 
 WHITESPACE : [\t ]+ -> skip;
+NEWLINE   : '\r' '\n' | '\n' | '\r' ;
 
 fragment LOWERCASE : [a-z] ;
 fragment UPPERCASE : [A-Z] ;

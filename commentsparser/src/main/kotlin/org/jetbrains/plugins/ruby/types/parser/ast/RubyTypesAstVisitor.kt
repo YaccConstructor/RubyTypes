@@ -2,8 +2,6 @@ package org.jetbrains.plugins.ruby.types.parser.ast
 
 interface RubyTypesAstVisitor<out R> {
 
-    fun visit(declarationList: RubyTypeAnnotation): R
-
     fun visit(declaration: RubyTypeDeclaration): R
 
     fun visit(identifier: RubyAtomTypeIdentifier): R

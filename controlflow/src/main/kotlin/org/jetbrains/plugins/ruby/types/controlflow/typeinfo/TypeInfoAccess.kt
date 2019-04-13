@@ -40,7 +40,6 @@ fun RIdentifier.inferredType(typeInfoContainer: ElementTypeInfoContainer): Strin
 val RMethod.rightOffset: Int get() = argumentList!!.let { it.textOffset + it.textLength } + 1
 
 fun RMethod.inferredType(typeInfoContainer: ElementTypeInfoContainer): String? {
-    println("${argumentList!!.textOffset + argumentList!!.textLength}")
     val element = typeInfoContainer.getElementByOffset(rightOffset)
     return if (element?.isMethod == true) element.type else null
 }

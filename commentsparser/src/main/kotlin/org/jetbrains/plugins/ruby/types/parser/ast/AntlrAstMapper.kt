@@ -8,14 +8,22 @@ import org.jetbrains.plugins.ruby.types.parser.*
 
 class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
 
+    private val actualDefinitions = mutableListOf<RubyTypeDefinition>()
+
     override fun visitIdentifier(ctx: RubyTypesParser.IdentifierContext?) = null
 
-    override fun visitAnnotation(ctx: RubyTypesParser.AnnotationContext): RubyTypeAnnotation {
-        return RubyTypeAnnotation(ctx.typeDeclaration().map { visitTypeDeclaration(it) })
+    override fun visitAnnotation(ctx: RubyTypesParser.AnnotationContext): RubyTypeDeclaration {
+//        val (declarationIdentifier, declarationOffset, primaryDefinition) = visitTypeDeclaration(ctx.typeDeclaration())
+//        return RubyTypeDeclaration(declarationIdentifier, declarationOffset, primaryDefinition)
+        return visitTypeDeclaration(ctx.typeDeclaration())
+    }
+
+    override fun visitAdditional(ctx: RubyTypesParser.AdditionalContext): RubyTypeDefinition {
+        return visitTypeDefinition(ctx.type())
     }
 
     override fun visitTypeDeclaration(ctx: RubyTypesParser.TypeDeclarationContext): RubyTypeDeclaration {
-        return RubyTypeDeclaration(ctx.identifier().text, ctx.identifier().start.startIndex, visitTypeDefinition(ctx.type()))
+        return RubyTypeDeclaration(ctx.identifier().text, ctx.identifier().start.startIndex, listOf(visitTypeDefinition(ctx.type())))
     }
 
     override fun visitFunctionalType(ctx: RubyTypesParser.FunctionalTypeContext): RubyFunctionalType {

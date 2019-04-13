@@ -17,6 +17,12 @@ public interface RubyTypesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAnnotation(RubyTypesParser.AnnotationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link RubyTypesParser#additional}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdditional(RubyTypesParser.AdditionalContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link RubyTypesParser#typeDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -11,15 +11,21 @@ interface RubyTypeDefinition: RubyTypeAstElement {
 data class RubyTypeDeclaration(
         val declarationIdentifier: String,
         val declarationOffset: Int,
-        val typeDefinition: RubyTypeDefinition
+        val typeDefinitions: List<RubyTypeDefinition>
 ): RubyTypeAstElement {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
-}
 
-data class RubyTypeAnnotation(
-        val declarations: List<RubyTypeDeclaration>
-): RubyTypeAstElement {
-    override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+    override fun toString(): String {
+        return "$declarationIdentifier: ${typeDefinitions.joinToString(" || ")}"
+    }
+
+    fun withAdditionalDefinition(definition: RubyTypeDefinition): RubyTypeDeclaration {
+        return RubyTypeDeclaration(
+                declarationIdentifier,
+                declarationOffset,
+                typeDefinitions + definition
+        )
+    }
 }
 
 data class RubyAtomTypeIdentifier(
@@ -33,6 +39,10 @@ data class RubyAtomTypeIdentifier(
         val typeIdentifier: List<String>
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun toString(): String {
+        return typeIdentifier.joinToString("::")
+    }
 }
 
 data class RubyListOfTypeElements(
@@ -42,6 +52,10 @@ data class RubyListOfTypeElements(
     val size = elements.size
 
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun toString(): String {
+        return elements.joinToString(", ")
+    }
 }
 
 data class RubyTupleType(
@@ -49,6 +63,10 @@ data class RubyTupleType(
         val tupleElements: RubyListOfTypeElements
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun toString(): String {
+        return "($tupleElements)"
+    }
 }
 
 sealed class RubyArrayType: RubyTypeDefinition {
@@ -58,12 +76,21 @@ sealed class RubyArrayType: RubyTypeDefinition {
 data class RubyShortArrayType(
         override val typeOffset: Int,
         val arrayElements: RubyListOfTypeElements
-): RubyArrayType()
+): RubyArrayType() {
+    override fun toString(): String {
+        return "[$arrayElements]"
+    }
+}
 
 data class RubyLongArrayType(
         override val typeOffset: Int,
         val arrayElements: RubyListOfTypeElements
-): RubyArrayType()
+): RubyArrayType() {
+    // TODO remake to union?
+    override fun toString(): String {
+        return "[$arrayElements]"
+    }
+}
 
 data class RubyFunctionalType(
         override val typeOffset: Int,
@@ -71,6 +98,12 @@ data class RubyFunctionalType(
         val codomain: RubyTypeAstElement
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun toString(): String {
+        val codomainRepresentation =
+                if (codomain is RubyFunctionalType || codomain is RubyUnionType) "($codomain)" else "$codomain"
+        return "($domain) -> $codomainRepresentation"
+    }
 }
 
 /**
@@ -81,6 +114,10 @@ data class RubyUnionType(
         val possibleTypes: RubyListOfTypeElements
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun toString(): String {
+        return possibleTypes.elements.joinToString(" | ")
+    }
 }
 
 /**

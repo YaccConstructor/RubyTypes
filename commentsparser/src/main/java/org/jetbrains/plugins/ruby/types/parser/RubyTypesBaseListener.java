@@ -28,6 +28,18 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAdditional(RubyTypesParser.AdditionalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdditional(RubyTypesParser.AdditionalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTypeDeclaration(RubyTypesParser.TypeDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}

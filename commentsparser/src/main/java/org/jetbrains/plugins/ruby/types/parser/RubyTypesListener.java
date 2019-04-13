@@ -18,6 +18,16 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 */
 	void exitAnnotation(RubyTypesParser.AnnotationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link RubyTypesParser#additional}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdditional(RubyTypesParser.AdditionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RubyTypesParser#additional}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdditional(RubyTypesParser.AdditionalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link RubyTypesParser#typeDeclaration}.
 	 * @param ctx the parse tree
 	 */

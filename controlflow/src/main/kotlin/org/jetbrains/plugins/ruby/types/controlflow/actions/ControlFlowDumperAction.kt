@@ -12,6 +12,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
 import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDialog
 import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
+import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 
@@ -22,6 +23,8 @@ class ControlFlowDumperAction : AnAction() {
         val editor = e.getData(PlatformDataKeys.EDITOR)!!
         
         file!!.accept(RubyTypesInlayVisitor(editor.inlayModel))
+
+        Annotations.collect(file)
 
         val builder = RControlFlowBuilder()
         if (file !is RFile) {

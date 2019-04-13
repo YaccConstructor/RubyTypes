@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
 import com.intellij.codeInsight.controlflow.Instruction
+import com.intellij.psi.PsiElement
 import com.intellij.psi.impl.source.tree.PsiCommentImpl
 import org.jetbrains.plugins.ruby.erb.psi.ERbFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
@@ -25,18 +26,18 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.ruby19.controlStructures.RBlockL
 import org.jetbrains.plugins.ruby.ruby.lang.psi.ruby19.controlStructures.RLambda
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.*
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
-import org.jetbrains.plugins.ruby.ruby.lang.search.RubyFindUsagesFactory
+import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 import org.jetbrains.plugins.ruby.types.controlflow.typeinfo.rightOffset
 import org.jetbrains.plugins.ruby.types.parser.AnnotationCompiler
-import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeAnnotation
-import java.lang.StringBuilder
+import org.jetbrains.plugins.ruby.types.parser.ast.AnyParsingException
+import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 
 class RubyElementsInfoCollector {
 
     private val nodesDescription = mutableListOf<NodeDescription>()
 
-    private var lastTypeAnnotation: RubyTypeAnnotation? = null
+    private var lastTypeAnnotation: RubyTypeDeclaration? = null
 
     fun getNodesDescriptions(): List<NodeDescription> = nodesDescription
 
@@ -145,8 +146,6 @@ class RubyElementsInfoCollector {
             is RRescueBlock -> visitRescueBlock(element)
             is RExpressionSubstitution -> visitExpressionSubstitution(element)
             is RGroupedExpression -> visitGroupedExpression(element)
-
-            is PsiCommentImpl -> visitPsiComment(element)
         }
     }
 
@@ -398,7 +397,10 @@ class RubyElementsInfoCollector {
     }
 
     private fun visitListOfExpressions(rListOfExpressions: RListOfExpressions) {
-        addNodeInfo("List of expressions")
+        addNodeInfo(
+                "List of expressions",
+                rListOfExpressions.text
+        )
     }
 
     private fun visitBreakStatement(breakStatement: RBreakStatement) {
@@ -469,9 +471,9 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Method",
                 rMethod.text,
-                Pair("presentable name", rMethod.getPresentableName(true)),
-                Pair("is constructor", rMethod.isConstructor.toString()),
-                Pair("deprecated", rMethod.isDeprecated.toString()),
+                "presentable name" to rMethod.getPresentableName(true),
+                "is constructor" to rMethod.isConstructor.toString(),
+                "deprecated" to rMethod.isDeprecated.toString(),
                 offset = rMethod.rightOffset
         )
     }
@@ -590,13 +592,13 @@ class RubyElementsInfoCollector {
     }
 
     private fun visitCall(rCall: RCall) {
+        val callee: RMethod? = rCall.getCalledMethod()
         addNodeInfo(
                 nodeType = "Call",
                 text = rCall.text,
-                additionalProperties = Pair("call type", rCall.type.presentableName),
+                additionalProperties = "call type" to callee?.let { Annotations.declarationForMethod(it)?.typeDefinitions?.joinToString(" || ") { it.toString() } },
                 callee = rCall.getCalledMethod()
         )
-//        rCall.getCalledMethod()?.let { calledMethods.add(it) }
     }
 
     private fun visitIntegerConstant(rIntegerConstant: RIntegerConstant) {
@@ -615,10 +617,6 @@ class RubyElementsInfoCollector {
         addNodeInfo("Lambda", rLambda.text)
     }
 
-    private fun visitPsiComment(comment: PsiCommentImpl) {
-        val annotationTypeElement = AnnotationCompiler.compile(comment.chars.toString(), comment.startOffset)
-    }
-
     private fun addNodeInfo(
             nodeType: String,
             text: String? = null,
@@ -633,7 +631,7 @@ class RubyElementsInfoCollector {
 
     companion object {
         private var currentElementId = 1
-    }
 
-    private fun RCall.getCalledMethod(): RMethod? = firstChild?.reference?.resolve() as? RMethod
+        private fun RCall.getCalledMethod(): RMethod? = firstChild?.reference?.resolve() as? RMethod
+    }
 }
