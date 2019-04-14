@@ -43,9 +43,6 @@ class ControlFlowDumperAction : AnAction() {
 
         val fileControlFlowInfo = controlFlowWrapper.dump().writeToString(JsonControlFlowWriter())
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
-//        File("cfg.json").writeText(
-////                "$fileControlFlowInfo\n$nestedControlFlowInfos"
-////        )
         val translatedData = BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
         val dialog = ControlFlowDumperDialog(
                 file,

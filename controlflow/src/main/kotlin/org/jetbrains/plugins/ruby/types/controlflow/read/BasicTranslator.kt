@@ -18,7 +18,7 @@ class BasicTranslator {
             val nodesDescription = cfgJson
                     .getJSONArray("nodes description")
                     .map { it as JSONObject }
-                    .filter { it.has("type") }
+                    .filter { it.has("type") && it.getString("type") != "null" }
             for (nodeDescription in nodesDescription) {
                 val translatedDescription = JSONObject()
                 translatedDescription.put("type", nodeDescription.getString("type"))
