@@ -15,6 +15,8 @@ import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
+import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
+import java.io.File
 
 class ControlFlowDumperAction : AnAction() {
 
@@ -41,9 +43,13 @@ class ControlFlowDumperAction : AnAction() {
 
         val fileControlFlowInfo = controlFlowWrapper.dump().writeToString(JsonControlFlowWriter())
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
+//        File("cfg.json").writeText(
+////                "$fileControlFlowInfo\n$nestedControlFlowInfos"
+////        )
+        val translatedData = BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
         val dialog = ControlFlowDumperDialog(
                 file,
-                fileControlFlowInfo + "\n" + nestedControlFlowInfos
+                translatedData.toString(4)
         )
         dialog.show()
     }

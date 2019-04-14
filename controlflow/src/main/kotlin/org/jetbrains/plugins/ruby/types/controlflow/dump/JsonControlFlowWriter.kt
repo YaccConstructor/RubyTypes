@@ -2,6 +2,7 @@ package org.jetbrains.plugins.ruby.types.controlflow.dump
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
+import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.data.AdjacencyRecord
 import org.jetbrains.plugins.ruby.types.controlflow.data.ControlFlowData
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
@@ -59,9 +60,14 @@ class JsonControlFlowWriter: ControlFlowWriter {
     }
 
     private fun writeHolder(holder: RPsiElement) {
-        controlFlowJson.put("holder", holder.name)
+        val holderInfo = JSONObject()
+        holderInfo.put("name", holder.name)
         if (holder is RMethod) {
-            controlFlowJson.put("holder_offset", holder.rightOffset)
+            holderInfo.put("type", Annotations.declarationForMethod(holder).toString())
         }
+        if (holder is RMethod) {
+            holderInfo.put("offset", holder.rightOffset)
+        }
+        controlFlowJson.put("holder", holderInfo)
     }
 }

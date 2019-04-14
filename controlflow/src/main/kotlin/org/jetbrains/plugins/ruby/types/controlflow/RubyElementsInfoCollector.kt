@@ -1,8 +1,6 @@
 package org.jetbrains.plugins.ruby.types.controlflow
 
 import com.intellij.codeInsight.controlflow.Instruction
-import com.intellij.psi.PsiElement
-import com.intellij.psi.impl.source.tree.PsiCommentImpl
 import org.jetbrains.plugins.ruby.erb.psi.ERbFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
@@ -36,8 +34,6 @@ import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 class RubyElementsInfoCollector {
 
     private val nodesDescription = mutableListOf<NodeDescription>()
-
-    private var lastTypeAnnotation: RubyTypeDeclaration? = null
 
     fun getNodesDescriptions(): List<NodeDescription> = nodesDescription
 
@@ -345,7 +341,7 @@ class RubyElementsInfoCollector {
 
     private fun visitIdentifier(rIdentifier: RIdentifier) {
         addNodeInfo(
-                "Identifier ${rIdentifier.reference?.canonicalText}",
+                "Identifier",
                 rIdentifier.text,
                 Pair("kind",
                         when {
@@ -596,8 +592,9 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 nodeType = "Call",
                 text = rCall.text,
-                additionalProperties = "call type" to callee?.let { Annotations.declarationForMethod(it)?.typeDefinitions?.joinToString(" || ") { it.toString() } },
-                callee = rCall.getCalledMethod()
+                additionalProperties = "type" to callee?.let { Annotations.declarationForMethod(it)?.typeDefinitions?.joinToString(" || ") { it.toString() } },
+                callee = rCall.getCalledMethod(),
+                offset = rCall.textOffset
         )
     }
 
