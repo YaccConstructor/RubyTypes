@@ -14,7 +14,11 @@
     <!--</extensions>-->
 
     <extensions defaultExtensionNs="com.intellij">
-        <completion.contributor language="" implementationClass="org.jetbrains.plugins.ruby.types.controlflow.typeinfo.RubyCompletionContributor"/>
+        <lang.documentationProvider
+                language="ruby"
+                implementationClass="org.jetbrains.plugins.ruby.types.controlflow.docs.RubyTypesDocumentationProvider"
+                order="first"
+        />
     </extensions>
 
     <actions>

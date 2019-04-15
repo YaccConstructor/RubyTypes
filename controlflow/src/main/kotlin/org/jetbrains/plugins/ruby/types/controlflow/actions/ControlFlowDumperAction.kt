@@ -1,6 +1,7 @@
 package org.jetbrains.plugins.ruby.types.controlflow.actions
 
 import com.intellij.codeInsight.daemon.impl.HintRenderer
+import com.intellij.ide.IdeEventQueue
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -14,6 +15,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMetho
 import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDialog
 import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
+import org.jetbrains.plugins.ruby.types.controlflow.docs.RubyTypesDocumentationProvider
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
@@ -52,15 +54,11 @@ class ControlFlowDumperAction : AnAction() {
 
         val knownTypes: Map<Int, RubyTypeDeclaration> = JsonResultReader().read(translatedData.toString())
 
+        RubyTypesDocumentationProvider.typeDeclarations = knownTypes
+
         editor.inlayModel.let {
             file.accept(RubyTypesInlayVisitor(it, knownTypes))
         }
-
-//        val dialog = ControlFlowDumperDialog(
-//                file,
-//                translatedData.toString(4)
-//        )
-//        dialog.show()
     }
 
     private fun getAllControlFlowGraphsInfo(element: PsiElement): String =
