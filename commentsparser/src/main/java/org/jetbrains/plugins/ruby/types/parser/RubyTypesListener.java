@@ -62,18 +62,6 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 */
 	void exitArrayType(RubyTypesParser.ArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code nestedType}
-	 * labeled alternative in {@link RubyTypesParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void enterNestedType(RubyTypesParser.NestedTypeContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code nestedType}
-	 * labeled alternative in {@link RubyTypesParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void exitNestedType(RubyTypesParser.NestedTypeContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code tupleType}
 	 * labeled alternative in {@link RubyTypesParser#type}.
 	 * @param ctx the parse tree
@@ -85,6 +73,18 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTupleType(RubyTypesParser.TupleTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code nestedType}
+	 * labeled alternative in {@link RubyTypesParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterNestedType(RubyTypesParser.NestedTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code nestedType}
+	 * labeled alternative in {@link RubyTypesParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitNestedType(RubyTypesParser.NestedTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code identifierType}
 	 * labeled alternative in {@link RubyTypesParser#type}.
@@ -110,16 +110,6 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 */
 	void exitUnionType(RubyTypesParser.UnionTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link RubyTypesParser#typesList}.
-	 * @param ctx the parse tree
-	 */
-	void enterTypesList(RubyTypesParser.TypesListContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link RubyTypesParser#typesList}.
-	 * @param ctx the parse tree
-	 */
-	void exitTypesList(RubyTypesParser.TypesListContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link RubyTypesParser#tuple}.
 	 * @param ctx the parse tree
 	 */
@@ -129,6 +119,16 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTuple(RubyTypesParser.TupleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link RubyTypesParser#ftuple}.
+	 * @param ctx the parse tree
+	 */
+	void enterFtuple(RubyTypesParser.FtupleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RubyTypesParser#ftuple}.
+	 * @param ctx the parse tree
+	 */
+	void exitFtuple(RubyTypesParser.FtupleContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link RubyTypesParser#array}.
 	 * @param ctx the parse tree

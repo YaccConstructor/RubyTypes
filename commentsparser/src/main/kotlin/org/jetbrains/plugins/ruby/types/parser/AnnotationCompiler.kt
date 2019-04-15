@@ -4,6 +4,7 @@ import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonToken
 import org.antlr.v4.runtime.CommonTokenStream
 import org.jetbrains.plugins.ruby.types.parser.ast.*
+import java.lang.Exception
 
 object AnnotationCompiler {
     /**
@@ -28,10 +29,15 @@ object AnnotationCompiler {
         parser.addErrorListener(TypeParsingErrorListener.INSTANCE)
 
         val mapper = AntlrAstMapper()
-        return try {
+        return if (isProbablyDeclaration(annotation)) {
             mapper.visitAnnotation(parser.annotation())
-        } catch (_: AnyParsingException) {
+        } else {
             mapper.visitAdditional(parser.additional())
         }
+
     }
+
+    private fun isProbablyDeclaration(annotation: String) = annotation.contains(":")
+
+
 }

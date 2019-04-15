@@ -27,11 +27,11 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
     }
 
     override fun visitFunctionalType(ctx: RubyTypesParser.FunctionalTypeContext): RubyFunctionalType {
-        return RubyFunctionalType(ctx.start.startIndex, visitTypesList(ctx.tuple().typesList()), visitTypeDefinition(ctx.type()))
+        return RubyFunctionalType(ctx.start.startIndex, visitTypesList(ctx.ftuple().type(), ctx.ftuple().start.startIndex), visitTypeDefinition(ctx.type()))
     }
 
     override fun visitArrayType(ctx: RubyTypesParser.ArrayTypeContext): RubyArrayType {
-        val typesList = visitTypesList(ctx.array().typesList())
+        val typesList = visitTypesList(ctx.array().type(), ctx.array().start.startIndex)
         val offset = ctx.start.startIndex
         if (typesList.size <= ARRAY_REPR_THRESHOLD) {
             return RubyShortArrayType(offset, typesList)
@@ -45,19 +45,18 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
     }
 
     override fun visitTupleType(ctx: RubyTypesParser.TupleTypeContext): RubyTupleType {
-        return RubyTupleType(ctx.start.startIndex, visitTypesList(ctx.tuple().typesList()))
+        return RubyTupleType(ctx.start.startIndex, visitTypesList(ctx.tuple().type(), ctx.tuple().start.startIndex))
     }
 
     override fun visitIdentifierType(ctx: RubyTypesParser.IdentifierTypeContext): RubyAtomTypeIdentifier {
         return RubyAtomTypeIdentifier(ctx.start.startIndex, ctx.identifier().ATOM().map { it.text })
     }
 
-    override fun visitTypesList(ctx: RubyTypesParser.TypesListContext): RubyListOfTypeElements =
-            RubyListOfTypeElements(ctx.start.startIndex, ctx.type().map { visitTypeDefinition(it) })
-
     override fun visit(tree: ParseTree) = null
 
     override fun visitTuple(ctx: RubyTypesParser.TupleContext) = null
+
+    override fun visitFtuple(ctx: RubyTypesParser.FtupleContext?) = null
 
     override fun visitArray(ctx: RubyTypesParser.ArrayContext) = null
 
@@ -85,4 +84,7 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
         }
 
     }
+
+    private fun visitTypesList(ctx: List<RubyTypesParser.TypeContext>, offset: Int): RubyListOfTypeElements =
+            RubyListOfTypeElements(offset + 1, ctx.map { visitTypeDefinition(it) })
 }

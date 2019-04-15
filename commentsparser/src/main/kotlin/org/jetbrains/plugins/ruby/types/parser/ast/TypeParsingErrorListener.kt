@@ -18,4 +18,7 @@ class TypeParsingErrorListener: BaseErrorListener() {
     }
 }
 
-class AnyParsingException(message: String): ParseCancellationException(message)
+class AnyParsingException: ParseCancellationException {
+    constructor(message: String) : super(message)
+    constructor(cause: Throwable) : super(cause)
+}

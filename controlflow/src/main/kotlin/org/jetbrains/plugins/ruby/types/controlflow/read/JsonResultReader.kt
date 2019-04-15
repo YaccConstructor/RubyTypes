@@ -6,8 +6,8 @@ import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDefinition
 import org.json.JSONObject
 
 class JsonResultReader {
-    fun read(input: String): Set<RubyTypeDeclaration> {
-        val declarations = mutableSetOf<RubyTypeDeclaration>()
+    fun read(input: String): Map<Int, RubyTypeDeclaration> {
+        val declarations = mutableMapOf<Int, RubyTypeDeclaration>()
         val elementsData = JSONObject(input)
         val filesData = elementsData.getJSONArray("files").map { it as JSONObject }
         for (fileData in filesData) {
@@ -23,9 +23,9 @@ class JsonResultReader {
                         .let {
                             RubyTypeDeclaration(identifier, offset, it)
                         }
-                declarations.add(type)
+                declarations[offset] = type
             }
         }
-        return declarations.toSet()
+        return declarations.toMap()
     }
 }

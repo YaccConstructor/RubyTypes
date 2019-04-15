@@ -63,7 +63,7 @@ class JsonControlFlowWriter: ControlFlowWriter {
         val holderInfo = JSONObject()
         holderInfo.put("name", holder.name)
         if (holder is RMethod) {
-            holderInfo.put("type", Annotations.declarationForMethod(holder).toString())
+            holderInfo.put("type", Annotations.declarationForMethod(holder)?.typeDefinitions?.joinToString(" || "))
         }
         if (holder is RMethod) {
             holderInfo.put("offset", holder.rightOffset)

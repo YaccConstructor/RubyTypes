@@ -22,9 +22,9 @@ public class RubyTypesParser extends Parser {
 		ATOM=15, FIRSTSYMBOL=16, ANYSYMBOL=17;
 	public static final int
 		RULE_annotation = 0, RULE_additional = 1, RULE_typeDeclaration = 2, RULE_type = 3, 
-		RULE_typesList = 4, RULE_tuple = 5, RULE_array = 6, RULE_identifier = 7;
+		RULE_tuple = 4, RULE_ftuple = 5, RULE_array = 6, RULE_identifier = 7;
 	public static final String[] ruleNames = {
-		"annotation", "additional", "typeDeclaration", "type", "typesList", "tuple", 
+		"annotation", "additional", "typeDeclaration", "type", "tuple", "ftuple", 
 		"array", "identifier"
 	};
 
@@ -250,8 +250,8 @@ public class RubyTypesParser extends Parser {
 		}
 	}
 	public static class FunctionalTypeContext extends TypeContext {
-		public TupleContext tuple() {
-			return getRuleContext(TupleContext.class,0);
+		public FtupleContext ftuple() {
+			return getRuleContext(FtupleContext.class,0);
 		}
 		public TerminalNode ARROW() { return getToken(RubyTypesParser.ARROW, 0); }
 		public TypeContext type() {
@@ -291,6 +291,25 @@ public class RubyTypesParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class TupleTypeContext extends TypeContext {
+		public TupleContext tuple() {
+			return getRuleContext(TupleContext.class,0);
+		}
+		public TupleTypeContext(TypeContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).enterTupleType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).exitTupleType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitTupleType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class NestedTypeContext extends TypeContext {
 		public TerminalNode LPAREN() { return getToken(RubyTypesParser.LPAREN, 0); }
 		public TypeContext type() {
@@ -309,25 +328,6 @@ public class RubyTypesParser extends Parser {
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitNestedType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class TupleTypeContext extends TypeContext {
-		public TupleContext tuple() {
-			return getRuleContext(TupleContext.class,0);
-		}
-		public TupleTypeContext(TypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).enterTupleType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).exitTupleType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitTupleType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -394,56 +394,56 @@ public class RubyTypesParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
 				{
-				_localctx = new NestedTypeContext(_localctx);
+				_localctx = new FunctionalTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
 				setState(29);
-				match(LPAREN);
+				ftuple();
 				setState(30);
-				type(0);
+				match(ARROW);
 				setState(31);
-				match(RPAREN);
+				type(6);
 				}
 				break;
 			case 2:
 				{
-				_localctx = new IdentifierTypeContext(_localctx);
+				_localctx = new TupleTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(33);
-				identifier();
+				tuple();
 				}
 				break;
 			case 3:
 				{
-				_localctx = new FunctionalTypeContext(_localctx);
+				_localctx = new NestedTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(34);
-				tuple();
+				match(LPAREN);
 				setState(35);
-				match(ARROW);
+				type(0);
 				setState(36);
-				type(4);
+				match(RPAREN);
 				}
 				break;
 			case 4:
 				{
-				_localctx = new TupleTypeContext(_localctx);
+				_localctx = new ArrayTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(38);
-				tuple();
+				array();
 				}
 				break;
 			case 5:
 				{
-				_localctx = new ArrayTypeContext(_localctx);
+				_localctx = new IdentifierTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(39);
-				array();
+				identifier();
 				}
 				break;
 			}
@@ -485,7 +485,9 @@ public class RubyTypesParser extends Parser {
 		return _localctx;
 	}
 
-	public static class TypesListContext extends ParserRuleContext {
+	public static class TupleContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(RubyTypesParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(RubyTypesParser.RPAREN, 0); }
 		public List<TypeContext> type() {
 			return getRuleContexts(TypeContext.class);
 		}
@@ -496,69 +498,6 @@ public class RubyTypesParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(RubyTypesParser.COMMA, i);
 		}
-		public TypesListContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_typesList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).enterTypesList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).exitTypesList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitTypesList(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final TypesListContext typesList() throws RecognitionException {
-		TypesListContext _localctx = new TypesListContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_typesList);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(50);
-			type(0);
-			setState(55);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==COMMA) {
-				{
-				{
-				setState(51);
-				match(COMMA);
-				setState(52);
-				type(0);
-				}
-				}
-				setState(57);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class TupleContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(RubyTypesParser.LPAREN, 0); }
-		public TypesListContext typesList() {
-			return getRuleContext(TypesListContext.class,0);
-		}
-		public TerminalNode RPAREN() { return getToken(RubyTypesParser.RPAREN, 0); }
 		public TupleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -580,15 +519,104 @@ public class RubyTypesParser extends Parser {
 
 	public final TupleContext tuple() throws RecognitionException {
 		TupleContext _localctx = new TupleContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_tuple);
+		enterRule(_localctx, 8, RULE_tuple);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(50);
 			match(LPAREN);
-			setState(59);
-			typesList();
+			setState(54); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(51);
+				type(0);
+				setState(52);
+				match(COMMA);
+				}
+				}
+				setState(56); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LPAREN) | (1L << LBRACE) | (1L << ATOM))) != 0) );
+			setState(58);
+			match(RPAREN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FtupleContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(RubyTypesParser.LPAREN, 0); }
+		public List<TypeContext> type() {
+			return getRuleContexts(TypeContext.class);
+		}
+		public TypeContext type(int i) {
+			return getRuleContext(TypeContext.class,i);
+		}
+		public TerminalNode RPAREN() { return getToken(RubyTypesParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(RubyTypesParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(RubyTypesParser.COMMA, i);
+		}
+		public FtupleContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_ftuple; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).enterFtuple(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).exitFtuple(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitFtuple(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FtupleContext ftuple() throws RecognitionException {
+		FtupleContext _localctx = new FtupleContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_ftuple);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
 			setState(60);
+			match(LPAREN);
+			setState(61);
+			type(0);
+			setState(66);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==COMMA) {
+				{
+				{
+				setState(62);
+				match(COMMA);
+				setState(63);
+				type(0);
+				}
+				}
+				setState(68);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(69);
 			match(RPAREN);
 			}
 		}
@@ -605,10 +633,17 @@ public class RubyTypesParser extends Parser {
 
 	public static class ArrayContext extends ParserRuleContext {
 		public TerminalNode LBRACE() { return getToken(RubyTypesParser.LBRACE, 0); }
-		public TypesListContext typesList() {
-			return getRuleContext(TypesListContext.class,0);
+		public List<TypeContext> type() {
+			return getRuleContexts(TypeContext.class);
+		}
+		public TypeContext type(int i) {
+			return getRuleContext(TypeContext.class,i);
 		}
 		public TerminalNode RBRACE() { return getToken(RubyTypesParser.RBRACE, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(RubyTypesParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(RubyTypesParser.COMMA, i);
+		}
 		public ArrayContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -631,14 +666,31 @@ public class RubyTypesParser extends Parser {
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_array);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(71);
 			match(LBRACE);
-			setState(63);
-			typesList();
-			setState(64);
+			setState(72);
+			type(0);
+			setState(77);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==COMMA) {
+				{
+				{
+				setState(73);
+				match(COMMA);
+				setState(74);
+				type(0);
+				}
+				}
+				setState(79);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(80);
 			match(RBRACE);
 			}
 		}
@@ -688,25 +740,25 @@ public class RubyTypesParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(66);
+			setState(82);
 			match(ATOM);
-			setState(71);
+			setState(87);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(67);
+					setState(83);
 					match(DCOLON);
-					setState(68);
+					setState(84);
 					match(ATOM);
 					}
 					} 
 				}
-				setState(73);
+				setState(89);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
 			}
 		}
@@ -737,25 +789,28 @@ public class RubyTypesParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23M\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23]\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\3"+
 		"\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\5\5+\n\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5\63\13\5\3\6\3\6\3\6\7"+
-		"\68\n\6\f\6\16\6;\13\6\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3\t\3\t\3\t\7\t"+
-		"H\n\t\f\t\16\tK\13\t\3\t\2\3\b\n\2\4\6\b\n\f\16\20\2\2\2K\2\22\3\2\2\2"+
-		"\4\26\3\2\2\2\6\32\3\2\2\2\b*\3\2\2\2\n\64\3\2\2\2\f<\3\2\2\2\16@\3\2"+
-		"\2\2\20D\3\2\2\2\22\23\7\16\2\2\23\24\5\6\4\2\24\25\7\2\2\3\25\3\3\2\2"+
-		"\2\26\27\7\16\2\2\27\30\5\b\5\2\30\31\7\2\2\3\31\5\3\2\2\2\32\33\5\20"+
-		"\t\2\33\34\7\13\2\2\34\35\5\b\5\2\35\7\3\2\2\2\36\37\b\5\1\2\37 \7\4\2"+
-		"\2 !\5\b\5\2!\"\7\5\2\2\"+\3\2\2\2#+\5\20\t\2$%\5\f\7\2%&\7\3\2\2&\'\5"+
-		"\b\5\6\'+\3\2\2\2(+\5\f\7\2)+\5\16\b\2*\36\3\2\2\2*#\3\2\2\2*$\3\2\2\2"+
-		"*(\3\2\2\2*)\3\2\2\2+\61\3\2\2\2,-\f\3\2\2-.\7\n\2\2.\60\5\b\5\4/,\3\2"+
-		"\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\61\3\2\2"+
-		"\2\649\5\b\5\2\65\66\7\b\2\2\668\5\b\5\2\67\65\3\2\2\28;\3\2\2\29\67\3"+
-		"\2\2\29:\3\2\2\2:\13\3\2\2\2;9\3\2\2\2<=\7\4\2\2=>\5\n\6\2>?\7\5\2\2?"+
-		"\r\3\2\2\2@A\7\6\2\2AB\5\n\6\2BC\7\7\2\2C\17\3\2\2\2DI\7\21\2\2EF\7\r"+
-		"\2\2FH\7\21\2\2GE\3\2\2\2HK\3\2\2\2IG\3\2\2\2IJ\3\2\2\2J\21\3\2\2\2KI"+
-		"\3\2\2\2\6*\619I";
+		"\5\3\5\5\5+\n\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5\63\13\5\3\6\3\6\3\6\3"+
+		"\6\6\69\n\6\r\6\16\6:\3\6\3\6\3\7\3\7\3\7\3\7\7\7C\n\7\f\7\16\7F\13\7"+
+		"\3\7\3\7\3\b\3\b\3\b\3\b\7\bN\n\b\f\b\16\bQ\13\b\3\b\3\b\3\t\3\t\3\t\7"+
+		"\tX\n\t\f\t\16\t[\13\t\3\t\2\3\b\n\2\4\6\b\n\f\16\20\2\2\2]\2\22\3\2\2"+
+		"\2\4\26\3\2\2\2\6\32\3\2\2\2\b*\3\2\2\2\n\64\3\2\2\2\f>\3\2\2\2\16I\3"+
+		"\2\2\2\20T\3\2\2\2\22\23\7\16\2\2\23\24\5\6\4\2\24\25\7\2\2\3\25\3\3\2"+
+		"\2\2\26\27\7\16\2\2\27\30\5\b\5\2\30\31\7\2\2\3\31\5\3\2\2\2\32\33\5\20"+
+		"\t\2\33\34\7\13\2\2\34\35\5\b\5\2\35\7\3\2\2\2\36\37\b\5\1\2\37 \5\f\7"+
+		"\2 !\7\3\2\2!\"\5\b\5\b\"+\3\2\2\2#+\5\n\6\2$%\7\4\2\2%&\5\b\5\2&\'\7"+
+		"\5\2\2\'+\3\2\2\2(+\5\16\b\2)+\5\20\t\2*\36\3\2\2\2*#\3\2\2\2*$\3\2\2"+
+		"\2*(\3\2\2\2*)\3\2\2\2+\61\3\2\2\2,-\f\3\2\2-.\7\n\2\2.\60\5\b\5\4/,\3"+
+		"\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\61\3\2"+
+		"\2\2\648\7\4\2\2\65\66\5\b\5\2\66\67\7\b\2\2\679\3\2\2\28\65\3\2\2\29"+
+		":\3\2\2\2:8\3\2\2\2:;\3\2\2\2;<\3\2\2\2<=\7\5\2\2=\13\3\2\2\2>?\7\4\2"+
+		"\2?D\5\b\5\2@A\7\b\2\2AC\5\b\5\2B@\3\2\2\2CF\3\2\2\2DB\3\2\2\2DE\3\2\2"+
+		"\2EG\3\2\2\2FD\3\2\2\2GH\7\5\2\2H\r\3\2\2\2IJ\7\6\2\2JO\5\b\5\2KL\7\b"+
+		"\2\2LN\5\b\5\2MK\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2PR\3\2\2\2QO\3\2"+
+		"\2\2RS\7\7\2\2S\17\3\2\2\2TY\7\21\2\2UV\7\r\2\2VX\7\21\2\2WU\3\2\2\2X"+
+		"[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\21\3\2\2\2[Y\3\2\2\2\b*\61:DOY";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

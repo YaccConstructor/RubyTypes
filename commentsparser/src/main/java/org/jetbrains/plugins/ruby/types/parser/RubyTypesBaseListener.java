@@ -76,18 +76,6 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNestedType(RubyTypesParser.NestedTypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNestedType(RubyTypesParser.NestedTypeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTupleType(RubyTypesParser.TupleTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -95,6 +83,18 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTupleType(RubyTypesParser.TupleTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNestedType(RubyTypesParser.NestedTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNestedType(RubyTypesParser.NestedTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -124,18 +124,6 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTypesList(RubyTypesParser.TypesListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTypesList(RubyTypesParser.TypesListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTuple(RubyTypesParser.TupleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +131,18 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTuple(RubyTypesParser.TupleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFtuple(RubyTypesParser.FtupleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFtuple(RubyTypesParser.FtupleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

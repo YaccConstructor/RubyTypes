@@ -43,19 +43,19 @@ public interface RubyTypesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayType(RubyTypesParser.ArrayTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code nestedType}
-	 * labeled alternative in {@link RubyTypesParser#type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNestedType(RubyTypesParser.NestedTypeContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code tupleType}
 	 * labeled alternative in {@link RubyTypesParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTupleType(RubyTypesParser.TupleTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code nestedType}
+	 * labeled alternative in {@link RubyTypesParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNestedType(RubyTypesParser.NestedTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code identifierType}
 	 * labeled alternative in {@link RubyTypesParser#type}.
@@ -71,17 +71,17 @@ public interface RubyTypesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUnionType(RubyTypesParser.UnionTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link RubyTypesParser#typesList}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTypesList(RubyTypesParser.TypesListContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link RubyTypesParser#tuple}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTuple(RubyTypesParser.TupleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link RubyTypesParser#ftuple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFtuple(RubyTypesParser.FtupleContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link RubyTypesParser#array}.
 	 * @param ctx the parse tree

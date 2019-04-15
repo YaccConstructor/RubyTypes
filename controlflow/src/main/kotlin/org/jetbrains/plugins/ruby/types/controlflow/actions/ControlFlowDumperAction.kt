@@ -4,6 +4,7 @@ import com.intellij.codeInsight.daemon.impl.HintRenderer
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
+import com.intellij.openapi.editor.impl.InlayModelImpl
 import com.intellij.openapi.ui.Messages
 import com.intellij.psi.PsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
@@ -16,6 +17,8 @@ import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
+import org.jetbrains.plugins.ruby.types.controlflow.read.JsonResultReader
+import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 import java.io.File
 
 class ControlFlowDumperAction : AnAction() {
@@ -23,8 +26,10 @@ class ControlFlowDumperAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val file = e.getData(PlatformDataKeys.PSI_FILE)
         val editor = e.getData(PlatformDataKeys.EDITOR)!!
-        
-        file!!.accept(RubyTypesInlayVisitor(editor.inlayModel))
+
+        if (file == null) {
+            return
+        }
 
         Annotations.collect(file)
 
@@ -44,11 +49,18 @@ class ControlFlowDumperAction : AnAction() {
         val fileControlFlowInfo = controlFlowWrapper.dump().writeToString(JsonControlFlowWriter())
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
         val translatedData = BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
-        val dialog = ControlFlowDumperDialog(
-                file,
-                translatedData.toString(4)
-        )
-        dialog.show()
+
+        val knownTypes: Map<Int, RubyTypeDeclaration> = JsonResultReader().read(translatedData.toString())
+
+        editor.inlayModel.let {
+            file.accept(RubyTypesInlayVisitor(it, knownTypes))
+        }
+
+//        val dialog = ControlFlowDumperDialog(
+//                file,
+//                translatedData.toString(4)
+//        )
+//        dialog.show()
     }
 
     private fun getAllControlFlowGraphsInfo(element: PsiElement): String =

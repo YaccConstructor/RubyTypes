@@ -46,7 +46,7 @@ class ParserTest {
     fun `test tuple type`() {
         val type = "Integer, String, IntegerString"
         val offsets = listOf(10, 19, 27)
-        val compiledResult = AnnotationCompiler.compile("##t xyz: ($type)")
+        val compiledResult = AnnotationCompiler.compile("##t xyz: ($type,)")
         val expectedAst = RubyTypeDeclaration(
                 "xyz",
                 4,
@@ -153,7 +153,7 @@ class ParserTest {
 
     @Test
     fun `test complex type`() {
-        val compiledResult = AnnotationCompiler.compile("##t foo: (A::B, ([C, D], E) -> (F | G)) -> (H, I, J::F::K)")
+        val compiledResult = AnnotationCompiler.compile("##t foo: (A::B, ([C, D], E) -> (F | G)) -> (H, I, J::F::K,)")
         val expectedAst = RubyTypeDeclaration(
                                 "foo",
                                 4,
@@ -218,7 +218,6 @@ class ParserTest {
     @Test
     fun `test comments not annotations`() {
         assertThrows<AnyParsingException> { AnnotationCompiler.compile("# Some regular comment") }
-        assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t onlyid") }
         assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t K: a -> b -> a") }
     }
 }

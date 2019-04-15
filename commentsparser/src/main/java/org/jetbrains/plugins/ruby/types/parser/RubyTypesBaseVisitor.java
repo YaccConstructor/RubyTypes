@@ -52,14 +52,14 @@ public class RubyTypesBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNestedType(RubyTypesParser.NestedTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTupleType(RubyTypesParser.TupleTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTupleType(RubyTypesParser.TupleTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNestedType(RubyTypesParser.NestedTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -80,14 +80,14 @@ public class RubyTypesBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTypesList(RubyTypesParser.TypesListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTuple(RubyTypesParser.TupleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTuple(RubyTypesParser.TupleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFtuple(RubyTypesParser.FtupleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

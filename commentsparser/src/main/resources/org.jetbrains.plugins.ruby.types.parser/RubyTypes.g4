@@ -3,17 +3,17 @@ grammar RubyTypes;
 annotation      : BEGIN typeDeclaration EOF ;
 additional      : BEGIN type EOF ;
 typeDeclaration : identifier COLON type ;
-type            : LPAREN type RPAREN    # nestedType
-                | identifier            # identifierType
-                | tuple ARROW type      # functionalType
+type            : ftuple ARROW type     # functionalType
                 | tuple                 # tupleType
+                | LPAREN type RPAREN    # nestedType
                 | array                 # arrayType
+                | identifier            # identifierType
                 | type OR type          # unionType ;
 
-typesList : type (COMMA type)* ;
 
-tuple   : LPAREN typesList RPAREN ;
-array   : LBRACE typesList RBRACE ;
+tuple   : LPAREN (type COMMA)+ RPAREN ;
+ftuple  : LPAREN type (COMMA type)* RPAREN ;
+array   : LBRACE type (COMMA type)* RBRACE ;
 
 identifier : ATOM (DCOLON ATOM)* ;
 
