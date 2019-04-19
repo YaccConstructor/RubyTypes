@@ -148,6 +148,18 @@ public class RubyTypesBaseListener implements RubyTypesListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFarg(RubyTypesParser.FargContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFarg(RubyTypesParser.FargContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArray(RubyTypesParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -130,6 +130,16 @@ public interface RubyTypesListener extends ParseTreeListener {
 	 */
 	void exitFtuple(RubyTypesParser.FtupleContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link RubyTypesParser#farg}.
+	 * @param ctx the parse tree
+	 */
+	void enterFarg(RubyTypesParser.FargContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link RubyTypesParser#farg}.
+	 * @param ctx the parse tree
+	 */
+	void exitFarg(RubyTypesParser.FargContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link RubyTypesParser#array}.
 	 * @param ctx the parse tree
 	 */

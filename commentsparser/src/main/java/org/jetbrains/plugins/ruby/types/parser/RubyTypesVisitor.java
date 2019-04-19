@@ -83,6 +83,12 @@ public interface RubyTypesVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFtuple(RubyTypesParser.FtupleContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link RubyTypesParser#farg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFarg(RubyTypesParser.FargContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link RubyTypesParser#array}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

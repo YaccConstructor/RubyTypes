@@ -12,6 +12,8 @@ interface RubyTypesAstVisitor<out R> {
 
     fun visit(array: RubyArrayType): R
 
+    fun visit(functionArgument: RubyFunctionalArgumentType): R
+
     fun visit(function: RubyFunctionalType): R
 
     fun visit(union: RubyUnionType): R

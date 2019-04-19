@@ -118,7 +118,7 @@ class ParserTest {
                                                 9,
                                                 RubyListOfTypeElements(
                                                         10,
-                                                        domain.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, listOf(it.first)) }
+                                                        domain.split(", ").zip(offsets).map { RubyRegularArgumentType(it.second, RubyAtomTypeIdentifier(it.second, listOf(it.first))) }
                                                 ),
                                                 RubyAtomTypeIdentifier(
                                                         23,
@@ -153,7 +153,7 @@ class ParserTest {
 
     @Test
     fun `test complex type`() {
-        val compiledResult = AnnotationCompiler.compile("##t foo: (A::B, ([C, D], E) -> (F | G)) -> (H, I, J::F::K,)")
+        val compiledResult = AnnotationCompiler.compile("##t foo: (*A::B, ([C, D], E?) -> (F | G)) -> (H, I, J::F::K,)")
         val expectedAst = RubyTypeDeclaration(
                                 "foo",
                                 4,
@@ -163,35 +163,44 @@ class ParserTest {
                                                 RubyListOfTypeElements(
                                                         10,
                                                         listOf(
-                                                                RubyAtomTypeIdentifier(
-                                                                        10,
-                                                                        "A::B".split("::")
+                                                                RubyVarargArgumentType(
+                                                                        11,
+                                                                        RubyAtomTypeIdentifier(
+                                                                                11,
+                                                                                "A::B".split("::")
+                                                                        )
                                                                 ),
-                                                                RubyFunctionalType(
-                                                                        16,
-                                                                        RubyListOfTypeElements(
+                                                                RubyRegularArgumentType(
+                                                                        17,
+                                                                        RubyFunctionalType(
                                                                                 17,
-                                                                                listOf(
-                                                                                        RubyShortArrayType(
-                                                                                                17,
-                                                                                                RubyListOfTypeElements(
-                                                                                                        18,
-                                                                                                        listOf(
-                                                                                                                RubyAtomTypeIdentifier(18, listOf("C")),
-                                                                                                                RubyAtomTypeIdentifier(21, listOf("D"))
-                                                                                                        )
-                                                                                                )
-                                                                                        ),
-                                                                                        RubyAtomTypeIdentifier(25, listOf("E"))
-                                                                                )
-                                                                        ),
-                                                                        RubyUnionType(
-                                                                                32,
                                                                                 RubyListOfTypeElements(
-                                                                                        32,
+                                                                                        18,
                                                                                         listOf(
-                                                                                                RubyAtomTypeIdentifier(32, listOf("F")),
-                                                                                                RubyAtomTypeIdentifier(36, listOf("G"))
+                                                                                                RubyRegularArgumentType(
+                                                                                                        18,
+                                                                                                        RubyShortArrayType(
+                                                                                                                18,
+                                                                                                                RubyListOfTypeElements(
+                                                                                                                        19,
+                                                                                                                        listOf(
+                                                                                                                                RubyAtomTypeIdentifier(19, listOf("C")),
+                                                                                                                                RubyAtomTypeIdentifier(22, listOf("D"))
+                                                                                                                        )
+                                                                                                                )
+                                                                                                        )
+                                                                                                ),
+                                                                                                RubyOptionalArgumentType(26, RubyAtomTypeIdentifier(26, listOf("E")))
+                                                                                        )
+                                                                                ),
+                                                                                RubyUnionType(
+                                                                                        34,
+                                                                                        RubyListOfTypeElements(
+                                                                                                34,
+                                                                                                listOf(
+                                                                                                        RubyAtomTypeIdentifier(34, listOf("F")),
+                                                                                                        RubyAtomTypeIdentifier(38, listOf("G"))
+                                                                                                )
                                                                                         )
                                                                                 )
                                                                         )
@@ -199,13 +208,13 @@ class ParserTest {
                                                         )
                                                 ),
                                                 RubyTupleType(
-                                                        43,
+                                                        45,
                                                         RubyListOfTypeElements(
-                                                                44,
+                                                                46,
                                                                 listOf(
-                                                                        RubyAtomTypeIdentifier(44, listOf("H")),
-                                                                        RubyAtomTypeIdentifier(47, listOf("I")),
-                                                                        RubyAtomTypeIdentifier(50, "J::F::K".split("::"))
+                                                                        RubyAtomTypeIdentifier(46, listOf("H")),
+                                                                        RubyAtomTypeIdentifier(49, listOf("I")),
+                                                                        RubyAtomTypeIdentifier(52, "J::F::K".split("::"))
                                                                 )
                                                         )
                                                 )
@@ -219,5 +228,7 @@ class ParserTest {
     fun `test comments not annotations`() {
         assertThrows<AnyParsingException> { AnnotationCompiler.compile("# Some regular comment") }
         assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t K: a -> b -> a") }
+        assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t K: (A, *B?) -> C") }
+        assertThrows<AnyParsingException> { AnnotationCompiler.compile("##t K: (A, B) -> C?") }
     }
 }

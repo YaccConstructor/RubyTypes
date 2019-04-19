@@ -18,24 +18,24 @@ public class RubyTypesParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		ARROW=1, LPAREN=2, RPAREN=3, LBRACE=4, RBRACE=5, COMMA=6, UNDERSCORE=7, 
-		OR=8, COLON=9, SEMICOLON=10, DCOLON=11, BEGIN=12, WHITESPACE=13, NEWLINE=14, 
-		ATOM=15, FIRSTSYMBOL=16, ANYSYMBOL=17;
+		OR=8, COLON=9, SEMICOLON=10, DCOLON=11, BEGIN=12, STAR=13, QMARK=14, WHITESPACE=15, 
+		NEWLINE=16, ATOM=17, FIRSTSYMBOL=18, ANYSYMBOL=19;
 	public static final int
 		RULE_annotation = 0, RULE_additional = 1, RULE_typeDeclaration = 2, RULE_type = 3, 
-		RULE_tuple = 4, RULE_ftuple = 5, RULE_array = 6, RULE_identifier = 7;
+		RULE_tuple = 4, RULE_ftuple = 5, RULE_farg = 6, RULE_array = 7, RULE_identifier = 8;
 	public static final String[] ruleNames = {
 		"annotation", "additional", "typeDeclaration", "type", "tuple", "ftuple", 
-		"array", "identifier"
+		"farg", "array", "identifier"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "'->'", "'('", "')'", "'['", "']'", "','", "'_'", "'|'", "':'", 
-		"';'", "'::'", "'##t '"
+		"';'", "'::'", "'##t '", "'*'", "'?'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "ARROW", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "COMMA", "UNDERSCORE", 
-		"OR", "COLON", "SEMICOLON", "DCOLON", "BEGIN", "WHITESPACE", "NEWLINE", 
-		"ATOM", "FIRSTSYMBOL", "ANYSYMBOL"
+		"OR", "COLON", "SEMICOLON", "DCOLON", "BEGIN", "STAR", "QMARK", "WHITESPACE", 
+		"NEWLINE", "ATOM", "FIRSTSYMBOL", "ANYSYMBOL"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -117,11 +117,11 @@ public class RubyTypesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(16);
-			match(BEGIN);
-			setState(17);
-			typeDeclaration();
 			setState(18);
+			match(BEGIN);
+			setState(19);
+			typeDeclaration();
+			setState(20);
 			match(EOF);
 			}
 		}
@@ -167,11 +167,11 @@ public class RubyTypesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(20);
-			match(BEGIN);
-			setState(21);
-			type(0);
 			setState(22);
+			match(BEGIN);
+			setState(23);
+			type(0);
+			setState(24);
 			match(EOF);
 			}
 		}
@@ -219,11 +219,11 @@ public class RubyTypesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(24);
-			identifier();
-			setState(25);
-			match(COLON);
 			setState(26);
+			identifier();
+			setState(27);
+			match(COLON);
+			setState(28);
 			type(0);
 			}
 		}
@@ -389,7 +389,7 @@ public class RubyTypesParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(40);
+			setState(42);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 			case 1:
@@ -398,11 +398,11 @@ public class RubyTypesParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(29);
-				ftuple();
-				setState(30);
-				match(ARROW);
 				setState(31);
+				ftuple();
+				setState(32);
+				match(ARROW);
+				setState(33);
 				type(6);
 				}
 				break;
@@ -411,7 +411,7 @@ public class RubyTypesParser extends Parser {
 				_localctx = new TupleTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(33);
+				setState(35);
 				tuple();
 				}
 				break;
@@ -420,11 +420,11 @@ public class RubyTypesParser extends Parser {
 				_localctx = new NestedTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(34);
-				match(LPAREN);
-				setState(35);
-				type(0);
 				setState(36);
+				match(LPAREN);
+				setState(37);
+				type(0);
+				setState(38);
 				match(RPAREN);
 				}
 				break;
@@ -433,7 +433,7 @@ public class RubyTypesParser extends Parser {
 				_localctx = new ArrayTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(38);
+				setState(40);
 				array();
 				}
 				break;
@@ -442,13 +442,13 @@ public class RubyTypesParser extends Parser {
 				_localctx = new IdentifierTypeContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(39);
+				setState(41);
 				identifier();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(47);
+			setState(49);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -459,16 +459,16 @@ public class RubyTypesParser extends Parser {
 					{
 					_localctx = new UnionTypeContext(new TypeContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_type);
-					setState(42);
-					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(43);
-					match(OR);
 					setState(44);
+					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
+					setState(45);
+					match(OR);
+					setState(46);
 					type(2);
 					}
 					} 
 				}
-				setState(49);
+				setState(51);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,1,_ctx);
 			}
@@ -524,25 +524,25 @@ public class RubyTypesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(52);
 			match(LPAREN);
-			setState(54); 
+			setState(56); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(51);
+				setState(53);
 				type(0);
-				setState(52);
+				setState(54);
 				match(COMMA);
 				}
 				}
-				setState(56); 
+				setState(58); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LPAREN) | (1L << LBRACE) | (1L << ATOM))) != 0) );
-			setState(58);
+			setState(60);
 			match(RPAREN);
 			}
 		}
@@ -559,11 +559,11 @@ public class RubyTypesParser extends Parser {
 
 	public static class FtupleContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(RubyTypesParser.LPAREN, 0); }
-		public List<TypeContext> type() {
-			return getRuleContexts(TypeContext.class);
+		public List<FargContext> farg() {
+			return getRuleContexts(FargContext.class);
 		}
-		public TypeContext type(int i) {
-			return getRuleContext(TypeContext.class,i);
+		public FargContext farg(int i) {
+			return getRuleContext(FargContext.class,i);
 		}
 		public TerminalNode RPAREN() { return getToken(RubyTypesParser.RPAREN, 0); }
 		public List<TerminalNode> COMMA() { return getTokens(RubyTypesParser.COMMA); }
@@ -596,28 +596,95 @@ public class RubyTypesParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
+			setState(62);
 			match(LPAREN);
-			setState(61);
-			type(0);
-			setState(66);
+			setState(63);
+			farg();
+			setState(68);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(62);
+				setState(64);
 				match(COMMA);
-				setState(63);
-				type(0);
+				setState(65);
+				farg();
 				}
 				}
-				setState(68);
+				setState(70);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(69);
+			setState(71);
 			match(RPAREN);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class FargContext extends ParserRuleContext {
+		public TypeContext type() {
+			return getRuleContext(TypeContext.class,0);
+		}
+		public TerminalNode STAR() { return getToken(RubyTypesParser.STAR, 0); }
+		public TerminalNode QMARK() { return getToken(RubyTypesParser.QMARK, 0); }
+		public FargContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_farg; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).enterFarg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RubyTypesListener ) ((RubyTypesListener)listener).exitFarg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RubyTypesVisitor ) return ((RubyTypesVisitor<? extends T>)visitor).visitFarg(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FargContext farg() throws RecognitionException {
+		FargContext _localctx = new FargContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_farg);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(74);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==STAR) {
+				{
+				setState(73);
+				match(STAR);
+				}
+			}
+
+			setState(76);
+			type(0);
+			setState(78);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==QMARK) {
+				{
+				setState(77);
+				match(QMARK);
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -665,32 +732,32 @@ public class RubyTypesParser extends Parser {
 
 	public final ArrayContext array() throws RecognitionException {
 		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_array);
+		enterRule(_localctx, 14, RULE_array);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(80);
 			match(LBRACE);
-			setState(72);
+			setState(81);
 			type(0);
-			setState(77);
+			setState(86);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(73);
+				setState(82);
 				match(COMMA);
-				setState(74);
+				setState(83);
 				type(0);
 				}
 				}
-				setState(79);
+				setState(88);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(80);
+			setState(89);
 			match(RBRACE);
 			}
 		}
@@ -735,30 +802,30 @@ public class RubyTypesParser extends Parser {
 
 	public final IdentifierContext identifier() throws RecognitionException {
 		IdentifierContext _localctx = new IdentifierContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_identifier);
+		enterRule(_localctx, 16, RULE_identifier);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(91);
 			match(ATOM);
-			setState(87);
+			setState(96);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(83);
+					setState(92);
 					match(DCOLON);
-					setState(84);
+					setState(93);
 					match(ATOM);
 					}
 					} 
 				}
-				setState(89);
+				setState(98);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,7,_ctx);
 			}
 			}
 		}
@@ -789,28 +856,31 @@ public class RubyTypesParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\23]\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\3\2\3\2\3\2\3\2\3\3"+
-		"\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\5\5+\n\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5\63\13\5\3\6\3\6\3\6\3"+
-		"\6\6\69\n\6\r\6\16\6:\3\6\3\6\3\7\3\7\3\7\3\7\7\7C\n\7\f\7\16\7F\13\7"+
-		"\3\7\3\7\3\b\3\b\3\b\3\b\7\bN\n\b\f\b\16\bQ\13\b\3\b\3\b\3\t\3\t\3\t\7"+
-		"\tX\n\t\f\t\16\t[\13\t\3\t\2\3\b\n\2\4\6\b\n\f\16\20\2\2\2]\2\22\3\2\2"+
-		"\2\4\26\3\2\2\2\6\32\3\2\2\2\b*\3\2\2\2\n\64\3\2\2\2\f>\3\2\2\2\16I\3"+
-		"\2\2\2\20T\3\2\2\2\22\23\7\16\2\2\23\24\5\6\4\2\24\25\7\2\2\3\25\3\3\2"+
-		"\2\2\26\27\7\16\2\2\27\30\5\b\5\2\30\31\7\2\2\3\31\5\3\2\2\2\32\33\5\20"+
-		"\t\2\33\34\7\13\2\2\34\35\5\b\5\2\35\7\3\2\2\2\36\37\b\5\1\2\37 \5\f\7"+
-		"\2 !\7\3\2\2!\"\5\b\5\b\"+\3\2\2\2#+\5\n\6\2$%\7\4\2\2%&\5\b\5\2&\'\7"+
-		"\5\2\2\'+\3\2\2\2(+\5\16\b\2)+\5\20\t\2*\36\3\2\2\2*#\3\2\2\2*$\3\2\2"+
-		"\2*(\3\2\2\2*)\3\2\2\2+\61\3\2\2\2,-\f\3\2\2-.\7\n\2\2.\60\5\b\5\4/,\3"+
-		"\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\t\3\2\2\2\63\61\3\2"+
-		"\2\2\648\7\4\2\2\65\66\5\b\5\2\66\67\7\b\2\2\679\3\2\2\28\65\3\2\2\29"+
-		":\3\2\2\2:8\3\2\2\2:;\3\2\2\2;<\3\2\2\2<=\7\5\2\2=\13\3\2\2\2>?\7\4\2"+
-		"\2?D\5\b\5\2@A\7\b\2\2AC\5\b\5\2B@\3\2\2\2CF\3\2\2\2DB\3\2\2\2DE\3\2\2"+
-		"\2EG\3\2\2\2FD\3\2\2\2GH\7\5\2\2H\r\3\2\2\2IJ\7\6\2\2JO\5\b\5\2KL\7\b"+
-		"\2\2LN\5\b\5\2MK\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP\3\2\2\2PR\3\2\2\2QO\3\2"+
-		"\2\2RS\7\7\2\2S\17\3\2\2\2TY\7\21\2\2UV\7\r\2\2VX\7\21\2\2WU\3\2\2\2X"+
-		"[\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\21\3\2\2\2[Y\3\2\2\2\b*\61:DOY";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\25f\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\3\2"+
+		"\3\2\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
+		"\5\3\5\3\5\3\5\5\5-\n\5\3\5\3\5\3\5\7\5\62\n\5\f\5\16\5\65\13\5\3\6\3"+
+		"\6\3\6\3\6\6\6;\n\6\r\6\16\6<\3\6\3\6\3\7\3\7\3\7\3\7\7\7E\n\7\f\7\16"+
+		"\7H\13\7\3\7\3\7\3\b\5\bM\n\b\3\b\3\b\5\bQ\n\b\3\t\3\t\3\t\3\t\7\tW\n"+
+		"\t\f\t\16\tZ\13\t\3\t\3\t\3\n\3\n\3\n\7\na\n\n\f\n\16\nd\13\n\3\n\2\3"+
+		"\b\13\2\4\6\b\n\f\16\20\22\2\2\2g\2\24\3\2\2\2\4\30\3\2\2\2\6\34\3\2\2"+
+		"\2\b,\3\2\2\2\n\66\3\2\2\2\f@\3\2\2\2\16L\3\2\2\2\20R\3\2\2\2\22]\3\2"+
+		"\2\2\24\25\7\16\2\2\25\26\5\6\4\2\26\27\7\2\2\3\27\3\3\2\2\2\30\31\7\16"+
+		"\2\2\31\32\5\b\5\2\32\33\7\2\2\3\33\5\3\2\2\2\34\35\5\22\n\2\35\36\7\13"+
+		"\2\2\36\37\5\b\5\2\37\7\3\2\2\2 !\b\5\1\2!\"\5\f\7\2\"#\7\3\2\2#$\5\b"+
+		"\5\b$-\3\2\2\2%-\5\n\6\2&\'\7\4\2\2\'(\5\b\5\2()\7\5\2\2)-\3\2\2\2*-\5"+
+		"\20\t\2+-\5\22\n\2, \3\2\2\2,%\3\2\2\2,&\3\2\2\2,*\3\2\2\2,+\3\2\2\2-"+
+		"\63\3\2\2\2./\f\3\2\2/\60\7\n\2\2\60\62\5\b\5\4\61.\3\2\2\2\62\65\3\2"+
+		"\2\2\63\61\3\2\2\2\63\64\3\2\2\2\64\t\3\2\2\2\65\63\3\2\2\2\66:\7\4\2"+
+		"\2\678\5\b\5\289\7\b\2\29;\3\2\2\2:\67\3\2\2\2;<\3\2\2\2<:\3\2\2\2<=\3"+
+		"\2\2\2=>\3\2\2\2>?\7\5\2\2?\13\3\2\2\2@A\7\4\2\2AF\5\16\b\2BC\7\b\2\2"+
+		"CE\5\16\b\2DB\3\2\2\2EH\3\2\2\2FD\3\2\2\2FG\3\2\2\2GI\3\2\2\2HF\3\2\2"+
+		"\2IJ\7\5\2\2J\r\3\2\2\2KM\7\17\2\2LK\3\2\2\2LM\3\2\2\2MN\3\2\2\2NP\5\b"+
+		"\5\2OQ\7\20\2\2PO\3\2\2\2PQ\3\2\2\2Q\17\3\2\2\2RS\7\6\2\2SX\5\b\5\2TU"+
+		"\7\b\2\2UW\5\b\5\2VT\3\2\2\2WZ\3\2\2\2XV\3\2\2\2XY\3\2\2\2Y[\3\2\2\2Z"+
+		"X\3\2\2\2[\\\7\7\2\2\\\21\3\2\2\2]b\7\23\2\2^_\7\r\2\2_a\7\23\2\2`^\3"+
+		"\2\2\2ad\3\2\2\2b`\3\2\2\2bc\3\2\2\2c\23\3\2\2\2db\3\2\2\2\n,\63<FLPX"+
+		"b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

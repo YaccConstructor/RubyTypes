@@ -1,6 +1,16 @@
 package org.jetbrains.plugins.ruby.types.parser.ast
 
-interface RubyTypeAstElement {
+interface TypeMatchable<T: TypeMatchable<T>> {
+    /**
+     * Compare two types with no subtyping relation considering
+     */
+    fun matchesInvariant(other: T): Boolean
+
+//    TODO
+//    fun matchesCovariant(other: T): Boolean
+}
+
+interface RubyTypeAstElement: TypeMatchable<RubyTypeAstElement> {
     fun <R> accept(visitor: RubyTypesAstVisitor<R>): R
 }
 
@@ -26,24 +36,42 @@ data class RubyTypeDeclaration(
                 typeDefinitions + definition
         )
     }
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyTypeDefinition) {
+            return false
+        }
+        return typeDefinitions.any { it.matchesInvariant(other) }
+    }
 }
 
 data class RubyAtomTypeIdentifier(
         override val typeOffset: Int,
         /**
-         * Generally. type identifier can consist of several classes.
+         * Generally. typeDefinition identifier can consist of several classes.
          * For example, if B is nested class of A, and C is nested class of B,
-         * then it's possible to have variable of type A::B::C.
+         * then it's possible to have variable of typeDefinition A::B::C.
          * Here, A, B, and C are different tupleElements of given list.
          */
         val typeIdentifier: List<String>
 ): RubyTypeDefinition {
+
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyAtomTypeIdentifier) {
+            return false
+        }
+        return typeIdentifier == other.typeIdentifier
+    }
 
     override fun toString(): String {
         return typeIdentifier.joinToString("::")
     }
 }
+
+// TODO implement it
+object AnyType
 
 data class RubyListOfTypeElements(
         override val typeOffset: Int,
@@ -52,6 +80,13 @@ data class RubyListOfTypeElements(
     val size = elements.size
 
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyListOfTypeElements) {
+            return false
+        }
+        return elements == other.elements
+    }
 
     override fun toString(): String {
         return elements.joinToString(", ")
@@ -64,8 +99,15 @@ data class RubyTupleType(
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
 
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyTupleType) {
+            return false
+        }
+        return tupleElements == other.tupleElements
+    }
+
     override fun toString(): String {
-        return "($tupleElements)"
+        return "($tupleElements,)"
     }
 }
 
@@ -77,6 +119,14 @@ data class RubyShortArrayType(
         override val typeOffset: Int,
         val arrayElements: RubyListOfTypeElements
 ): RubyArrayType() {
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyShortArrayType) {
+            return false
+        }
+        return arrayElements == other.arrayElements
+    }
+
     override fun toString(): String {
         return "[$arrayElements]"
     }
@@ -86,9 +136,89 @@ data class RubyLongArrayType(
         override val typeOffset: Int,
         val arrayElements: RubyListOfTypeElements
 ): RubyArrayType() {
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyLongArrayType) {
+            return false
+        }
+        return arrayElements == other.arrayElements
+    }
+
     // TODO remake to union?
     override fun toString(): String {
         return "[$arrayElements]"
+    }
+}
+
+sealed class RubyFunctionalArgumentType(
+        override val typeOffset: Int,
+        open val typeDefinition: RubyTypeDefinition
+): RubyTypeDefinition {
+    override fun <R> accept(visitor: RubyTypesAstVisitor<R>) = visitor.visit(this)
+}
+
+data class RubyRegularArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition
+): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun toString() = "$typeDefinition"
+}
+
+data class RubyVarargArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition
+): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun toString() = "*$typeDefinition"
+}
+
+data class RubyOptionalArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition
+): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun toString() = "$typeDefinition?"
+}
+
+sealed class RubyNamedArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition,
+        open val argumentName: String,
+        open val argumentOffset: Int
+): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+
+    override fun toString() = "$argumentName: $typeDefinition"
+}
+
+data class RubyKeywordArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition,
+        override val argumentName: String,
+        override val argumentOffset: Int
+): RubyNamedArgumentType(typeOffset, typeDefinition, argumentName, argumentOffset) {
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
+
+data class RubyRequiredArgumentType(
+        override val typeOffset: Int,
+        override val typeDefinition: RubyTypeDefinition,
+        override val argumentName: String,
+        override val argumentOffset: Int
+): RubyNamedArgumentType(typeOffset, typeDefinition, argumentName, argumentOffset) {
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
 
@@ -99,6 +229,13 @@ data class RubyFunctionalType(
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
 
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyFunctionalType) {
+            return false
+        }
+        return domain == other.domain && codomain == other.codomain
+    }
+
     override fun toString(): String {
         val codomainRepresentation =
                 if (codomain is RubyFunctionalType || codomain is RubyUnionType) "($codomain)" else "$codomain"
@@ -107,13 +244,20 @@ data class RubyFunctionalType(
 }
 
 /**
- * Used when variable can have different type depending on path or context.
+ * Used when variable can have different typeDefinition depending on path or context.
  */
 data class RubyUnionType(
         override val typeOffset: Int,
         val possibleTypes: RubyListOfTypeElements
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
+
+    override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
+        if (other !is RubyUnionType) {
+            return false
+        }
+        return possibleTypes == other.possibleTypes
+    }
 
     override fun toString(): String {
         return possibleTypes.elements.joinToString(" | ")

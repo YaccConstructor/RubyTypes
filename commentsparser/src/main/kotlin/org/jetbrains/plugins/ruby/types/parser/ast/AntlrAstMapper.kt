@@ -26,8 +26,17 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
         return RubyTypeDeclaration(ctx.identifier().text, ctx.identifier().start.startIndex, listOf(visitTypeDefinition(ctx.type())))
     }
 
+    override fun visitFarg(ctx: RubyTypesParser.FargContext): RubyFunctionalArgumentType {
+        return when {
+            ctx.QMARK() == null && ctx.STAR() == null -> RubyRegularArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
+            ctx.QMARK() == null && ctx.STAR() != null -> RubyVarargArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
+            ctx.QMARK() != null && ctx.STAR() == null -> RubyOptionalArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
+            else -> throw AnyParsingException("Error in ${ctx.start.line}:${ctx.start.charPositionInLine}: type ${ctx.text} that declared as variable length args list cannot have default value")
+        }
+    }
+
     override fun visitFunctionalType(ctx: RubyTypesParser.FunctionalTypeContext): RubyFunctionalType {
-        return RubyFunctionalType(ctx.start.startIndex, visitTypesList(ctx.ftuple().type(), ctx.ftuple().start.startIndex), visitTypeDefinition(ctx.type()))
+        return RubyFunctionalType(ctx.start.startIndex, visitFunctionArgumentsTypesList(ctx.ftuple().farg(), ctx.ftuple().start.startIndex), visitTypeDefinition(ctx.type()))
     }
 
     override fun visitArrayType(ctx: RubyTypesParser.ArrayTypeContext): RubyArrayType {
@@ -87,4 +96,7 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
 
     private fun visitTypesList(ctx: List<RubyTypesParser.TypeContext>, offset: Int): RubyListOfTypeElements =
             RubyListOfTypeElements(offset + 1, ctx.map { visitTypeDefinition(it) })
+
+    private fun visitFunctionArgumentsTypesList(ctx: List<RubyTypesParser.FargContext>, offset: Int): RubyListOfTypeElements =
+            RubyListOfTypeElements(offset + 1, ctx.map { visitFarg(it) })
 }

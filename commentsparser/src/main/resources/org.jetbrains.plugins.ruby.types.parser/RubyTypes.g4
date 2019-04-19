@@ -12,7 +12,8 @@ type            : ftuple ARROW type     # functionalType
 
 
 tuple   : LPAREN (type COMMA)+ RPAREN ;
-ftuple  : LPAREN type (COMMA type)* RPAREN ;
+ftuple  : LPAREN farg (COMMA farg)* RPAREN ;
+farg    : STAR? type QMARK? ;
 array   : LBRACE type (COMMA type)* RBRACE ;
 
 identifier : ATOM (DCOLON ATOM)* ;
@@ -29,6 +30,8 @@ COLON      : ':'    ;
 SEMICOLON  : ';'    ;
 DCOLON     : '::'   ;
 BEGIN      : '##t ' ;
+STAR       : '*'    ;
+QMARK      : '?'    ;
 
 WHITESPACE : [\t ]+ -> skip;
 NEWLINE   : '\r' '\n' | '\n' | '\r' ;
