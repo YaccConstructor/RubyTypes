@@ -1,12 +1,19 @@
 package org.jetbrains.plugins.ruby.types.parser.ast
 
+import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.tree.ErrorNode
 import org.antlr.v4.runtime.tree.ParseTree
 import org.antlr.v4.runtime.tree.RuleNode
 import org.antlr.v4.runtime.tree.TerminalNode
 import org.jetbrains.plugins.ruby.types.parser.*
 
-class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
+/**
+ * Comments are passed as-is, without any relations to their position in source code.
+ * Therefore, in order to save original offset of symbols in comments,
+ * we need to pass initial offset of comment in the source file
+ * and recalculate offsets of tokens produced by lexer according to this value.
+ */
+class AntlrAstMapper(val initialOffset: Int): RubyTypesVisitor<RubyTypeAstElement> {
 
     private val actualDefinitions = mutableListOf<RubyTypeDefinition>()
 
@@ -23,42 +30,45 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
     }
 
     override fun visitTypeDeclaration(ctx: RubyTypesParser.TypeDeclarationContext): RubyTypeDeclaration {
-        return RubyTypeDeclaration(ctx.identifier().text, ctx.identifier().start.startIndex, listOf(visitTypeDefinition(ctx.type())))
+        return RubyTypeDeclaration(ctx.identifier().text, ctx.identifier().start.startIndex.shift(), listOf(visitTypeDefinition(ctx.type())))
     }
 
     override fun visitFarg(ctx: RubyTypesParser.FargContext): RubyFunctionalArgumentType {
+        val offset = ctx.start.startIndex.shift()
+        val length = length(ctx)
         return when {
-            ctx.QMARK() == null && ctx.STAR() == null -> RubyRegularArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
-            ctx.QMARK() == null && ctx.STAR() != null -> RubyVarargArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
-            ctx.QMARK() != null && ctx.STAR() == null -> RubyOptionalArgumentType(ctx.type().start.startIndex, visitTypeDefinition(ctx.type()))
+            ctx.QMARK() == null && ctx.STAR() == null -> RubyRegularArgumentType(offset, length, visitTypeDefinition(ctx.type()))
+            ctx.QMARK() == null && ctx.STAR() != null -> RubyVarargArgumentType(offset, length, visitTypeDefinition(ctx.type()))
+            ctx.QMARK() != null && ctx.STAR() == null -> RubyOptionalArgumentType(offset, length, visitTypeDefinition(ctx.type()))
             else -> throw AnyParsingException("Error in ${ctx.start.line}:${ctx.start.charPositionInLine}: type ${ctx.text} that declared as variable length args list cannot have default value")
         }
     }
 
     override fun visitFunctionalType(ctx: RubyTypesParser.FunctionalTypeContext): RubyFunctionalType {
-        return RubyFunctionalType(ctx.start.startIndex, visitFunctionArgumentsTypesList(ctx.ftuple().farg(), ctx.ftuple().start.startIndex), visitTypeDefinition(ctx.type()))
+        return RubyFunctionalType(ctx.start.startIndex.shift(), length(ctx), visitFunctionArgumentsTypesList(ctx.ftuple().farg(), ctx.ftuple().start.startIndex.shift(), length(ctx.ftuple())), visitTypeDefinition(ctx.type()))
     }
 
     override fun visitArrayType(ctx: RubyTypesParser.ArrayTypeContext): RubyArrayType {
-        val typesList = visitTypesList(ctx.array().type(), ctx.array().start.startIndex)
-        val offset = ctx.start.startIndex
+        val typesList = visitTypesList(ctx.array().type(), ctx.array().start.startIndex.shift(), length(ctx.array()))
+        val offset = ctx.start.startIndex.shift()
+        val length = length(ctx)
         if (typesList.size <= ARRAY_REPR_THRESHOLD) {
-            return RubyShortArrayType(offset, typesList)
+            return RubyShortArrayType(offset, length, typesList)
         } else {
-            return RubyLongArrayType(offset, typesList)
+            return RubyLongArrayType(offset, length, typesList)
         }
     }
 
     override fun visitUnionType(ctx: RubyTypesParser.UnionTypeContext): RubyUnionType {
-        return RubyUnionType(ctx.start.startIndex, RubyListOfTypeElements(ctx.start.startIndex, ctx.type().map { visitTypeDefinition(it) }))
+        return RubyUnionType(ctx.start.startIndex.shift(), length(ctx), RubyListOfTypeElements(ctx.start.startIndex.shift(), length(ctx), ctx.type().map { visitTypeDefinition(it) }))
     }
 
     override fun visitTupleType(ctx: RubyTypesParser.TupleTypeContext): RubyTupleType {
-        return RubyTupleType(ctx.start.startIndex, visitTypesList(ctx.tuple().type(), ctx.tuple().start.startIndex))
+        return RubyTupleType(ctx.start.startIndex.shift(), length(ctx), visitTypesList(ctx.tuple().type(), ctx.tuple().start.startIndex.shift(), length(ctx)))
     }
 
     override fun visitIdentifierType(ctx: RubyTypesParser.IdentifierTypeContext): RubyAtomTypeIdentifier {
-        return RubyAtomTypeIdentifier(ctx.start.startIndex, ctx.identifier().ATOM().map { it.text })
+        return RubyAtomTypeIdentifier(ctx.start.startIndex.shift(), length(ctx), ctx.identifier().ATOM().map { it.text })
     }
 
     override fun visit(tree: ParseTree) = null
@@ -94,9 +104,13 @@ class AntlrAstMapper: RubyTypesVisitor<RubyTypeAstElement> {
 
     }
 
-    private fun visitTypesList(ctx: List<RubyTypesParser.TypeContext>, offset: Int): RubyListOfTypeElements =
-            RubyListOfTypeElements(offset + 1, ctx.map { visitTypeDefinition(it) })
+    private fun visitTypesList(ctx: List<RubyTypesParser.TypeContext>, offset: Int, length: Int): RubyListOfTypeElements =
+            RubyListOfTypeElements(offset + 1, length, ctx.map { visitTypeDefinition(it) })
 
-    private fun visitFunctionArgumentsTypesList(ctx: List<RubyTypesParser.FargContext>, offset: Int): RubyListOfTypeElements =
-            RubyListOfTypeElements(offset + 1, ctx.map { visitFarg(it) })
+    private fun visitFunctionArgumentsTypesList(ctx: List<RubyTypesParser.FargContext>, offset: Int, length: Int): RubyListOfTypeElements =
+            RubyListOfTypeElements(offset + 1, length, ctx.map { visitFarg(it) })
+    
+    private fun Int.shift() = this + initialOffset
+    
+    private fun length(context: ParserRuleContext): Int = context.stop.stopIndex - context.start.startIndex + 1
 }

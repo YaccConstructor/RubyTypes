@@ -33,7 +33,7 @@ BEGIN      : '##t ' ;
 STAR       : '*'    ;
 QMARK      : '?'    ;
 
-WHITESPACE : [\t ]+ -> skip;
+WHITESPACE : [\t ]+ -> channel(HIDDEN) ;
 NEWLINE   : '\r' '\n' | '\n' | '\r' ;
 
 fragment LOWERCASE : [a-z] ;

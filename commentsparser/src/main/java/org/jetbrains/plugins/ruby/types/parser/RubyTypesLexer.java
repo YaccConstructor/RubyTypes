@@ -129,7 +129,7 @@ public class RubyTypesLexer extends Lexer {
 		"\4\2\2]$\3\2\2\2^_\t\5\2\2_&\3\2\2\2`a\t\6\2\2a(\3\2\2\2bf\5+\26\2ce\5"+
 		"-\27\2dc\3\2\2\2eh\3\2\2\2fd\3\2\2\2fg\3\2\2\2g*\3\2\2\2hf\3\2\2\2ij\t"+
 		"\7\2\2j,\3\2\2\2ko\5+\26\2lo\5\17\b\2mo\5\'\24\2nk\3\2\2\2nl\3\2\2\2n"+
-		"m\3\2\2\2o.\3\2\2\2\7\2SZfn\3\b\2\2";
+		"m\3\2\2\2o.\3\2\2\2\7\2SZfn\3\2\3\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

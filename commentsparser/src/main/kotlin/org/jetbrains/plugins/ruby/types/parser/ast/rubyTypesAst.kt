@@ -16,6 +16,7 @@ interface RubyTypeAstElement: TypeMatchable<RubyTypeAstElement> {
 
 interface RubyTypeDefinition: RubyTypeAstElement {
     val typeOffset: Int
+    val typeLength: Int
 }
 
 data class RubyTypeDeclaration(
@@ -47,6 +48,7 @@ data class RubyTypeDeclaration(
 
 data class RubyAtomTypeIdentifier(
         override val typeOffset: Int,
+        override val typeLength: Int,
         /**
          * Generally. typeDefinition identifier can consist of several classes.
          * For example, if B is nested class of A, and C is nested class of B,
@@ -75,6 +77,7 @@ object AnyType
 
 data class RubyListOfTypeElements(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val elements: List<RubyTypeAstElement>
 ): RubyTypeDefinition {
     val size = elements.size
@@ -95,6 +98,7 @@ data class RubyListOfTypeElements(
 
 data class RubyTupleType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val tupleElements: RubyListOfTypeElements
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)
@@ -117,6 +121,7 @@ sealed class RubyArrayType: RubyTypeDefinition {
 
 data class RubyShortArrayType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val arrayElements: RubyListOfTypeElements
 ): RubyArrayType() {
 
@@ -134,6 +139,7 @@ data class RubyShortArrayType(
 
 data class RubyLongArrayType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val arrayElements: RubyListOfTypeElements
 ): RubyArrayType() {
 
@@ -152,6 +158,7 @@ data class RubyLongArrayType(
 
 sealed class RubyFunctionalArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         open val typeDefinition: RubyTypeDefinition
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>) = visitor.visit(this)
@@ -159,8 +166,9 @@ sealed class RubyFunctionalArgumentType(
 
 data class RubyRegularArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition
-): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+): RubyFunctionalArgumentType(typeOffset, typeLength, typeDefinition) {
     override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -170,8 +178,9 @@ data class RubyRegularArgumentType(
 
 data class RubyVarargArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition
-): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+): RubyFunctionalArgumentType(typeOffset, typeLength, typeDefinition) {
     override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -181,8 +190,9 @@ data class RubyVarargArgumentType(
 
 data class RubyOptionalArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition
-): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+): RubyFunctionalArgumentType(typeOffset, typeLength, typeDefinition) {
     override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -192,20 +202,22 @@ data class RubyOptionalArgumentType(
 
 sealed class RubyNamedArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition,
         open val argumentName: String,
         open val argumentOffset: Int
-): RubyFunctionalArgumentType(typeOffset, typeDefinition) {
+): RubyFunctionalArgumentType(typeOffset, typeLength, typeDefinition) {
 
     override fun toString() = "$argumentName: $typeDefinition"
 }
 
 data class RubyKeywordArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition,
         override val argumentName: String,
         override val argumentOffset: Int
-): RubyNamedArgumentType(typeOffset, typeDefinition, argumentName, argumentOffset) {
+): RubyNamedArgumentType(typeOffset, typeLength, typeDefinition, argumentName, argumentOffset) {
     override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -213,10 +225,11 @@ data class RubyKeywordArgumentType(
 
 data class RubyRequiredArgumentType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         override val typeDefinition: RubyTypeDefinition,
         override val argumentName: String,
         override val argumentOffset: Int
-): RubyNamedArgumentType(typeOffset, typeDefinition, argumentName, argumentOffset) {
+): RubyNamedArgumentType(typeOffset, typeLength, typeDefinition, argumentName, argumentOffset) {
     override fun matchesInvariant(other: RubyTypeAstElement): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -224,6 +237,7 @@ data class RubyRequiredArgumentType(
 
 data class RubyFunctionalType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val domain: RubyListOfTypeElements,
         val codomain: RubyTypeAstElement
 ): RubyTypeDefinition {
@@ -248,6 +262,7 @@ data class RubyFunctionalType(
  */
 data class RubyUnionType(
         override val typeOffset: Int,
+        override val typeLength: Int,
         val possibleTypes: RubyListOfTypeElements
 ): RubyTypeDefinition {
     override fun <R> accept(visitor: RubyTypesAstVisitor<R>): R = visitor.visit(this)

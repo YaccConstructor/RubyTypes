@@ -19,16 +19,11 @@ object AnnotationCompiler {
         lexer.addErrorListener(TypeParsingErrorListener.INSTANCE)
 
         val tokens = CommonTokenStream(lexer)
-        tokens.tokens.map {
-            if (it is CommonToken) {
-                it.startIndex += initialOffset
-            }
-        }
         val parser = RubyTypesParser(tokens)
         parser.removeErrorListeners()
         parser.addErrorListener(TypeParsingErrorListener.INSTANCE)
 
-        val mapper = AntlrAstMapper()
+        val mapper = AntlrAstMapper(initialOffset)
         return if (isProbablyDeclaration(annotation)) {
             mapper.visitAnnotation(parser.annotation())
         } else {

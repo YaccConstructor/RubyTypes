@@ -18,6 +18,7 @@ class ParserTest {
                         listOf(
                                 RubyAtomTypeIdentifier(
                                         9,
+                                        6,
                                         listOf("Fixnum")
                                 )
                         )
@@ -35,6 +36,7 @@ class ParserTest {
                 listOf(
                         RubyAtomTypeIdentifier(
                                 7,
+                                type.length,
                                 type.split("::")
                         )
                 )
@@ -53,9 +55,11 @@ class ParserTest {
                 listOf(
                         RubyTupleType(
                                 9,
+                                type.length + 3,
                                 RubyListOfTypeElements(
                                         10,
-                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, listOf(it.first)) }
+                                        type.length + 3,
+                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
                                 )
                         )
                 )
@@ -74,9 +78,11 @@ class ParserTest {
                                 listOf(
                                         RubyShortArrayType(
                                                 9,
+                                                type.length + 2,
                                                 RubyListOfTypeElements(
                                                         10,
-                                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, listOf(it.first)) }
+                                                        type.length + 2,
+                                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
                                                 )
                                         )
                                 )
@@ -95,9 +101,11 @@ class ParserTest {
                                 listOf(
                                         RubyLongArrayType(
                                                 9,
+                                                type.length + 2,
                                                 RubyListOfTypeElements(
                                                         10,
-                                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, listOf(it.first)) }
+                                                        type.length + 2,
+                                                        type.split(", ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
                                                 )
                                         )
                                 )
@@ -116,12 +124,15 @@ class ParserTest {
                                 listOf(
                                         RubyFunctionalType(
                                                 9,
+                                                17,
                                                 RubyListOfTypeElements(
                                                         10,
-                                                        domain.split(", ").zip(offsets).map { RubyRegularArgumentType(it.second, RubyAtomTypeIdentifier(it.second, listOf(it.first))) }
+                                                        domain.length + 2,
+                                                        domain.split(", ").zip(offsets).map { RubyRegularArgumentType(it.second, it.first.length, RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first))) }
                                                 ),
                                                 RubyAtomTypeIdentifier(
                                                         23,
+                                                        3,
                                                         listOf("Boo")
                                                 )
                                         )
@@ -141,9 +152,11 @@ class ParserTest {
                                 listOf(
                                         RubyUnionType(
                                                 12,
+                                                type.length,
                                                 RubyListOfTypeElements(
                                                         12,
-                                                        type.split(" | ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, listOf(it.first)) }
+                                                        type.length,
+                                                        type.split(" | ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
                                                 )
                                         )
                                 )
@@ -160,46 +173,58 @@ class ParserTest {
                                 listOf(
                                         RubyFunctionalType(
                                                 9,
+                                                "(*A::B, ([C, D], E?) -> (F | G)) -> (H, I, J::F::K,)".length,
                                                 RubyListOfTypeElements(
                                                         10,
+                                                        "(*A::B, ([C, D], E?) -> (F | G))".length,
                                                         listOf(
                                                                 RubyVarargArgumentType(
-                                                                        11,
+                                                                        10,
+                                                                        5,
                                                                         RubyAtomTypeIdentifier(
                                                                                 11,
+                                                                                4,
                                                                                 "A::B".split("::")
                                                                         )
                                                                 ),
                                                                 RubyRegularArgumentType(
                                                                         17,
+                                                                        "([C, D], E?) -> (F | G)".length,
                                                                         RubyFunctionalType(
                                                                                 17,
+                                                                                "([C, D], E?) -> (F | G)".length,
                                                                                 RubyListOfTypeElements(
                                                                                         18,
+                                                                                        "([C, D], E?)".length,
                                                                                         listOf(
                                                                                                 RubyRegularArgumentType(
                                                                                                         18,
+                                                                                                        6,
                                                                                                         RubyShortArrayType(
                                                                                                                 18,
+                                                                                                                6,
                                                                                                                 RubyListOfTypeElements(
                                                                                                                         19,
+                                                                                                                        6,
                                                                                                                         listOf(
-                                                                                                                                RubyAtomTypeIdentifier(19, listOf("C")),
-                                                                                                                                RubyAtomTypeIdentifier(22, listOf("D"))
+                                                                                                                                RubyAtomTypeIdentifier(19, 1, listOf("C")),
+                                                                                                                                RubyAtomTypeIdentifier(22, 1, listOf("D"))
                                                                                                                         )
                                                                                                                 )
                                                                                                         )
                                                                                                 ),
-                                                                                                RubyOptionalArgumentType(26, RubyAtomTypeIdentifier(26, listOf("E")))
+                                                                                                RubyOptionalArgumentType(26, 2, RubyAtomTypeIdentifier(26, 1, listOf("E")))
                                                                                         )
                                                                                 ),
                                                                                 RubyUnionType(
                                                                                         34,
+                                                                                        5,
                                                                                         RubyListOfTypeElements(
                                                                                                 34,
+                                                                                                5,
                                                                                                 listOf(
-                                                                                                        RubyAtomTypeIdentifier(34, listOf("F")),
-                                                                                                        RubyAtomTypeIdentifier(38, listOf("G"))
+                                                                                                        RubyAtomTypeIdentifier(34, 1, listOf("F")),
+                                                                                                        RubyAtomTypeIdentifier(38, 1, listOf("G"))
                                                                                                 )
                                                                                         )
                                                                                 )
@@ -209,12 +234,14 @@ class ParserTest {
                                                 ),
                                                 RubyTupleType(
                                                         45,
+                                                        16,
                                                         RubyListOfTypeElements(
                                                                 46,
+                                                                16,
                                                                 listOf(
-                                                                        RubyAtomTypeIdentifier(46, listOf("H")),
-                                                                        RubyAtomTypeIdentifier(49, listOf("I")),
-                                                                        RubyAtomTypeIdentifier(52, "J::F::K".split("::"))
+                                                                        RubyAtomTypeIdentifier(46, 1, listOf("H")),
+                                                                        RubyAtomTypeIdentifier(49, 1, listOf("I")),
+                                                                        RubyAtomTypeIdentifier(52, 7, "J::F::K".split("::"))
                                                                 )
                                                         )
                                                 )
