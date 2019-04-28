@@ -222,17 +222,17 @@ data class RubyShortArrayType(
 data class RubyLongArrayType(
         override val typeOffset: Int,
         override val typeLength: Int,
-        val arrayElements: RubyListOfTypeElements
+        val lub: RubyTypeDefinition
 ): RubyArrayType() {
 
     override fun typeEquals(other: RubyTypeDefinition): Boolean {
         if (other is RubyFunctionalArgumentType) {
             return other.acceptsInvariant(this)
         }
-        if (other !is RubyShortArrayType) {
+        if (other !is RubyLongArrayType) {
             return false
         }
-        return arrayElements.typeEquals(other.arrayElements)
+        return lub.typeEquals(other.lub)
     }
 
     override fun acceptsInvariant(other: RubyTypeDefinition): Boolean {
@@ -242,12 +242,11 @@ data class RubyLongArrayType(
         if (other !is RubyLongArrayType) {
             return false
         }
-        return arrayElements == other.arrayElements
+        return lub == other.lub
     }
 
-    // TODO remake to union?
     override fun toString(): String {
-        return "[$arrayElements]"
+        return "Array<$lub>"
     }
 
     override fun toStringIgnoreNames() = toString()
@@ -431,10 +430,10 @@ data class RubyUnionType(
     }
 
     override fun toString(): String {
-        return possibleTypes.elements.joinToString(" | ")
+        return possibleTypes.elements.joinToString(" or ")
     }
 
-    override fun toStringIgnoreNames() = possibleTypes.elements.joinToString(" | ") { it.toStringIgnoreNames() }
+    override fun toStringIgnoreNames() = possibleTypes.elements.joinToString(" or ") { it.toStringIgnoreNames() }
 }
 
 data class ArgumentInfo(

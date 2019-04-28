@@ -70,6 +70,4 @@ object AnnotationCompiler {
     }
 
     private fun isProbablyDeclaration(annotation: String) = annotation.contains(":")
-
-
 }

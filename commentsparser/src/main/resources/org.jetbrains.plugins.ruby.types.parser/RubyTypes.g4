@@ -25,7 +25,7 @@ LBRACE     : '['    ;
 RBRACE     : ']'    ;
 COMMA      : ','    ;
 UNDERSCORE : '_'    ;
-OR         : '|'    ;
+OR         : 'or'   ;
 COLON      : ':'    ;
 SEMICOLON  : ';'    ;
 DCOLON     : '::'   ;
