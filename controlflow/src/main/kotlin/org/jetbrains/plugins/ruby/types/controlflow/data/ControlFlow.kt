@@ -30,5 +30,5 @@ class ControlFlowData(
         val holder: RPsiElement
 ) {
 
-    fun writeToString(writer: ControlFlowWriter): String = writer.write(this)
+    fun writeToString(writer: ControlFlowWriter): String = writer.write(this) + "-$-"
 }

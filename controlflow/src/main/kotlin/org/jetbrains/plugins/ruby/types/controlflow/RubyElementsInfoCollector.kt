@@ -27,9 +27,6 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.fields.*
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 import org.jetbrains.plugins.ruby.types.controlflow.typeinfo.rightOffset
-import org.jetbrains.plugins.ruby.types.parser.AnnotationCompiler
-import org.jetbrains.plugins.ruby.types.parser.ast.AnyParsingException
-import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 
 class RubyElementsInfoCollector {
 
@@ -205,7 +202,7 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Argument",
                 argument.text,
-                Pair("argument type", argument.type.toString())
+                Pair("argument typeDefinition", argument.type.toString())
         )
     }
 
@@ -226,7 +223,7 @@ class RubyElementsInfoCollector {
                 "Unary expression",
                 rUnaryExpression.text,
                 Pair("operation", rUnaryExpression.operationName),
-                Pair("expression type", rUnaryExpression.type.presentableName)
+                Pair("expression typeDefinition", rUnaryExpression.type.presentableName)
         )
     }
 
@@ -307,7 +304,7 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Global variable",
                 rGlobalVariable.text,
-                Pair("variable type", rGlobalVariable.globalVariableType.toString())
+                Pair("variable typeDefinition", rGlobalVariable.globalVariableType.toString())
         )
     }
 
@@ -331,7 +328,7 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Ternary expression",
                 null,
-                Pair("expression type", ternaryExpression.type.presentableName)
+                Pair("expression typeDefinition", ternaryExpression.type.presentableName)
         )
     }
 
@@ -359,7 +356,7 @@ class RubyElementsInfoCollector {
                         }
                 ),
                 Pair("reference", rIdentifier.reference?.canonicalText),
-                "type" to Annotations.definitionsForIdentifier(rIdentifier)?.joinToString(" || ") { it.toString() },
+                "typeDefinition" to Annotations.definitionsForIdentifier(rIdentifier)?.joinToString(" || ") { it.toString() },
                 offset = rIdentifier.rightOffset
         )
     }
@@ -436,7 +433,7 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Assignment expression",
                 null,
-                Pair("operation type", assignmentExpression.operationType.toString())
+                Pair("operation typeDefinition", assignmentExpression.operationType.toString())
         )
     }
 
@@ -543,8 +540,8 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 "Binary expression",
                 rBinaryExpression.text,
-                Pair("expression type", rBinaryExpression.type.presentableName),
-                Pair("operation type", rBinaryExpression.operationType.toString())
+                Pair("expression typeDefinition", rBinaryExpression.type.presentableName),
+                Pair("operation typeDefinition", rBinaryExpression.operationType.toString())
         )
     }
 
@@ -593,7 +590,7 @@ class RubyElementsInfoCollector {
         addNodeInfo(
                 nodeType = "Call",
                 text = rCall.text,
-                additionalProperties = "type" to callee?.let { Annotations.declarationForMethod(it)?.typeDefinitions?.joinToString(" || ") { it.toString() } },
+                additionalProperties = "typeDefinition" to callee?.let { Annotations.declarationForMethod(it)?.typeDefinitions?.joinToString(" || ") { it.toStringIgnoreNames() } },
                 callee = rCall.getCalledMethod(),
                 offset = rCall.textOffset
         )
@@ -629,7 +626,5 @@ class RubyElementsInfoCollector {
 
     companion object {
         private var currentElementId = 1
-
-        private fun RCall.getCalledMethod(): RMethod? = firstChild?.reference?.resolve() as? RMethod
     }
 }

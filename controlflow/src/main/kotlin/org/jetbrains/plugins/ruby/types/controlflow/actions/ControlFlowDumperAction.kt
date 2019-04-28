@@ -1,5 +1,6 @@
 package org.jetbrains.plugins.ruby.types.controlflow.actions
 
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
 import com.intellij.codeInsight.daemon.impl.HintRenderer
 import com.intellij.ide.IdeEventQueue
 import com.intellij.openapi.actionSystem.AnAction
@@ -14,9 +15,11 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
 import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDialog
 import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
+import org.jetbrains.plugins.ruby.types.controlflow.TypesUtil
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.docs.RubyTypesDocumentationProvider
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
+import org.jetbrains.plugins.ruby.types.controlflow.errors.TypeMismatchErrors
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
 import org.jetbrains.plugins.ruby.types.controlflow.read.JsonResultReader
@@ -33,6 +36,7 @@ class ControlFlowDumperAction : AnAction() {
             return
         }
 
+        TypeMismatchErrors.reset()
         Annotations.collect(file)
 
         val builder = RControlFlowBuilder()
@@ -52,13 +56,21 @@ class ControlFlowDumperAction : AnAction() {
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
         val translatedData = BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
 
+//        val dialog = ControlFlowDumperDialog(
+//                file,
+//                fileControlFlowInfo + "\n" + nestedControlFlowInfos
+//        )
+//        dialog.show()
+
         val knownTypes: Map<Int, RubyTypeDeclaration> = JsonResultReader().read(translatedData.toString())
 
-        RubyTypesDocumentationProvider.typeDeclarations = knownTypes
+        TypesUtil.types = knownTypes
 
         editor.inlayModel.let {
             file.accept(RubyTypesInlayVisitor(it, knownTypes))
         }
+
+        DaemonCodeAnalyzer.getInstance(e.project).restart(file)
     }
 
     private fun getAllControlFlowGraphsInfo(element: PsiElement): String =

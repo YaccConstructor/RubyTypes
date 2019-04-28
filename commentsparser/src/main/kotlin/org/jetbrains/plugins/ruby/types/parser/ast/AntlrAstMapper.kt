@@ -107,8 +107,8 @@ class AntlrAstMapper(val initialOffset: Int): RubyTypesVisitor<RubyTypeAstElemen
     private fun visitTypesList(ctx: List<RubyTypesParser.TypeContext>, offset: Int, length: Int): RubyListOfTypeElements =
             RubyListOfTypeElements(offset + 1, length, ctx.map { visitTypeDefinition(it) })
 
-    private fun visitFunctionArgumentsTypesList(ctx: List<RubyTypesParser.FargContext>, offset: Int, length: Int): RubyListOfTypeElements =
-            RubyListOfTypeElements(offset + 1, length, ctx.map { visitFarg(it) })
+    private fun visitFunctionArgumentsTypesList(ctx: List<RubyTypesParser.FargContext>, offset: Int, length: Int): RubyFunctionalDomain =
+            RubyFunctionalDomain(offset + 1, length, ctx.map { visitFarg(it) })
     
     private fun Int.shift() = this + initialOffset
     

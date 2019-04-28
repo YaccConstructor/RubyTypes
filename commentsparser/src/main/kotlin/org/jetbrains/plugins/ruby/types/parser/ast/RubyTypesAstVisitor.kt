@@ -17,4 +17,6 @@ interface RubyTypesAstVisitor<out R> {
     fun visit(function: RubyFunctionalType): R
 
     fun visit(union: RubyUnionType): R
+
+    fun visit(domain: RubyFunctionalDomain): R
 }

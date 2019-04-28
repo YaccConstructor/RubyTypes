@@ -19,6 +19,11 @@
                 implementationClass="org.jetbrains.plugins.ruby.types.controlflow.docs.RubyTypesDocumentationProvider"
                 order="first"
         />
+        <annotator
+                language="ruby"
+                implementationClass="org.jetbrains.plugins.ruby.types.controlflow.annotator.TypeCheckingAnnotator"
+                order="first"
+        />
     </extensions>
 
     <actions>

@@ -32,6 +32,43 @@ object AnnotationCompiler {
 
     }
 
+    fun compileNamed(annotation: String, argumentInfos: List<ArgumentInfo>): RubyTypeDefinition {
+        val type = compile(annotation) as RubyFunctionalType
+        val namedElements = type.domain.elements.zip(argumentInfos).map {
+            when (it.second.kind) {
+                ArgumentKind.KEYWORD -> RubyKeywordArgumentType(
+                        it.first.typeOffset,
+                        it.first.typeLength,
+                        it.first,
+                        it.second.name,
+                        it.second.offset
+                )
+                ArgumentKind.KEYREQ -> RubyKeyreqArgumentType(
+                        it.first.typeOffset,
+                        it.first.typeLength,
+                        it.first,
+                        it.second.name,
+                        it.second.offset
+                )
+                else -> RubyNamedRegularArgumentType(
+                        it.second.name,
+                        it.second.offset,
+                        it.first
+                )
+            }
+        }
+        return RubyFunctionalType(
+                type.typeOffset,
+                type.typeLength,
+                RubyFunctionalDomain(
+                        type.domain.typeOffset,
+                        type.domain.typeLength,
+                        namedElements
+                ),
+                type.codomain
+        )
+    }
+
     private fun isProbablyDeclaration(annotation: String) = annotation.contains(":")
 
 

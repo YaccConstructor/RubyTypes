@@ -125,7 +125,7 @@ class ParserTest {
                                         RubyFunctionalType(
                                                 9,
                                                 17,
-                                                RubyListOfTypeElements(
+                                                RubyFunctionalDomain(
                                                         10,
                                                         domain.length + 2,
                                                         domain.split(", ").zip(offsets).map { RubyRegularArgumentType(it.second, it.first.length, RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first))) }
@@ -174,7 +174,7 @@ class ParserTest {
                                         RubyFunctionalType(
                                                 9,
                                                 "(*A::B, ([C, D], E?) -> (F | G)) -> (H, I, J::F::K,)".length,
-                                                RubyListOfTypeElements(
+                                                RubyFunctionalDomain(
                                                         10,
                                                         "(*A::B, ([C, D], E?) -> (F | G))".length,
                                                         listOf(
@@ -193,7 +193,7 @@ class ParserTest {
                                                                         RubyFunctionalType(
                                                                                 17,
                                                                                 "([C, D], E?) -> (F | G)".length,
-                                                                                RubyListOfTypeElements(
+                                                                                RubyFunctionalDomain(
                                                                                         18,
                                                                                         "([C, D], E?)".length,
                                                                                         listOf(

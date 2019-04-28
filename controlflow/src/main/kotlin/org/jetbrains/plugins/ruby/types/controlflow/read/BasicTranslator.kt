@@ -7,7 +7,7 @@ import org.json.JSONObject
 class BasicTranslator {
     fun translate(input: String): JSONObject {
         val result = JSONObject()
-        val cfgsData = input.split(System.lineSeparator().repeat(2)).filter { it.isNotBlank() }
+        val cfgsData = input.split("-$-").filter { it.isNotBlank() }
         val files = JSONArray()
         val fileDescription = JSONObject()
         fileDescription.put("file", "dummy")
@@ -18,21 +18,17 @@ class BasicTranslator {
             val nodesDescription = cfgJson
                     .getJSONArray("nodes description")
                     .map { it as JSONObject }
-                    .filter { it.has("type") && it.getString("type") != "null" }
+                    .filter { it.has("typeDefinition") && it.getString("typeDefinition") != "null" }
             for (nodeDescription in nodesDescription) {
                 val translatedDescription = JSONObject()
-                translatedDescription.put("type", nodeDescription.getString("type"))
+                translatedDescription.put("typeDefinition", nodeDescription.getString("typeDefinition"))
                 translatedDescription.put("identifier", nodeDescription.getString("text"))
                 translatedDescription.put("offset", nodeDescription.getInt("offset"))
                 fileContents.put(translatedDescription)
             }
             val holder = cfgJson.getJSONObject("holder")
-            if (holder.has("type")) {
-                val translatedDescription = JSONObject()
-                translatedDescription.put("type", holder.getString("type"))
-                translatedDescription.put("identifier", holder.getString("name"))
-                translatedDescription.put("offset", holder.getInt("offset"))
-                fileContents.put(translatedDescription)
+            if (holder.has("typeDefinition")) {
+                fileContents.put(holder)
             }
         }
         fileDescription.put("contents", fileContents)

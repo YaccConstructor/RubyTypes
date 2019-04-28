@@ -2,11 +2,14 @@ package org.jetbrains.plugins.ruby.types.controlflow.dump
 
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RNamedArgument
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.data.AdjacencyRecord
 import org.jetbrains.plugins.ruby.types.controlflow.data.ControlFlowData
 import org.jetbrains.plugins.ruby.types.controlflow.data.NodeDescription
 import org.jetbrains.plugins.ruby.types.controlflow.typeinfo.rightOffset
+import org.jetbrains.plugins.ruby.types.parser.ast.RubyFunctionalType
+import org.jetbrains.plugins.ruby.types.parser.ast.RubyNamedArgumentType
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -61,12 +64,23 @@ class JsonControlFlowWriter: ControlFlowWriter {
 
     private fun writeHolder(holder: RPsiElement) {
         val holderInfo = JSONObject()
-        holderInfo.put("name", holder.name)
+        holderInfo.put("identifier", holder.name)
         if (holder is RMethod) {
-            holderInfo.put("type", Annotations.declarationForMethod(holder)?.typeDefinitions?.joinToString(" || "))
-        }
-        if (holder is RMethod) {
-            holderInfo.put("offset", holder.rightOffset)
+            Annotations.declarationForMethod(holder)?.typeDefinitions?.let { defs ->
+                val def = defs.first() as RubyFunctionalType
+                val arguments = def.domain.elements.map { it as RubyNamedArgumentType }
+                val argumentInfos = JSONArray()
+                arguments.forEach {
+                    val argumentInfo = JSONObject()
+                    argumentInfo.put("name", it.argumentName)
+                    argumentInfo.put("kind", it.kind)
+                    argumentInfo.put("offset", it.argumentOffset)
+                    argumentInfos.put(argumentInfo)
+                }
+                holderInfo.put("arguments", argumentInfos)
+                holderInfo.put("typeDefinition", defs.joinToString(" || ") { it.toStringIgnoreNames() })
+                holderInfo.put("offset", holder.textOffset)
+            }
         }
         controlFlowJson.put("holder", holderInfo)
     }

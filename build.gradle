@@ -27,6 +27,8 @@ allprojects {
         compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.0"
         compile "org.jetbrains.kotlin:kotlin-reflect:1.2.0"
 
+        compile "org.jsoup:jsoup:1.11.3"
+        
         testCompile 'junit:junit:4.12'
     }
 
