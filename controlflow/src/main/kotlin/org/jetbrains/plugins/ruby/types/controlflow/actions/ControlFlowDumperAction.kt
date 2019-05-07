@@ -25,6 +25,13 @@ import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
 import org.jetbrains.plugins.ruby.types.controlflow.read.JsonResultReader
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 import java.io.File
+import com.sun.java.accessibility.util.AWTEventMonitor.addActionListener
+import org.jetbrains.plugins.ruby.types.controlflow.actions.algorithm.AlgorithmExecutor
+import org.jetbrains.plugins.ruby.types.controlflow.dialogs.SelectTypeInferenceAlgorithmDialogWrapper
+import java.nio.file.Paths
+import javax.swing.JButton
+
+
 
 class ControlFlowDumperAction : AnAction() {
 
@@ -36,9 +43,6 @@ class ControlFlowDumperAction : AnAction() {
             return
         }
 
-        TypeMismatchErrors.reset()
-        Annotations.collect(file)
-
         val builder = RControlFlowBuilder()
         if (file !is RFile) {
             Messages.showErrorDialog(
@@ -49,12 +53,37 @@ class ControlFlowDumperAction : AnAction() {
             return
         }
 
+        TypeMismatchErrors.reset()
+        Annotations.collect(file)
+
+        val selectTypeInferenceAlgorithmDialogWrapper = SelectTypeInferenceAlgorithmDialogWrapper(e.project ?: throw RuntimeException())
+
+        if (!selectTypeInferenceAlgorithmDialogWrapper.showAndGet()) {
+            return
+        }
+
         val controlFlow = builder.buildControlFlow(file)
         val controlFlowWrapper = RubyControlFlowWrapper(controlFlow, file)
 
         val fileControlFlowInfo = controlFlowWrapper.dump().writeToString(JsonControlFlowWriter())
         val nestedControlFlowInfos = getAllControlFlowGraphsInfo(file)
-        val translatedData = BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
+        val input = File("data.txt")
+        input.writeText("$fileControlFlowInfo\n$nestedControlFlowInfos")
+
+        val pathToOutput = AlgorithmExecutor(selectTypeInferenceAlgorithmDialogWrapper.pathToSelectedBinary ?: throw RuntimeException())
+                .execute(input.absolutePath, "")
+
+        // !!! This line is just for debugging;
+        //     comment it if you have real algorithm
+        val output = File("datanew.txt")
+        output.writeText(BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos").toString())
+
+        val translatedData = File(pathToOutput).readText()//BasicTranslator().translate("$fileControlFlowInfo\n$nestedControlFlowInfos")
+
+        input.deleteOnExit()
+        output.deleteOnExit()
+
+//        println(translatedData)
 
 //        val dialog = ControlFlowDumperDialog(
 //                file,
@@ -62,7 +91,7 @@ class ControlFlowDumperAction : AnAction() {
 //        )
 //        dialog.show()
 
-        val knownTypes: Map<Int, RubyTypeDeclaration> = JsonResultReader().read(translatedData.toString())
+        val knownTypes: Map<Int, RubyTypeDeclaration> = JsonResultReader().read(translatedData)
 
         TypesUtil.types = knownTypes
 
@@ -99,5 +128,10 @@ class ControlFlowDumperAction : AnAction() {
         val cfg = RubyControlFlowWrapper(controlFlow, element)
         val childInfo = element.children.joinToString(separator = System.lineSeparator()) { getAllControlFlowGraphsInfo(it) }
         return cfg.dump().writeToString(JsonControlFlowWriter()) + System.lineSeparator() + childInfo
+    }
+
+    private fun executeBinary(path: String) {
+        val runtime = Runtime.getRuntime()
+        val process = runtime.exec(path)
     }
 }
