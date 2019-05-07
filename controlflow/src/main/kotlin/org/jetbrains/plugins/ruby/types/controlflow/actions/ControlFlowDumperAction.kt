@@ -1,12 +1,9 @@
 package org.jetbrains.plugins.ruby.types.controlflow.actions
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer
-import com.intellij.codeInsight.daemon.impl.HintRenderer
-import com.intellij.ide.IdeEventQueue
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
-import com.intellij.openapi.editor.impl.InlayModelImpl
 import com.intellij.openapi.ui.Messages
 import com.intellij.psi.PsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
@@ -17,14 +14,12 @@ import org.jetbrains.plugins.ruby.types.controlflow.dialogs.ControlFlowDumperDia
 import org.jetbrains.plugins.ruby.types.controlflow.RubyControlFlowWrapper
 import org.jetbrains.plugins.ruby.types.controlflow.TypesUtil
 import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
-import org.jetbrains.plugins.ruby.types.controlflow.docs.RubyTypesDocumentationProvider
 import org.jetbrains.plugins.ruby.types.controlflow.dump.JsonControlFlowWriter
 import org.jetbrains.plugins.ruby.types.controlflow.errors.TypeMismatchErrors
 import org.jetbrains.plugins.ruby.types.controlflow.hints.RubyTypesInlayVisitor
 import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
 import org.jetbrains.plugins.ruby.types.controlflow.read.JsonResultReader
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
-import java.io.File
 
 class ControlFlowDumperAction : AnAction() {
 
@@ -37,7 +32,7 @@ class ControlFlowDumperAction : AnAction() {
         }
 
         TypeMismatchErrors.reset()
-        Annotations.collect(file)
+        Annotations.resetAndCollect(file)
 
         val builder = RControlFlowBuilder()
         if (file !is RFile) {

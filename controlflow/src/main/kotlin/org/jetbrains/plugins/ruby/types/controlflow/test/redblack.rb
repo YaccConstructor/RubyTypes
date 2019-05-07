@@ -210,7 +210,7 @@ class RedBlackTree
             ret = balanced_rotate_left
           end
         else
-          # flip this sub-tree into another type of 3-children node
+          # flip this sub-tree into another typeDefinition of 3-children node
           ret = rotate_left
           # try to rebalance in sub-tree
           ret.left, rebalance = ret.left.rebalance_for_left_delete
@@ -675,7 +675,7 @@ class ConcurrentRedBlackTree < RedBlackTree
             node = balanced_rotate(dir)
           end
         else
-          # flip this sub-tree into another type of 3-children node
+          # flip this sub-tree into another typeDefinition of 3-children node
           node = rotate(dir)
           # try to rebalance in sub-tree
           target, rebalance = node.child(dir).rebalance_for_delete(dir)

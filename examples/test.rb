@@ -1,15 +1,15 @@
-class A_B
-  class B
+require 'rdl'
+extend RDL::Annotate
 
-  end
-  ##t foo: (I, I) -> S
-  ##t      (I, F) -> S
-  def foo(x, y)
-    # comment
-    z = 1
-    x + y
-  end
+class String
+
 end
 
-x, y, z = 1, 2, 3
-A_B().foo(x, y)
+type String, :chomp, '(Integer) -> Integer'
+
+type String, :[], '(Integer) -> String or nil'
+type String, :[], '(Integer, Integer) -> String or nil'
+type String, :[], '(Range or Regexp) -> String or nil'
+type String, :[], '(Regexp, Integer) -> String or nil'
+type String, :[], '(Regexp, String) -> String or nil'
+type String, :[], '(String) -> String or nil'

@@ -140,11 +140,11 @@ data class RubyFunctionalDomain(
     }
 
     override fun toString(): String {
-        return elements.joinToString(", ")
+        return elements.filter { !it.isNullary }.joinToString(", ")
     }
 
     override fun toStringIgnoreNames(): String {
-        return elements.joinToString(", ") { it.toStringIgnoreNames() }
+        return elements.filter { !it.isNullary }.joinToString(", ") { it.toStringIgnoreNames() }
     }
 }
 
@@ -260,6 +260,8 @@ sealed class RubyFunctionalArgumentType(
 
     abstract val kind: ArgumentKind
 
+    open val isNullary: Boolean = false
+
     override fun typeEquals(other: RubyTypeDefinition): Boolean {
         return typeDefinition.typeEquals(other)
     }
@@ -332,6 +334,8 @@ data class RubyNamedRegularArgumentType(
 
     override val kind = underlyingType.kind
 
+    override val isNullary = underlyingType.isNullary
+
     override fun toString() = "$argumentName: $underlyingType"
 
     override fun toStringIgnoreNames() = underlyingType.toStringIgnoreNames()
@@ -365,6 +369,21 @@ data class RubyKeyreqArgumentType(
     override fun toString() = "$argumentName: $typeDefinition"
 
     override fun toStringIgnoreNames() = typeDefinition.toStringIgnoreNames()
+}
+
+data class RubyMultiArgumentType(
+        override val typeOffset: Int,
+        override val typeLength: Int,
+        val types: RubyListOfTypeElements
+): RubyFunctionalArgumentType(typeOffset, typeLength, types) {
+
+    override val kind = ArgumentKind.REGULAR
+
+    override val isNullary = types.elements.isEmpty()
+
+    override fun toString() = types.toString()
+
+    override fun toStringIgnoreNames() = types.toStringIgnoreNames()
 }
 
 data class RubyFunctionalType(

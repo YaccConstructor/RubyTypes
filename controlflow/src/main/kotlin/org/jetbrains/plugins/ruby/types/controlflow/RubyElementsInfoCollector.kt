@@ -356,7 +356,7 @@ class RubyElementsInfoCollector {
                         }
                 ),
                 Pair("reference", rIdentifier.reference?.canonicalText),
-                "typeDefinition" to Annotations.definitionsForIdentifier(rIdentifier)?.joinToString(" || ") { it.toString() },
+                "typeDefinition" to Annotations.definitionsForIdentifier(rIdentifier)?.joinToString(" or ") { it.toString() },
                 offset = rIdentifier.rightOffset
         )
     }

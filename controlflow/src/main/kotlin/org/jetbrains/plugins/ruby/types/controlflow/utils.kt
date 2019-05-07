@@ -8,6 +8,7 @@ import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RRegex
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStringLiteral
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RStrings
 import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.stringLiterals.RWords
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
 import org.jetbrains.plugins.ruby.ruby.lang.psi.expressions.RLiteral
 import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall
@@ -25,6 +26,8 @@ fun PsiElement.neededOffset(): Int =
 
 fun RCall.getCalledMethod(): RMethod? = firstChild?.reference?.resolve() as? RMethod
 
+fun RMethod.minimalArgumentsNumber() = argumentInfos.count { it.type != ArgumentInfo.Type.ARRAY }
+
 class TypesUtil {
 
     companion object {
@@ -32,6 +35,8 @@ class TypesUtil {
         // TODO reaching defs to infer types in flow-sensitively way
         private val identifiersInCurrentBaseBlock = mutableSetOf<RIdentifier>()
         var types: Map<Int, RubyTypeDeclaration> = emptyMap()
+
+        val supportedRdlAnnotations = listOf("type", "RDL.type", "var_type")
 
         fun analyzeLiteral(right: RLiteral): String {
             return when (right) {
@@ -77,5 +82,7 @@ class TypesUtil {
         fun declarationByOffset(offset: Int): RubyTypeDeclaration? {
             return types[offset]
         }
+
+        fun RMethod.minimalArgumentsNumber() = argumentInfos.count { it.type != ArgumentInfo.Type.ARRAY }
     }
 }

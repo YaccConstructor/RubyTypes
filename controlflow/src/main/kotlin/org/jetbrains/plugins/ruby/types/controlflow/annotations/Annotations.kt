@@ -2,28 +2,40 @@ package org.jetbrains.plugins.ruby.types.controlflow.annotations
 
 import com.intellij.psi.PsiComment
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiPolyVariantReference
 import com.intellij.psi.impl.source.tree.PsiCommentImpl
-import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
+import org.jetbrains.plugins.ruby.ruby.lang.psi.RFile
+import org.jetbrains.plugins.ruby.ruby.lang.psi.basicTypes.RSymbol
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.classes.RClass
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
+import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.modules.RModule
+import org.jetbrains.plugins.ruby.ruby.lang.psi.methodCall.RCall
+import org.jetbrains.plugins.ruby.ruby.lang.psi.references.RReference
+import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RConstant
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier
 import org.jetbrains.plugins.ruby.ruby.lang.psi.visitors.RubyRecursiveElementVisitor
+import org.jetbrains.plugins.ruby.types.controlflow.TypesUtil
 import org.jetbrains.plugins.ruby.types.controlflow.errors.TypeMismatchErrors
+import org.jetbrains.plugins.ruby.types.controlflow.minimalArgumentsNumber
 import org.jetbrains.plugins.ruby.types.controlflow.signatureanalysis.SignatureTypeAnalysisVisitor
 import org.jetbrains.plugins.ruby.types.parser.AnnotationCompiler
 import org.jetbrains.plugins.ruby.types.parser.ast.*
+import org.jetbrains.plugins.ruby.types.rdl.RdlAnnotationCompiler
 
 object Annotations {
     private val declaredMethodTypes = mutableMapOf<RMethod, RubyTypeDeclaration>()
     private val inferredIdentifierTypes = mutableMapOf<RIdentifier, List<RubyTypeDefinition>>()
 
-    fun collect(rootElement: PsiElement) {
+    fun resetAndCollect(rootElement: PsiElement) {
+        declaredMethodTypes.clear()
+        inferredIdentifierTypes.clear()
         rootElement.accept(AnnotationsCollector())
         rootElement.accept(SignatureTypeAnalysisVisitor())
     }
 
     fun verifyMethod(method: RMethod, declaration: RubyTypeDeclaration): Boolean {
-        if (declaration.declarationIdentifier != method.methodName?.name) {
+        if (declaration.declarationIdentifier != method.fqnWithNesting.fullPath) {
             return false
         }
 
@@ -32,27 +44,48 @@ object Annotations {
                 TypeMismatchErrors.registerNotAFunctionError(method, it)
                 return false
             }
-            if (method.argumentInfos.size != it.domain.size) {
-                TypeMismatchErrors.registerDifferentTypeParametersNumberInSignatureError(method, it)
+            if (it.domain.size < method.minimalArgumentsNumber()) {
+                TypeMismatchErrors.registerNotEnoughArgumentTypes(method, it)
                 return false
-            }
-            method.argumentInfos.indices.zip(it.domain.elements).forEach { (argId, type) ->
-                var hasErrors = false
-                if (!type.matches(method.argumentInfos[argId])) {
-                    TypeMismatchErrors.registerDeclaredTypeMismatchError(method.arguments[argId], method.argumentInfos[argId].type, type)
-                    hasErrors = true
-                }
-                if (hasErrors) {
-                    return false
-                }
             }
         }
 
         return true
     }
 
+    /**
+     * Find all methods with given name and enclosing class
+     */
+    fun resolveRdlCalledMethod(receiver: RConstant, methodName: RSymbol): Set<RMethod> {
+        val reference = receiver.reference
+        when (reference) {
+            is RReference -> return resolveRdlCalledMethodForContainer(reference.resolve(), methodName)
+            is PsiPolyVariantReference -> return reference.multiResolve(false).flatMapTo(HashSet()) { resolveRdlCalledMethodForContainer(it.element, methodName) }
+        }
+        return emptySet()
+    }
+
+    private fun resolveRdlCalledMethodForContainer(container: PsiElement?, methodName: RSymbol): Set<RMethod> {
+        return when (container) {
+            is RClass -> setOf(container.findMethodByName(methodName.value) ?: return emptySet())
+            is RModule -> setOf(container.findMethodByName(methodName.value) ?: return emptySet())
+            is RFile -> container.children.filter { it is RMethod && it.methodName?.name == methodName.value }.map {it as RMethod}.toSet()
+            else -> return emptySet()
+        }
+    }
+
     fun registerMethod(method: RMethod, declaration: RubyTypeDeclaration) {
         declaredMethodTypes[method] = declaration
+    }
+
+    fun registerMethodOrExtend(method: RMethod, declaration: RubyTypeDeclaration) {
+        if (method !in declaredMethodTypes) {
+            declaredMethodTypes[method] = declaration
+        } else {
+            for (definition in declaration.typeDefinitions) {
+                declaredMethodTypes[method] = declaredMethodTypes[method]!!.withAdditionalDefinition(definition)
+            }
+        }
     }
 
     fun registerIdentifier(identifier: RIdentifier, definitions: List<RubyTypeDefinition>) {
@@ -85,6 +118,22 @@ object Annotations {
                     // TODO some interaction with user?
                 }
             }
+        }
+
+        override fun visitRCall(rCall: RCall) {
+            if (rCall.name !in TypesUtil.supportedRdlAnnotations || rCall.callArguments.elements.isEmpty()) {
+                return
+            }
+            // TODO calls w/o receiver / method names
+            val calledMethods = resolveRdlCalledMethod(rCall.callArguments.elements[0] as RConstant, rCall.callArguments.elements[1] as RSymbol)
+            val typeAnnotation = RdlAnnotationCompiler.compile(rCall.text, rCall.textOffset)
+            calledMethods.forEach {
+                typeAnnotation as RubyTypeDeclaration
+                if (verifyMethod(it, typeAnnotation)) {
+                    Annotations.registerMethodOrExtend(it, typeAnnotation.accept(MethodTypeRefineVisitor(it)) as RubyTypeDeclaration)
+                }
+            }
+            super.visitRCall(rCall)
         }
 
         override fun visitRMethod(rMethod: RMethod) {

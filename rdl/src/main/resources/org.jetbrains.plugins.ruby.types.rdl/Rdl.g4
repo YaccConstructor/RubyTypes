@@ -4,7 +4,7 @@ annotation            : methodTypeDeclaration | varTypeDeclaration ;
 methodTypeDeclaration : METHOD_TYPE_DECL (receiver COMMA)? (externalMethod COMMA)? QUOTE type QUOTE ;
 varTypeDeclaration    : VAR_TYPE_DECL AT ATOM COMMA QUOTE type QUOTE ;
 
-receiver: identifier;
+receiver : identifier;
 externalMethod : COLON identifier;
 
 // todo named types, attributes access

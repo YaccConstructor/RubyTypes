@@ -30,4 +30,5 @@ patchPluginXml{
 dependencies {
     compile group: 'org.json', name: 'json', version: '20180813'
     compile project(':commentsparser')
+    compile project(':rdl')
 }
