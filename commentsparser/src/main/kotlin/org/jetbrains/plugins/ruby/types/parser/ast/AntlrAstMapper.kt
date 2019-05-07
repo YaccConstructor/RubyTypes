@@ -20,8 +20,6 @@ class AntlrAstMapper(val initialOffset: Int): RubyTypesVisitor<RubyTypeAstElemen
     override fun visitIdentifier(ctx: RubyTypesParser.IdentifierContext?) = null
 
     override fun visitAnnotation(ctx: RubyTypesParser.AnnotationContext): RubyTypeDeclaration {
-//        val (declarationIdentifier, declarationOffset, primaryDefinition) = visitTypeDeclaration(ctx.typeDeclaration())
-//        return RubyTypeDeclaration(declarationIdentifier, declarationOffset, primaryDefinition)
         return visitTypeDeclaration(ctx.typeDeclaration())
     }
 

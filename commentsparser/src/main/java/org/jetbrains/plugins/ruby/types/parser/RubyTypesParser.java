@@ -29,7 +29,7 @@ public class RubyTypesParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "'->'", "'('", "')'", "'['", "']'", "','", "'_'", "'|'", "':'", 
+		null, "'->'", "'('", "')'", "'['", "']'", "','", "'_'", "'or'", "':'", 
 		"';'", "'::'", "'##t '", "'*'", "'?'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {

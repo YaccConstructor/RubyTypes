@@ -143,9 +143,9 @@ class ParserTest {
 
     @Test
     fun `test union type`() {
-        val type = "String | Error"
-        val offsets = listOf(12, 21)
-        val compiledResult = AnnotationCompiler.compile("##t result: String | Error")
+        val type = "String or Error"
+        val offsets = listOf(12, 22)
+        val compiledResult = AnnotationCompiler.compile("##t result: String or Error")
         val expectedAst = RubyTypeDeclaration(
                                 "result",
                                 4,
@@ -156,7 +156,7 @@ class ParserTest {
                                                 RubyListOfTypeElements(
                                                         12,
                                                         type.length,
-                                                        type.split(" | ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
+                                                        type.split(" or ").zip(offsets).map { RubyAtomTypeIdentifier(it.second, it.first.length, listOf(it.first)) }
                                                 )
                                         )
                                 )
@@ -166,17 +166,17 @@ class ParserTest {
 
     @Test
     fun `test complex type`() {
-        val compiledResult = AnnotationCompiler.compile("##t foo: (*A::B, ([C, D], E?) -> (F | G)) -> (H, I, J::F::K,)")
+        val compiledResult = AnnotationCompiler.compile("##t foo: (*A::B, ([C, D], E?) -> (F or G)) -> (H, I, J::F::K,)")
         val expectedAst = RubyTypeDeclaration(
                                 "foo",
                                 4,
                                 listOf(
                                         RubyFunctionalType(
                                                 9,
-                                                "(*A::B, ([C, D], E?) -> (F | G)) -> (H, I, J::F::K,)".length,
+                                                "(*A::B, ([C, D], E?) -> (F or G)) -> (H, I, J::F::K,)".length,
                                                 RubyFunctionalDomain(
                                                         10,
-                                                        "(*A::B, ([C, D], E?) -> (F | G))".length,
+                                                        "(*A::B, ([C, D], E?) -> (F or G))".length,
                                                         listOf(
                                                                 RubyVarargArgumentType(
                                                                         10,
@@ -189,10 +189,10 @@ class ParserTest {
                                                                 ),
                                                                 RubyRegularArgumentType(
                                                                         17,
-                                                                        "([C, D], E?) -> (F | G)".length,
+                                                                        "([C, D], E?) -> (F or G)".length,
                                                                         RubyFunctionalType(
                                                                                 17,
-                                                                                "([C, D], E?) -> (F | G)".length,
+                                                                                "([C, D], E?) -> (F or G)".length,
                                                                                 RubyFunctionalDomain(
                                                                                         18,
                                                                                         "([C, D], E?)".length,
@@ -218,13 +218,13 @@ class ParserTest {
                                                                                 ),
                                                                                 RubyUnionType(
                                                                                         34,
-                                                                                        5,
+                                                                                        6,
                                                                                         RubyListOfTypeElements(
                                                                                                 34,
-                                                                                                5,
+                                                                                                6,
                                                                                                 listOf(
                                                                                                         RubyAtomTypeIdentifier(34, 1, listOf("F")),
-                                                                                                        RubyAtomTypeIdentifier(38, 1, listOf("G"))
+                                                                                                        RubyAtomTypeIdentifier(39, 1, listOf("G"))
                                                                                                 )
                                                                                         )
                                                                                 )
@@ -233,15 +233,15 @@ class ParserTest {
                                                         )
                                                 ),
                                                 RubyTupleType(
-                                                        45,
+                                                        46,
                                                         16,
                                                         RubyListOfTypeElements(
-                                                                46,
+                                                                47,
                                                                 16,
                                                                 listOf(
-                                                                        RubyAtomTypeIdentifier(46, 1, listOf("H")),
-                                                                        RubyAtomTypeIdentifier(49, 1, listOf("I")),
-                                                                        RubyAtomTypeIdentifier(52, 7, "J::F::K".split("::"))
+                                                                        RubyAtomTypeIdentifier(47, 1, listOf("H")),
+                                                                        RubyAtomTypeIdentifier(50, 1, listOf("I")),
+                                                                        RubyAtomTypeIdentifier(53, 7, "J::F::K".split("::"))
                                                                 )
                                                         )
                                                 )

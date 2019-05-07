@@ -40,7 +40,8 @@ class JsonResultReader {
                     val type = fileContentData
                             .getString("typeDefinition")
                             .split(" || ")
-                            .map { AnnotationCompiler.compile("##t $it") as RubyTypeDefinition }
+                            .map {
+                                AnnotationCompiler.compile("##t $it") as RubyTypeDefinition }
                             .let {
                                 RubyTypeDeclaration(identifier, offset, it)
                             }

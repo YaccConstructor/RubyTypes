@@ -1,12 +1,11 @@
-package org.jetbrains.plugins.ruby.types.parser
+package org.jetbrains.plugins.ruby.types.rdl
 
 import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonToken
 import org.antlr.v4.runtime.CommonTokenStream
 import org.jetbrains.plugins.ruby.types.parser.ast.*
-import java.lang.Exception
 
-object AnnotationCompiler {
+// TODO merge with its origin?
+object RdlAnnotationCompiler {
     /**
      * Comments are passed as-is, without any relations to their position in source code.
      * Therefore, in order to save original offset of symbols in comments,
@@ -14,22 +13,17 @@ object AnnotationCompiler {
      * and recalculate offsets of tokens produced by lexer according to this value.
      */
     fun compile(annotation: String, initialOffset: Int = 0): RubyTypeAstElement {
-        val lexer = RubyTypesLexer(CharStreams.fromString(annotation))
+        val lexer = RdlLexer(CharStreams.fromString(annotation))
         lexer.removeErrorListeners()
         lexer.addErrorListener(TypeParsingErrorListener.INSTANCE)
 
         val tokens = CommonTokenStream(lexer)
-        val parser = RubyTypesParser(tokens)
+        val parser = RdlParser(tokens)
         parser.removeErrorListeners()
         parser.addErrorListener(TypeParsingErrorListener.INSTANCE)
 
         val mapper = AntlrAstMapper(initialOffset)
-        return if (isProbablyDeclaration(annotation)) {
-            mapper.visitAnnotation(parser.annotation())
-        } else {
-            mapper.visitAdditional(parser.additional())
-        }
-
+        return mapper.visitAnnotation(parser.annotation())
     }
 
     fun compileNamed(annotation: String, argumentInfos: List<ArgumentInfo>): RubyTypeDefinition {
@@ -68,6 +62,4 @@ object AnnotationCompiler {
                 type.codomain
         )
     }
-
-    private fun isProbablyDeclaration(annotation: String) = annotation.contains(":")
 }

@@ -111,7 +111,7 @@ class TypeCheckingAnnotator: Annotator {
                 } else if (typeDefinitions.size == 1) {
                     return typeDefinitions[0]
                 } else {
-                    val definition = typeDefinitions.joinToString(" | ")
+                    val definition = typeDefinitions.joinToString(" or ")
                     return RubyUnionType(typeDefinitions[0].typeOffset, definition.length, RubyListOfTypeElements(typeDefinitions[0].typeOffset, definition.length, typeDefinitions))
                 }
             }
@@ -121,8 +121,6 @@ class TypeCheckingAnnotator: Annotator {
     data class ListOfTypeMismatches(
             val mismatches: List<CallTypeMismatchError>
     ) {
-        fun errorRepresentation(holder: AnnotationHolder) {
-        }
     }
 
     data class CallTypeMismatchError(

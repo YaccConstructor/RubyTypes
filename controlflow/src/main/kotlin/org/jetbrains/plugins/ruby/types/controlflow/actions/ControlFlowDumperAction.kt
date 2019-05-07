@@ -25,12 +25,9 @@ import org.jetbrains.plugins.ruby.types.controlflow.read.BasicTranslator
 import org.jetbrains.plugins.ruby.types.controlflow.read.JsonResultReader
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDeclaration
 import java.io.File
-import com.sun.java.accessibility.util.AWTEventMonitor.addActionListener
 import org.jetbrains.plugins.ruby.types.controlflow.actions.algorithm.AlgorithmExecutor
 import org.jetbrains.plugins.ruby.types.controlflow.dialogs.SelectTypeInferenceAlgorithmDialogWrapper
 import java.nio.file.Paths
-import javax.swing.JButton
-
 
 
 class ControlFlowDumperAction : AnAction() {
@@ -128,10 +125,5 @@ class ControlFlowDumperAction : AnAction() {
         val cfg = RubyControlFlowWrapper(controlFlow, element)
         val childInfo = element.children.joinToString(separator = System.lineSeparator()) { getAllControlFlowGraphsInfo(it) }
         return cfg.dump().writeToString(JsonControlFlowWriter()) + System.lineSeparator() + childInfo
-    }
-
-    private fun executeBinary(path: String) {
-        val runtime = Runtime.getRuntime()
-        val process = runtime.exec(path)
     }
 }

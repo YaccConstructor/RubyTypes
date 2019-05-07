@@ -24,7 +24,7 @@ class RubyTypesInlayVisitor(val inlayModel: InlayModel, val knownTypes: Map<Int,
 
     private fun visitIdentifier(rIdentifier: RIdentifier) {
         knownTypes[rIdentifier.textOffset + rIdentifier.textLength]?.let {
-            inlayModel.addInlineElement(rIdentifier.rightOffset, true, HintRenderer(": ${it.typeDefinitions.joinToString(" | ")}"))
+            inlayModel.addInlineElement(rIdentifier.rightOffset, true, HintRenderer(": ${it.typeDefinitions.joinToString(" or ")}"))
         }
     }
 }

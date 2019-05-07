@@ -4,6 +4,7 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
 import org.jetbrains.plugins.ruby.ruby.lang.psi.variables.RIdentifier
 import org.jetbrains.plugins.ruby.types.controlflow.TypesUtil
+import org.jetbrains.plugins.ruby.types.controlflow.annotations.Annotations
 import org.jetbrains.plugins.ruby.types.controlflow.neededOffset
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
@@ -31,7 +32,7 @@ class HtmlTypeDocProcessor(val selectedElement: PsiElement): DocProcessor {
 
         documentBody.childNodes()
                 .last()
-                .after(nodesWithTypeAnnotaton.map { it.text().removePrefix("#t").withoutDeclaration() }.toHtmlList())
+                .after(Annotations.declarationForMethod(selectedElement as RMethod)?.typeDefinitions?.map { it.toString() }?.toHtmlList())
                 .after("Declared types:".withTag("h3"))
 
         return documentBody.toString()

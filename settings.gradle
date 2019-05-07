@@ -1,2 +1,3 @@
 rootProject.name = 'RubyTypes'
-include 'controlflow', 'commentsparser'
+include 'controlflow', 'commentsparser', 'rdl'
+

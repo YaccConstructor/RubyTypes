@@ -2,11 +2,11 @@ package org.jetbrains.plugins.ruby.types.controlflow.errors
 
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.openapi.util.TextRange
-import org.codehaus.plexus.util.cli.Arg
 import org.jetbrains.plugins.ruby.ruby.lang.psi.RPsiElement
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.ArgumentInfo
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RArgument
 import org.jetbrains.plugins.ruby.ruby.lang.psi.controlStructures.methods.RMethod
+import org.jetbrains.plugins.ruby.types.controlflow.minimalArgumentsNumber
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyFunctionalArgumentType
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyFunctionalType
 import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDefinition
@@ -14,8 +14,8 @@ import org.jetbrains.plugins.ruby.types.parser.ast.RubyTypeDefinition
 object TypeMismatchErrors {
     private val typeMismatchErrors = mutableMapOf<RPsiElement, TypeMismatchError>()
 
-    fun registerDifferentTypeParametersNumberInSignatureError(element: RMethod, type: RubyFunctionalType) {
-        DifferentTypeParametersNumberInSignatureError(
+    fun registerNotEnoughArgumentTypes(element: RMethod, type: RubyFunctionalType) {
+        NotEnoughArgumentsInSignatureError(
                 element,
                 type
         ).let {
@@ -62,7 +62,7 @@ interface TypeMismatchError {
     fun reportError(range: TextRange, annotationHolder: AnnotationHolder)
 }
 
-data class DifferentTypeParametersNumberInSignatureError(
+data class NotEnoughArgumentsInSignatureError(
         val method: RMethod,
         val type: RubyFunctionalType
 ): TypeMismatchError {
@@ -72,7 +72,7 @@ data class DifferentTypeParametersNumberInSignatureError(
     override fun reportError(range: TextRange, annotationHolder: AnnotationHolder) {
         annotationHolder.createErrorAnnotation(
                 range,
-                "Method declaration has ${method.argumentInfos.size} type parameters " +
+                "Method declaration has at least ${method.minimalArgumentsNumber()} type parameters " +
                         "but one of type annotations has ${type.domain.size}"
         )
     }
